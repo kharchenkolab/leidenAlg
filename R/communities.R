@@ -176,8 +176,8 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
 #' @param obj fakeCommunities object
 #' @param ... dropped
 #' @return dendrogram
-#' @export as.dendrogram.fakeCommunities
-as.dendrogram.fakeCommunities <- function(obj, ...) {
+#' @export
+dendrogram.fakeCommunities <- function(obj, ...) {
   return(obj$dendrogram)
 }
 

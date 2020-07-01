@@ -28,7 +28,7 @@ Python interface [here](https://github.com/vtraag/leidenalg/blob/master/src/func
 
 * `rleiden.community()`: Recursive leiden communities, constructs an n-step recursive clustering, using leiden.community.detection. Returns a f`akeCommunities` object that has methods membership(), without dendogram.
 
-* `as.dendrogram.fakeCommunities()`: Returns pre-calculated dendrogram
+* `dendrogram.fakeCommunities()`: Returns pre-calculated dendrogram
 
 * `membership.fakeCommunities()`: Returns pre-calculated membership factor
 
