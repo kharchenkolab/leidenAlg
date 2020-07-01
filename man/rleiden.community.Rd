@@ -27,13 +27,13 @@ rleiden.community(
 
 \item{verbose}{whether to output progress messages}
 
-\item{resolution}{resolution parameter passed to leiden.communities (either a single value, or a value equivalent to max.depth)}
+\item{resolution}{resolution parameter passed to leiden.community.detection (either a single value, or a value equivalent to max.depth)}
 
-\item{...}{passed to leiden.communities}
+\item{...}{passed to leiden.community.detection}
 }
 \value{
-a fakeCommunities object that has methods membership() ... does not return a dendrogram ... see cltrap.community() to constructo that
+a fakeCommunities object that has methods membership() ... does not return a dendrogram ... see cltrap.community() to construct to that
 }
 \description{
-Constructrs a n-step recursive clustering, using leiden.communities
+Constructs an n-step recursive clustering, using leiden.community.detection
 }
