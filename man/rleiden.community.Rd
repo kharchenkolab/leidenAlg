@@ -32,7 +32,7 @@ rleiden.community(
 \item{...}{passed to leiden.community.detection}
 }
 \value{
-a fakeCommunities object that has methods membership() ... does not return a dendrogram ... see cltrap.community() to construct to that
+a fakeCommunities object that has methods membership(), and does return a dendrogram
 }
 \description{
 Constructs an n-step recursive clustering, using leiden.community.detection

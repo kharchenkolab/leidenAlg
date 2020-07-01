@@ -29,7 +29,7 @@ leiden.community.detection <- function(graph, resolution=1.0, n.iterations=2) {
 #' @param verbose whether to output progress messages
 #' @param resolution resolution parameter passed to leiden.community.detection (either a single value, or a value equivalent to max.depth)
 #' @param ... passed to leiden.community.detection
-#' @return a fakeCommunities object that has methods membership() ... does not return a dendrogram ... see cltrap.community() to construct to that
+#' @return a fakeCommunities object that has methods membership(), and does return a dendrogram
 #' @import parallel
 #' @export
 rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(logical=FALSE), min.community.size=10, verbose=FALSE, resolution=1, cur.depth=1, hierarchical=TRUE, ...) {
