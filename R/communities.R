@@ -7,9 +7,9 @@
 #' @return community object
 #' @import igraph
 #' @export 
-leiden.community.detection <- function(graph, resolution=1.0, n.iterations=2) {
+leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 
-  x <- leiden_community(graph, E(graph)$weight, resolution, n.iterations)
+  x <- find_partition(graph, E(graph)$weight, resolution, n.iterations)
 
   # enclose in a masquerading class
   fv <- as.factor(setNames(x, V(graph)$name))
@@ -21,14 +21,14 @@ leiden.community.detection <- function(graph, resolution=1.0, n.iterations=2) {
 
 #' Recursive leiden communities
 #'
-#' Constructs an n-step recursive clustering, using leiden.community.detection
+#' Constructs an n-step recursive clustering, using leiden.community
 #' @param graph graph
 #' @param n.cores number of cores to use
 #' @param max.depth recursive depth
 #' @param min.community.size minimal community size parameter for the walktrap communities .. communities smaller than that will be merged
 #' @param verbose whether to output progress messages
-#' @param resolution resolution parameter passed to leiden.community.detection (either a single value, or a value equivalent to max.depth)
-#' @param ... passed to leiden.community.detection
+#' @param resolution resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth)
+#' @param ... passed to leiden.community
 #' @return a fakeCommunities object that has methods membership(), and does return a dendrogram
 #' @import parallel
 #' @export
@@ -42,7 +42,7 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
     if(length(resolution)!=max.depth) { stop("resolution value must be either a single number or a vector of length max.depth")}
     res <- resolution[cur.depth]
   } else { res <- resolution }
-  mt <- leiden.community.detection(graph, resolution=res, ...)
+  mt <- leiden.community(graph, resolution=res, ...)
 
   mem <- membership(mt)
   tx <- table(mem)
@@ -60,7 +60,7 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
     wtl <- papply(conos:::sn(unique(mem)), function(cluster) {
       cn <- names(mem)[which(mem==cluster)]
       sg <- induced.subgraph(graph,cn)
-      rleiden.community.detection(induced.subgraph(graph,cn), max.depth=max.depth, resolution=resolution, cur.depth=cur.depth+1, min.community.size=min.community.size, hierarchical=hierarchical, verbose=verbose, n.cores=1, ...)
+      rleiden.community(induced.subgraph(graph,cn), max.depth=max.depth, resolution=resolution, cur.depth=cur.depth+1, min.community.size=min.community.size, hierarchical=hierarchical, verbose=verbose, n.cores=1, ...)
     }, n.cores=n.cores)
 
     ## merge clusters, cleanup

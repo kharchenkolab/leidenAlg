@@ -40,15 +40,9 @@ int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
   return 0;
 }
 
-//' Find the optimal graph partition using the Leiden algorithm, Traag et al 2019 https://doi.org/10.1038/s41598-019-41695-z. Refer to find_partition() in the python interface, https://github.com/vtraag/leidenalg
-//' 
-//' @param graph The input graph for which to detect communities.
-//' @param edge_weights Weights of edges. Can be either an iterable or an edge attribute.
-//' @param resolution numeric (default=1.0)
-//' @param niter integer Number of iterations to run the Leiden algorithm. By default, 2 iterations are run. If the number of iterations is negative, the Leiden algorithm is run until an iteration in which there was no improvement. (default=2)
-//' @export
+
 // [[Rcpp::export]]
-std::vector<size_t> leiden_community(SEXP graph, std::vector<double>& edge_weights, double resolution=1.0, int niter=2) {
+std::vector<size_t> find_partition(SEXP graph, std::vector<double>& edge_weights, double resolution=1.0, int niter=2) {
   igraph_t g;
   
   R_SEXP_to_igraph(graph, &g);

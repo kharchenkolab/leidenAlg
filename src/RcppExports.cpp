@@ -17,9 +17,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// leiden_community
-std::vector<size_t> leiden_community(SEXP graph, std::vector<double>& edge_weights, double resolution, int niter);
-RcppExport SEXP _leidenAlg_leiden_community(SEXP graphSEXP, SEXP edge_weightsSEXP, SEXP resolutionSEXP, SEXP niterSEXP) {
+// find_partition
+std::vector<size_t> find_partition(SEXP graph, std::vector<double>& edge_weights, double resolution, int niter);
+RcppExport SEXP _leidenAlg_find_partition(SEXP graphSEXP, SEXP edge_weightsSEXP, SEXP resolutionSEXP, SEXP niterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -27,14 +27,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::vector<double>& >::type edge_weights(edge_weightsSEXP);
     Rcpp::traits::input_parameter< double >::type resolution(resolutionSEXP);
     Rcpp::traits::input_parameter< int >::type niter(niterSEXP);
-    rcpp_result_gen = Rcpp::wrap(leiden_community(graph, edge_weights, resolution, niter));
+    rcpp_result_gen = Rcpp::wrap(find_partition(graph, edge_weights, resolution, niter));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_leidenAlg_checkOpenMP", (DL_FUNC) &_leidenAlg_checkOpenMP, 0},
-    {"_leidenAlg_leiden_community", (DL_FUNC) &_leidenAlg_leiden_community, 4},
+    {"_leidenAlg_find_partition", (DL_FUNC) &_leidenAlg_find_partition, 4},
     {NULL, NULL, 0}
 };
 

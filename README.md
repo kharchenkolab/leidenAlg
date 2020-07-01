@@ -22,9 +22,7 @@ Python interface [here](https://github.com/vtraag/leidenalg/blob/master/src/func
 
 ## Functions
 
-* `leiden_community()`: Find the optimal graph partition using the Leiden algorithm.
-
-* `leiden.community.detection()`: Detect communities using Leiden algorithm, output as `fakeCommunities` class for downstream use.
+* `leiden.community()`: Detect communities using Leiden algorithm, output as `fakeCommunities` class for downstream use.
 
 * `rleiden.community()`: Recursive leiden communities, constructs an n-step recursive clustering, using leiden.community.detection. Returns a f`akeCommunities` object that has methods membership(), without dendogram.
 
