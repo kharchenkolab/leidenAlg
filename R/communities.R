@@ -1,3 +1,9 @@
+#' @useDynLib leidenAlg
+#' @import igraph
+#' @import parallel
+NULL
+
+
 #' Leiden algorithm community detection
 #'
 #' Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
@@ -5,7 +11,6 @@
 #' @param resolution resolution parameter (default=1.0) - higher numbers lead to more communities
 #' @param n.iterations number of iterations that the algorithm should be run for (default=2)
 #' @return community object
-#' @import igraph
 #' @export 
 leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 
@@ -30,7 +35,6 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 #' @param resolution resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth)
 #' @param ... passed to leiden.community
 #' @return a fakeCommunities object that has methods membership(), and does return a dendrogram
-#' @import parallel
 #' @export
 rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(logical=FALSE), min.community.size=10, verbose=FALSE, resolution=1, cur.depth=1, hierarchical=TRUE, ...) {
 
