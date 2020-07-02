@@ -13,26 +13,33 @@ rleiden.community(
   resolution = 1,
   cur.depth = 1,
   hierarchical = TRUE,
+  mc.preschedule = FALSE,
   ...
 )
 }
 \arguments{
 \item{graph}{graph}
 
-\item{max.depth}{recursive depth}
+\item{max.depth}{Recursive depth (default=2)}
 
-\item{n.cores}{number of cores to use}
+\item{n.cores}{integer Number of cores to use (default = parallel::detectCores(logical=FALSE)). If logical=FALSE, uses the number of physical CPUs/cores. If logical=TRUE, uses the logical number of CPUS/cores. See parallel::detectCores()}
 
-\item{min.community.size}{minimal community size parameter for the walktrap communities .. communities smaller than that will be merged}
+\item{min.community.size}{integer Minimal community size parameter for the walktrap communities---Communities smaller than that will be merged (default=10)}
 
-\item{verbose}{whether to output progress messages}
+\item{verbose}{boolean Whether to output progress messages (default=FALSE)}
 
 \item{resolution}{resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth)}
+
+\item{cur.depth}{integer (default=1)}
+
+\item{hierarchical}{boolean If TRUE, calculate hierarchy on the multilevel clusters (default=TRUE)}
+
+\item{mc.preschedule}{boolean (default=FALSE) Parameter fed to mclapply(). If TRUE, then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X in mclapply(X, FUN, ...)}
 
 \item{...}{passed to leiden.community}
 }
 \value{
-a fakeCommunities object that has methods membership(), and does return a dendrogram
+a fakeCommunities object that returns membership and dendrogram
 }
 \description{
 Constructs an n-step recursive clustering, using leiden.community

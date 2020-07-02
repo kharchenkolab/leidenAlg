@@ -4,6 +4,19 @@
 NULL
 
 
+
+#' setNames wrapper function, also called 'sn' elsewhere
+#'
+#' @description Set names equal to values
+#' @param x an object for which names attribute will be meaningful 
+#' @return An object with names assigned equal to values
+#' @examples
+#' vec = c(1, 2, 3, 4)
+#' set.names(vec)
+#' @keywords internal
+set.names <- function(x) { setNames(x, x) }
+
+
 #' Leiden algorithm community detection
 #'
 #' Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
@@ -28,15 +41,18 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 #'
 #' Constructs an n-step recursive clustering, using leiden.community
 #' @param graph graph
-#' @param n.cores number of cores to use
-#' @param max.depth recursive depth
-#' @param min.community.size minimal community size parameter for the walktrap communities .. communities smaller than that will be merged
-#' @param verbose whether to output progress messages
+#' @param max.depth Recursive depth (default=2)
+#' @param n.cores integer Number of cores to use (default = parallel::detectCores(logical=FALSE)). If logical=FALSE, uses the number of physical CPUs/cores. If logical=TRUE, uses the logical number of CPUS/cores. See parallel::detectCores()
+#' @param min.community.size integer Minimal community size parameter for the walktrap communities---Communities smaller than that will be merged (default=10) 
+#' @param verbose boolean Whether to output progress messages (default=FALSE)
 #' @param resolution resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth)
+#' @param cur.depth integer (default=1)
+#' @param hierarchical boolean If TRUE, calculate hierarchy on the multilevel clusters (default=TRUE)
+#' @param mc.preschedule boolean (default=FALSE) Parameter fed to mclapply(). If TRUE, then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X in mclapply(X, FUN, ...)
 #' @param ... passed to leiden.community
-#' @return a fakeCommunities object that has methods membership(), and does return a dendrogram
+#' @return a fakeCommunities object that returns membership and dendrogram
 #' @export
-rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(logical=FALSE), min.community.size=10, verbose=FALSE, resolution=1, cur.depth=1, hierarchical=TRUE, ...) {
+rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(logical=FALSE), min.community.size=10, verbose=FALSE, resolution=1, cur.depth=1, hierarchical=TRUE, mc.preschedule=FALSE, ...) {
 
   if(verbose & cur.depth==1){
     cat(paste0("running ",max.depth,"-recursive Leiden clustering: "))
@@ -45,7 +61,9 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
   if(length(resolution)>1) {
     if(length(resolution)!=max.depth) { stop("resolution value must be either a single number or a vector of length max.depth")}
     res <- resolution[cur.depth]
-  } else { res <- resolution }
+  } else { 
+    res <- resolution 
+  }
   mt <- leiden.community(graph, resolution=res, ...)
 
   mem <- membership(mt)
@@ -61,16 +79,16 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
 
   if(cur.depth<max.depth) {
     ## start recursive run
-    wtl <- papply(conos:::sn(unique(mem)), function(cluster) {
+    wtl <- parallel::mclapply(set.names(unique(mem)), function(cluster) {
       cn <- names(mem)[which(mem==cluster)]
       sg <- induced.subgraph(graph,cn)
       rleiden.community(induced.subgraph(graph,cn), max.depth=max.depth, resolution=resolution, cur.depth=cur.depth+1, min.community.size=min.community.size, hierarchical=hierarchical, verbose=verbose, n.cores=1, ...)
-    }, n.cores=n.cores)
+    }, mc.cores=n.cores, mc.preschedule=mc.preschedule)
 
     ## merge clusters, cleanup
     mbl <- lapply(wtl,membership)
     ## combined clustering factor
-    fv <- unlist(lapply(conos:::sn(names(wtl)),function(cn) {
+    fv <- unlist(lapply(set.names(names(wtl)),function(cn) {
       paste(cn,as.character(mbl[[cn]]),sep='-')
     }))
     names(fv) <- unlist(lapply(mbl,names))
@@ -78,13 +96,13 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
     fv <- mem
     if(hierarchical) {
       ## use walktrap on the last level
-      wtl <- conos:::papply(sn(unique(mem)), function(cluster) {
+      wtl <- parallel::mclapply(set.names(unique(mem)), function(cluster) {
         cn <- names(mem)[which(mem==cluster)]
         sg <- induced.subgraph(graph,cn)
         res <- walktrap.community(induced.subgraph(graph,cn))
         res$merges <- complete.dend(res,FALSE)
         res
-      }, n.cores=n.cores)
+      }, mc.cores=n.cores, mc.preschedule=mc.preschedule)
     }
   }
 
