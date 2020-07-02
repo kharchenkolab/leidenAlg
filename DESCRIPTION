@@ -8,6 +8,9 @@ Description: An R interface to he Leiden algorithm, an iterative community detec
 License: GPL (>= 2)
 Imports: 
     Rcpp (>= 1.0.4), 
-    parallel
+    parallel, 
+    sccore
+Remotes:  
+    hms-dbmi/sccore
 LinkingTo: Rcpp, RcppArmadillo, RcppEigen, igraph
 RoxygenNote: 7.1.1

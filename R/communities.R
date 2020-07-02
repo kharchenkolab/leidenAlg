@@ -1,8 +1,8 @@
 #' @useDynLib leidenAlg
 #' @import igraph
 #' @import parallel
+#' @import sccore
 NULL
-
 
 
 #' setNames wrapper function, also called 'sn' elsewhere
@@ -15,6 +15,31 @@ NULL
 #' set.names(vec)
 #' @keywords internal
 set.names <- function(x) { setNames(x, x) }
+
+
+#' Use mclapply if n.cores>1, otherwise use regular lapply() if n.cores=1
+#'
+#' @description Set names equal to values
+#' @param ... Primary input arguments X, FUN for mclapply(X, FUN, ...) or lapply(X, FUN, ...)
+#' @param n.cores integer Number of cores (default=parallel::detectCores())
+#' @param mc.preschedule boolean (default=FALSE) From mclapply. If TRUE, then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X for mclapply(X, FUN, ...)
+#' @return list 
+#' @keywords internal
+papply <- function(..., n.cores=parallel::detectCores(), mc.preschedule=FALSE) {
+  if(n.cores>1) {
+    result <- parallel::mclapply(..., mc.cores=n.cores, mc.preschedule=mc.preschedule)
+  } else {
+    # fall back on lapply
+    result <- lapply(...)
+  }
+
+  is.error <- (sapply(result, class) == "try-error")
+  if (any(is.error)) {
+    stop(paste("Errors in papply:", result[is.error]))
+  }
+
+  return(result)
+}
 
 
 #' Leiden algorithm community detection
@@ -76,18 +101,17 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
   if(verbose){
     cat(length(unique(mem)),' ')
   }
-
   if(cur.depth<max.depth) {
-    ## start recursive run
-    wtl <- parallel::mclapply(set.names(unique(mem)), function(cluster) {
+    # start recursive run
+    wtl <- papply(set.names(unique(mem)), function(cluster) {
       cn <- names(mem)[which(mem==cluster)]
       sg <- induced.subgraph(graph,cn)
       rleiden.community(induced.subgraph(graph,cn), max.depth=max.depth, resolution=resolution, cur.depth=cur.depth+1, min.community.size=min.community.size, hierarchical=hierarchical, verbose=verbose, n.cores=1, ...)
-    }, mc.cores=n.cores, mc.preschedule=mc.preschedule)
+    }, n.cores=n.cores)
 
-    ## merge clusters, cleanup
+    # merge clusters, cleanup
     mbl <- lapply(wtl,membership)
-    ## combined clustering factor
+    # combined clustering factor
     fv <- unlist(lapply(set.names(names(wtl)),function(cn) {
       paste(cn,as.character(mbl[[cn]]),sep='-')
     }))
@@ -95,69 +119,55 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
   } else {
     fv <- mem
     if(hierarchical) {
-      ## use walktrap on the last level
-      wtl <- parallel::mclapply(set.names(unique(mem)), function(cluster) {
+      # use walktrap on the last level
+      wtl <- papply(set.names(unique(mem)), function(cluster) {
         cn <- names(mem)[which(mem==cluster)]
         sg <- induced.subgraph(graph,cn)
         res <- walktrap.community(induced.subgraph(graph,cn))
-        res$merges <- complete.dend(res,FALSE)
+        res$merges <- igraph:::complete.dend(res,FALSE)
         res
-      }, mc.cores=n.cores, mc.preschedule=mc.preschedule)
+      },n.cores=n.cores)
     }
   }
 
   if(hierarchical) {
-    ## calculate hierarchy on the multilevel clusters
+    # calculate hierarchy on the multilevel clusters
     if(length(wtl)>1) {
-      cgraph <- getClusterGraph(graph,mem)
-      chwt <- walktrap.community(cgraph, steps=8)
+      cgraph <- sccore::getClusterGraph(graph,mem)
+      chwt <- walktrap.community(cgraph,steps=8)
       d <- as.dendrogram(chwt)
 
-      ## merge hierarchical portions
-      wtld <- lapply(wtl, as.dendrogram)
+      # merge hierarchical portions
+      wtld <- lapply(wtl,as.dendrogram)
       max.height <- max(unlist(lapply(wtld,attr,'height')))
 
-      ## shift leaf ids to fill in 1..N range
-      mn <- unlist(lapply(wtld, attr, 'members'))
-      shift.leaf.ids <- function(l,v) { 
-        if (is.leaf(l)){ 
-          la <- attributes(l)
-          l <- as.integer(l) + v 
-          attributes(l) <- la
-        } 
-        return(l)  
-      }
-      
-      nshift <- cumsum(c(0,mn))[-(length(mn)+1)]
-      names(nshift) <- names(mn) ## how much to shift ids in each tree
+      # shift leaf ids to fill in 1..N range
+      mn <- unlist(lapply(wtld,attr,'members'))
+      shift.leaf.ids <- function(l,v) { if(is.leaf(l)) { la <- attributes(l); l <- as.integer(l)+v; attributes(l) <- la; }; l  }
+      nshift <- cumsum(c(0,mn))[-(length(mn)+1)]; names(nshift) <- names(mn); # how much to shift ids in each tree
 
       get.heights <- function(l) {
         if(is.leaf(l)) {
-          return(attr(l, 'height'))
+          return(attr(l,'height'))
         } else {
-          return(c(attr(l, 'height'), unlist(lapply(l,get.heights))))
+          return(c(attr(l,'height'),unlist(lapply(l, get.heights))))
         }
       }
-
       min.d.height <- min(get.heights(d))
       height.scale <- length(wtld)*2
       height.shift <- 2
 
-      shift.heights <- function(l, s) { 
-        attr(l, 'height') <- attr(l, 'height') + s
-        return(l) 
-      }
+      shift.heights <- function(l,s) { attr(l,'height') <- attr(l,'height')+s; l }
 
       glue.dends <- function(l) {
         if(is.leaf(l)) {
-          nam <- as.character(attr(l,'label'))
+          nam <- as.character(attr(l,'label'));
           id <- dendrapply(wtld[[nam]], shift.leaf.ids, v=nshift[nam])
-          return(dendrapply(id,shift.heights, s=max.height-attr(id,'height')))
+          return(dendrapply(id,shift.heights,s=max.height-attr(id,'height')))
 
         }
-        attr(l,'height') <- (attr(l,'height')-min.d.height)*height.scale + max.height + height.shift
-        l[[1]] <- glue.dends(l[[1]])
-        l[[2]] <- glue.dends(l[[2]])
+        attr(l,'height') <- (attr(l,'height')-min.d.height)*height.scale + max.height + height.shift;
+        l[[1]] <- glue.dends(l[[1]]); l[[2]] <- glue.dends(l[[2]])
         attr(l,'members') <- attr(l[[1]],'members') + attr(l[[2]],'members')
         return(l)
       }
@@ -176,20 +186,17 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
     }
   }
 
-  ## enclose in a masquerading class
+  # enclose in a masquerading class
   res <- list(membership=fv, dendrogram=combd, algorithm='rleiden', names=names(fv))
-
   if(hierarchical & cur.depth==max.depth) {
-    ## reconstruct merges matrix
+    # reconstruct merges matrix
     hcm <- as.hclust(as.dendrogram(combd))$merge
-    ## translate hclust $merge to walktrap-like $merges
+    # translate hclust $merge to walktrap-like $merges
     res$merges <- hcm + nrow(hcm) + 1
     res$merges[hcm < 0] <- -hcm[hcm < 0] - 1
   }
-
   class(res) <- rev("fakeCommunities")
   return(res)
-
 }
 
 
