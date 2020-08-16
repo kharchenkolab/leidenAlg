@@ -3,20 +3,20 @@ Type: Package
 Title: Implements the Leiden algorithm via an R interface
 Version: 0.0.1
 Date: 2020-06-26
-Authors@R: c(person("Peter", "Kharchenko", email = "Peter_Kharchenko@hms.harvard.edu", role = c("aut")), person("Evan", "Biederstedt", email = "evan.biederstedt@gmail.com", role=c("cre", "aut")))
-Description: An R interface to he Leiden algorithm, an iterative community detection algorithm on networks. The algorithm is designed to converge to a partition in which all subsets of all communities are locally optimally assigned, yielding communities guaranteed to be connected. The implementation proves to be fast, scales well, and can be run on graphs of millions of nodes (as long as they can fit in memory)
-License: MIT + file LICENSE
+Authors@R: c(person("Peter", "Kharchenko", email = "Peter_Kharchenko@hms.harvard.edu", role = c("aut", "cph")), person("Viktor", "Petukhov", email = "viktor.s.petukhov@ya.ru", role = c("aut")), person("Evan", "Biederstedt", email = "evan.biederstedt@gmail.com", role=c("cre", "aut")))
+Description: An R interface to the Leiden algorithm, an iterative community detection algorithm on networks. The algorithm is designed to converge to a partition in which all subsets of all communities are locally optimally assigned, yielding communities guaranteed to be connected. The implementation proves to be fast, scales well, and can be run on graphs of millions of nodes (as long as they can fit in memory)
+License: GPL3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
     Rcpp (>= 1.0.4), 
-    parallel, 
-    sccore
-Remotes:  
-    kharchenkolab/sccore
+    parallel
 LinkingTo: Rcpp, RcppArmadillo, RcppEigen, igraph
 Imports: Rcpp (>= 1.0.4)
 LinkingTo: Rcpp, RcppEigen
 RoxygenNote: 7.1.1
-Author: Peter Kharchenko [aut], Evan Biederstedt [cre, aut]
+URL: https://github.com/kharchenkolab/leidenAlg
+BugReports: https://github.com/kharchenkolab/leidenAlg/issues
+NeedsCompilation: yes
+Author: Peter Kharchenko [aut, cph], Viktor Petukhov [aut], Evan Biederstedt [cre, aut]
 Maintainer: Evan Biederstedt <evan.biederstedt@gmail.com>
