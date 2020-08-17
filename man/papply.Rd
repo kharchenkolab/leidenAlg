@@ -2,21 +2,30 @@
 % Please edit documentation in R/communities.R
 \name{papply}
 \alias{papply}
-\title{Use mclapply if n.cores>1, otherwise use regular lapply() if n.cores=1}
+\title{Parallel lapply: Use mclapply if n.cores>1, otherwise use regular lapply() if n.cores=1}
 \usage{
-papply(..., n.cores = parallel::detectCores(), mc.preschedule = FALSE)
+papply(
+  ...,
+  progress = FALSE,
+  n.cores = parallel::detectCores(),
+  mc.preschedule = FALSE
+)
 }
 \arguments{
-\item{...}{Primary input arguments X, FUN for mclapply(X, FUN, ...) or lapply(X, FUN, ...)}
+\item{progress}{Show progress bar via pbapply (default=FALSE)}
 
-\item{n.cores}{integer Number of cores (default=parallel::detectCores())}
+\item{n.cores}{Number of cores to use (default=1)}
 
-\item{mc.preschedule}{boolean (default=FALSE) From mclapply. If TRUE, then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X for mclapply(X, FUN, ...)}
+\item{mc.preschedule}{See ?parllel::mclapply (default=FALSE) If TRUE then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X. The former is better for short computations or large number of values in X, the latter is better for jobs that have high variance of completion time and not too many values of X compared to mc.cores.}
 }
 \value{
-list
+list, as returned by lapply
 }
 \description{
-Set names equal to values
+Parallel, optionally verbose lapply. See ?parallel::mclapply for more info.
 }
-\keyword{internal}
+\examples{
+square = function(x){ x**2 }
+plapply(1:10, square, n.cores=1, progress=TRUE)
+
+}

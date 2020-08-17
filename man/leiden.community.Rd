@@ -14,7 +14,7 @@ leiden.community(graph, resolution = 1, n.iterations = 2)
 \item{n.iterations}{number of iterations that the algorithm should be run for (default=2)}
 }
 \value{
-community object
+a fakeCommunities object that returns membership and dendrogram
 }
 \description{
 Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)

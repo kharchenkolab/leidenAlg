@@ -2,7 +2,8 @@
 % Please edit documentation in R/communities.R
 \name{rleiden.community}
 \alias{rleiden.community}
-\title{Recursive leiden communities}
+\title{Recursive leiden communities
+Constructs an n-step recursive clustering, using leiden.community}
 \usage{
 rleiden.community(
   graph,
@@ -28,9 +29,9 @@ rleiden.community(
 
 \item{verbose}{boolean Whether to output progress messages (default=FALSE)}
 
-\item{resolution}{resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth)}
+\item{resolution}{resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth) (default=1)}
 
-\item{cur.depth}{integer (default=1)}
+\item{cur.depth}{integer Current depth of clustering (default=1)}
 
 \item{hierarchical}{boolean If TRUE, calculate hierarchy on the multilevel clusters (default=TRUE)}
 
@@ -42,5 +43,6 @@ rleiden.community(
 a fakeCommunities object that returns membership and dendrogram
 }
 \description{
+Recursive leiden communities
 Constructs an n-step recursive clustering, using leiden.community
 }
