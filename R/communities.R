@@ -17,16 +17,22 @@ NULL
 set.names <- function(x) { setNames(x, x) }
 
 
-#' Use mclapply if n.cores>1, otherwise use regular lapply() if n.cores=1
+#' Parallel lapply: Use mclapply if n.cores>1, otherwise use regular lapply() if n.cores=1
 #'
-#' @description Set names equal to values
-#' @param ... Primary input arguments X, FUN for mclapply(X, FUN, ...) or lapply(X, FUN, ...)
-#' @param n.cores integer Number of cores (default=parallel::detectCores())
-#' @param mc.preschedule boolean (default=FALSE) From mclapply. If TRUE, then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X for mclapply(X, FUN, ...)
-#' @return list 
-#' @keywords internal
-papply <- function(..., n.cores=parallel::detectCores(), mc.preschedule=FALSE) {
-  if(n.cores>1) {
+#' @description Parallel, optionally verbose lapply. See ?parallel::mclapply for more info.
+#' @param progress Show progress bar via pbapply (default=FALSE)
+#' @param n.cores Number of cores to use (default=1)
+#' @param mc.preschedule See ?parllel::mclapply (default=FALSE) If TRUE then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X. The former is better for short computations or large number of values in X, the latter is better for jobs that have high variance of completion time and not too many values of X compared to mc.cores.
+#' @examples
+#' square = function(x){ x**2 }
+#' plapply(1:10, square, n.cores=1, progress=TRUE)
+#'
+#' @return list, as returned by lapply
+#' @export
+papply <- function(..., progress=FALSE, n.cores=parallel::detectCores(), mc.preschedule=FALSE) {
+  if (progress && requireNamespace("pbapply", quietly=TRUE)) {
+    result <- pbapply::pblapply(..., cl=n.cores)
+  } else if(n.cores>1) {
     result <- parallel::mclapply(..., mc.cores=n.cores, mc.preschedule=mc.preschedule)
   } else {
     # fall back on lapply
@@ -35,12 +41,11 @@ papply <- function(..., n.cores=parallel::detectCores(), mc.preschedule=FALSE) {
 
   is.error <- (sapply(result, class) == "try-error")
   if (any(is.error)) {
-    stop(paste("Errors in papply:", result[is.error]))
+    stop(paste("Errors in plapply:", result[is.error]))
   }
 
   return(result)
 }
-
 
 #' Leiden algorithm community detection
 #'
@@ -48,7 +53,7 @@ papply <- function(..., n.cores=parallel::detectCores(), mc.preschedule=FALSE) {
 #' @param graph graph on which communities should be detected
 #' @param resolution resolution parameter (default=1.0) - higher numbers lead to more communities
 #' @param n.iterations number of iterations that the algorithm should be run for (default=2)
-#' @return community object
+#' @return a fakeCommunities object that returns membership and dendrogram
 #' @export 
 leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 
@@ -63,15 +68,15 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 
 
 #' Recursive leiden communities
-#'
 #' Constructs an n-step recursive clustering, using leiden.community
+#' 
 #' @param graph graph
 #' @param max.depth Recursive depth (default=2)
 #' @param n.cores integer Number of cores to use (default = parallel::detectCores(logical=FALSE)). If logical=FALSE, uses the number of physical CPUs/cores. If logical=TRUE, uses the logical number of CPUS/cores. See parallel::detectCores()
 #' @param min.community.size integer Minimal community size parameter for the walktrap communities---Communities smaller than that will be merged (default=10) 
 #' @param verbose boolean Whether to output progress messages (default=FALSE)
-#' @param resolution resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth)
-#' @param cur.depth integer (default=1)
+#' @param resolution resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth) (default=1) 
+#' @param cur.depth integer Current depth of clustering (default=1)
 #' @param hierarchical boolean If TRUE, calculate hierarchy on the multilevel clusters (default=TRUE)
 #' @param mc.preschedule boolean (default=FALSE) Parameter fed to mclapply(). If TRUE, then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X in mclapply(X, FUN, ...)
 #' @param ... passed to leiden.community
