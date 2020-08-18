@@ -1,5 +1,6 @@
 #' @useDynLib leidenAlg
 #' @import igraph
+#' @import sccore
 #' @import parallel
 NULL
 
@@ -13,12 +14,13 @@ NULL
 #' vec = c(1, 2, 3, 4)
 #' set.names(vec)
 #' @keywords internal
-set.names <- function(x) { setNames(x, x) }
+set.names <- function(x) { stats::setNames(x, x) }
 
 
 #' Parallel lapply: Use mclapply if n.cores>1, otherwise use regular lapply() if n.cores=1
 #'
 #' @description Parallel, optionally verbose lapply. See ?parallel::mclapply for more info.
+#' @param ... Arguments fed to parallel::mclapply(...), pbapply::pblapply(...), or lapply(...)
 #' @param progress Show progress bar via pbapply (default=FALSE)
 #' @param n.cores Number of cores to use (default=1)
 #' @param mc.preschedule See ?parllel::mclapply (default=FALSE) If TRUE then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X. The former is better for short computations or large number of values in X, the latter is better for jobs that have high variance of completion time and not too many values of X compared to mc.cores.
@@ -59,7 +61,7 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
   x <- find_partition(graph, igraph::E(graph)$weight, resolution, n.iterations)
 
   # enclose in a masquerading class
-  fv <- as.factor(setNames(x, V(graph)$name))
+  fv <- as.factor(stats::setNames(x, V(graph)$name))
   res <- list(membership=fv, dendrogram=NULL, algorithm='leiden', resolution=resolution, n.iter=n.iterations, names=names(fv))
   class(res) <- rev("fakeCommunities")
   return(res)
@@ -139,7 +141,7 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
     if(length(wtl)>1) {
       cgraph <- sccore::getClusterGraph(graph,mem)
       chwt <- walktrap.community(cgraph,steps=8)
-      d <- as.dendrogram(chwt)
+      d <- stats::as.dendrogram(chwt)
 
       # merge hierarchical portions
       wtld <- lapply(wtl,as.dendrogram)
@@ -166,8 +168,8 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
       glue.dends <- function(l) {
         if(is.leaf(l)) {
           nam <- as.character(attr(l,'label'));
-          id <- dendrapply(wtld[[nam]], shift.leaf.ids, v=nshift[nam])
-          return(dendrapply(id,shift.heights,s=max.height-attr(id,'height')))
+          id <- stats::dendrapply(wtld[[nam]], shift.leaf.ids, v=nshift[nam])
+          return(stats::dendrapply(id,shift.heights,s=max.height-attr(id,'height')))
 
         }
         attr(l,'height') <- (attr(l,'height')-min.d.height)*height.scale + max.height + height.shift;
@@ -194,7 +196,7 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
   res <- list(membership=fv, dendrogram=combd, algorithm='rleiden', names=names(fv))
   if(hierarchical & cur.depth==max.depth) {
     # reconstruct merges matrix
-    hcm <- as.hclust(as.dendrogram(combd))$merge
+    hcm <- stats::as.hclust(as.dendrogram(combd))$merge
     # translate hclust $merge to walktrap-like $merges
     res$merges <- hcm + nrow(hcm) + 1
     res$merges[hcm < 0] <- -hcm[hcm < 0] - 1

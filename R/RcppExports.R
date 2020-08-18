@@ -14,6 +14,8 @@ checkOpenMP <- function() {
 #' @return A vector of membership values
 #' @examples 
 #' library(igraph)
+#' library(leidenAlg)
+#'
 #' g <- make_star(10)
 #' E(g)$weight <- seq(ecount(g))
 #' find_partition(g, E(g)$weight)
