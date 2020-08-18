@@ -1,6 +1,7 @@
 #' @useDynLib leidenAlg
 #' @import igraph
 #' @import parallel
+#' @import sccore
 NULL
 
 
@@ -56,7 +57,7 @@ papply <- function(..., progress=FALSE, n.cores=parallel::detectCores(), mc.pres
 #' @export 
 leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 
-  x <- find_partition(graph, igraph::E(graph)$weight, resolution, n.iterations)
+  x <- find_partition(graph, E(graph)$weight, resolution, n.iterations)
 
   # enclose in a masquerading class
   fv <- as.factor(setNames(x, V(graph)$name))
