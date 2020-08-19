@@ -2,6 +2,8 @@
 #' @import igraph
 #' @import sccore
 #' @import parallel
+#' @importFrom igraph decompose
+#' @importFrom igraph spectrum
 NULL
 
 
@@ -26,7 +28,7 @@ set.names <- function(x) { stats::setNames(x, x) }
 #' @param mc.preschedule See ?parllel::mclapply (default=FALSE) If TRUE then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X. The former is better for short computations or large number of values in X, the latter is better for jobs that have high variance of completion time and not too many values of X compared to mc.cores.
 #' @examples
 #' square = function(x){ x**2 }
-#' plapply(1:10, square, n.cores=1, progress=TRUE)
+#' papply(1:10, square, n.cores=1, progress=TRUE)
 #'
 #' @return list, as returned by lapply
 #' @export
@@ -42,7 +44,7 @@ papply <- function(..., progress=FALSE, n.cores=parallel::detectCores(), mc.pres
 
   is.error <- (sapply(result, class) == "try-error")
   if (any(is.error)) {
-    stop(paste("Errors in plapply:", result[is.error]))
+    stop(paste("Errors in papply:", result[is.error]))
   }
 
   return(result)
