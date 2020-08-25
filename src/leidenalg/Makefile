@@ -1,5 +1,5 @@
 CXX ?= g++
-PKG_CXXFLAGS = -O3 -march=native -std=c++11 -pthread -fPIC -fopenmp
+PKG_CXXFLAGS = -O3 -std=c++11 -pthread -fPIC -fopenmp
 PKG_CXXFLAGS += -I"./include" -I"./igraph-R"
 LDFLAGS += -lpthread
 #CXXFLAGS += -I"./include" -I"./igraph-R"
