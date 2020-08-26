@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/kharchenkolab/leidenAlg.svg?branch=master)](https://travis-ci.com/kharchenkolab/leidenAlg)
+
 # leidenAlg
 
 Implements the Leiden algorithm via an R interface
@@ -11,9 +13,9 @@ The algorithm was written to improve upon defects of the Louvain algorithm. Cons
 The basic steps are:
 * (1) local moving of nodes to quickly find partitions
 * (2) refinement of partitions
-* (3) aggregation of the network based on the refned partition, using the non-refned partition to create an initial partition for the aggregate network. Steps are iterated until convergence.
+* (3) aggregation of the network based on the refined partition, using the non-refined partition to create an initial partition for the aggregate network. Steps are iterated until convergence.
 
-For details on the algoritym, see ["From Louvain to Leiden: guaranteeing well-connected communities"](https://www.nature.com/articles/s41598-019-41695-z) Traag, Waltman, van Eck. Sci Rep 9, 5233 (2019). https://doi.org/10.1038/s41598-019-41695-z
+For details on the algorithm, see ["From Louvain to Leiden: guaranteeing well-connected communities"](https://www.nature.com/articles/s41598-019-41695-z) Traag, Waltman, van Eck. Sci Rep 9, 5233 (2019). https://doi.org/10.1038/s41598-019-41695-z
 
 For the original implementation in C++ with python bindings, see: https://github.com/vtraag/leidenalg
 
@@ -21,7 +23,7 @@ For the original implementation in C++ with python bindings, see: https://github
 
 * `leiden.community()`: Detect communities using Leiden algorithm, output as `fakeCommunities` class for downstream use.
 
-* `rleiden.community()`: Recursive leiden communities, constructs an n-step recursive clustering, using leiden.community.detection. Returns a f`akeCommunities` object that has methods membership(), without dendogram.
+* `rleiden.community()`: Recursive leiden communities, constructs an n-step recursive clustering, using leiden.community.detection. Returns a f`akeCommunities` object that has methods membership(), without dendrogram.
 
 * `dendrogram.fakeCommunities()`: Returns pre-calculated dendrogram
 
