@@ -108,6 +108,25 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
   if(verbose){
     cat(length(unique(mem)),' ')
   }
+
+  ## internal function in igraph, community.R
+  complete.dend <- function(comm, use.modularity) {
+    merges <- comm$merges
+    if (nrow(merges) < comm$vcount-1) {
+      if (use.modularity) {
+        stop(paste("`use.modularity' requires a full dendrogram,",
+                   "i.e. a connected graph"))
+      }
+      miss <- seq_len(comm$vcount + nrow(merges))[-as.vector(merges)]
+      miss <- c(miss, seq_len(length(miss)-2) + comm$vcount+nrow(merges))
+      miss <- matrix(miss, byrow=TRUE, ncol=2)
+      merges <- rbind(merges, miss)
+    }
+    storage.mode(merges) <- "integer"
+
+    return(merges)
+  }
+
   if(cur.depth<max.depth) {
     # start recursive run
     wtl <- papply(set.names(unique(mem)), function(cluster) {
@@ -131,7 +150,7 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
         cn <- names(mem)[which(mem==cluster)]
         sg <- induced.subgraph(graph,cn)
         res <- walktrap.community(induced.subgraph(graph,cn))
-        res$merges <- igraph:::complete.dend(res,FALSE)
+        res$merges <- complete.dend(res,FALSE)
         res
       },n.cores=n.cores)
     }
@@ -255,7 +274,7 @@ getClusterGraph <- function(graph, groups, method="sum", plot=FALSE, node.scale=
     }
   } else {
     gn <- V(graph)$name;
-    groups <- na.omit(groups[names(groups) %in% gn]);
+    groups <- stats::na.omit(groups[names(groups) %in% gn]);
     if(length(groups)<2) stop('valid names of groups elements include too few cells')
     if(length(groups)<length(gn)) {
       g <- induced.subgraph(graph,names(groups))
@@ -265,7 +284,7 @@ getClusterGraph <- function(graph, groups, method="sum", plot=FALSE, node.scale=
     if(is.factor(groups)) {
       groups <- groups[V(g)$name]
     } else {
-      groups <- as.factor(setNames(as.character(groups[V(g)$name]),V(g)$name))
+      groups <- as.factor(stats::setNames(as.character(groups[V(g)$name]),V(g)$name))
     }
   }
 
