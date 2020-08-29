@@ -6,7 +6,7 @@ PKG_CXXFLAGS= -I"../inst/include"  -I"./leidenalg/igraph-R" -I"./leidenalg/inclu
 PKGB_PATH=`echo 'library(igraph); cat(system.file("libs", package="igraph"))' \
       | ${R_HOME}/bin/R --vanilla --slave`
 
-PKG_LIBS=-L/usr/lib/ -L"." -lpthread -lstdc++ -lleidenalg -lm $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "Rcpp:::LdFlags()") $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) $(SHLIB_OPENMP_CXXFLAGS) $(PKGB_PATH)/igraph.so
+PKG_LIBS=-L/usr/lib/ -L"." -lpthread -lstdc++ -lleidenalg -lm $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "Rcpp:::LdFlags()") $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) $(SHLIB_OPENMP_CXXFLAGS) $(PKGB_PATH)/igraph.dll
 CXX_STD = CXX11
 MkInclude = $(R_HOME)/etc${R_ARCH}/Makeconf
 
