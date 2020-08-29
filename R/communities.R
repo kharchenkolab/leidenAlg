@@ -3,6 +3,9 @@
 #' @import parallel
 #' @importFrom igraph decompose
 #' @importFrom igraph spectrum
+#' @importFrom graphics par
+#' @importFrom grDevices adjustcolor
+#' @importFrom stats as.dendrogram is.leaf
 NULL
 
 
@@ -164,7 +167,7 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
       d <- stats::as.dendrogram(chwt)
 
       # merge hierarchical portions
-      wtld <- lapply(wtl,as.dendrogram)
+      wtld <- lapply(wtl, as.dendrogram)
       max.height <- max(unlist(lapply(wtld,attr,'height')))
 
       # shift leaf ids to fill in 1..N range

@@ -9,10 +9,11 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    Rcpp (>= 1.0.4), 
+	graphics,
+    grDevices,
+    igraph,
     parallel, 
-    stats,
-    igraph
+    stats
 Suggests:
     pbapply
 LinkingTo: Rcpp, RcppArmadillo, RcppEigen
