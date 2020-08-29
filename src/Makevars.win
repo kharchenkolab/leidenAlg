@@ -16,10 +16,9 @@ MkInclude = $(R_HOME)/etc${R_ARCH}/Makeconf
 SUBDIRS = leidenalg
 SUBLIBS = leidenalg.a
 
-IGRAPH_LIB = $(PKGB_PATH)/igraph.so
+IGRAPH_LIB = $(PKGB_PATH)/igraph.dll
 
 all: $(SHLIB) 
-	if [ "$(OS)" != "Windows_NT" ] && [ `uname -s` = 'Darwin' ]; then install_name_tool -id '@rpath/igraph.so' $(IGRAPH_LIB); fi 
 $(SHLIB): $(OBJECTS) sublibs
 sublibs: sublibraries
 
