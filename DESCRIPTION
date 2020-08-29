@@ -13,6 +13,7 @@ Imports:
     grDevices,
     igraph,
     parallel, 
+    Rcpp (>= 1.0.5), 
     stats
 Suggests:
     pbapply

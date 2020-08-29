@@ -1,4 +1,5 @@
 #' @useDynLib leidenAlg
+#' @import Rcpp
 #' @import igraph
 #' @import parallel
 #' @importFrom igraph decompose
