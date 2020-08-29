@@ -18,6 +18,8 @@ NULL
 #' @examples
 #' vec = c(1, 2, 3, 4)
 #' set.names(vec)
+#' 
+#' @export
 #' @keywords internal
 set.names <- function(x) { stats::setNames(x, x) }
 
