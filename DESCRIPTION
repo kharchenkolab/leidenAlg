@@ -14,7 +14,7 @@ Imports:
     igraph,
     parallel, 
     Rcpp (>= 1.0.5), 
-    stats
+    stats,
 Suggests:
     pbapply
 LinkingTo: Rcpp, RcppArmadillo, RcppEigen
