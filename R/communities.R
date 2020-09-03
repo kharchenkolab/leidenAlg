@@ -65,9 +65,10 @@ papply <- function(..., progress=FALSE, n.cores=parallel::detectCores(), mc.pres
 #' @param edge.alpha numeric Value to scale the opacity of 'alpha.f' in adjustcolor(); typically in [0,1] (default=0.3)
 #' @param plot boolean Whether to show collapsed graph plot (default=FALSE)
 #' @param seed numeric Set seed via set.seed() for plotting (default=1)
+#' @param ... arguments passed to collapseGraphSum()
 #' @return collapsed graph
 #' @export
-getClusterGraph <- function(graph, groups, method="sum", plot=FALSE, set.seed=1, node.scale=50, edge.scale=50, edge.alpha=0.3, ...) {
+getClusterGraph <- function(graph, groups, method="sum", plot=FALSE, seed=1, node.scale=50, edge.scale=50, edge.alpha=0.3, ...) {
   V(graph)$num <- 1;
   if(is.integer(groups) && is.null(names(groups))) {
     nv <- vcount(graph)
@@ -106,7 +107,7 @@ getClusterGraph <- function(graph, groups, method="sum", plot=FALSE, set.seed=1,
   }
 
   if(plot) {
-    set.seed(set.seed)
+    set.seed(seed)
     par(mar = rep(0.1, 4))
     plot.igraph(gcon, layout=layout_with_fr(gcon), vertex.size=V(gcon)$num/(sum(V(gcon)$num)/node.scale), 
       edge.width=E(gcon)$weight/sum(E(gcon)$weight/edge.scale), adjustcolor('black', alpha.f=edge.alpha))
@@ -152,7 +153,7 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(logical=FALSE), min.community.size=10, verbose=FALSE, resolution=1, cur.depth=1, hierarchical=TRUE, mc.preschedule=FALSE, ...) {
 
   if(verbose & cur.depth==1){
-    cat(paste0("running ",max.depth,"-recursive Leiden clustering: "))
+    message(paste0("running ",max.depth,"-recursive Leiden clustering: "))
   }
 
   if(length(resolution)>1) {
@@ -171,7 +172,7 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
   }
 
   if(verbose){
-    cat(length(unique(mem)),' ')
+    message(length(unique(mem)),' ')
   }
 
   ## internal function in igraph, community.R
@@ -272,8 +273,8 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
 
   if(cur.depth==1) {
     if(verbose) {
-      cat(paste0('Detected a total of ',length(unique(fv)),' clusters '))
-      cat("Done\n")
+      message(paste0('Detected a total of ',length(unique(fv)),' clusters '))
+      message("Done\n")
     }
   }
 

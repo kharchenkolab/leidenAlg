@@ -9,7 +9,7 @@ getClusterGraph(
   groups,
   method = "sum",
   plot = FALSE,
-  set.seed = 1,
+  seed = 1,
   node.scale = 50,
   edge.scale = 50,
   edge.alpha = 0.3,
@@ -25,13 +25,15 @@ getClusterGraph(
 
 \item{plot}{boolean Whether to show collapsed graph plot (default=FALSE)}
 
+\item{seed}{numeric Set seed via set.seed() for plotting (default=1)}
+
 \item{node.scale}{numeric Value to scale the size of the nodes, via 'vertex.size' in igraph::plot() (default=50)}
 
 \item{edge.scale}{numeric Value to scale the edge thickness of the noes, via 'edge.width' in graph::plot()  (default=50)}
 
 \item{edge.alpha}{numeric Value to scale the opacity of 'alpha.f' in adjustcolor(); typically in [0,1] (default=0.3)}
 
-\item{seed}{numeric Set seed via set.seed() for plotting (default=1)}
+\item{...}{arguments passed to collapseGraphSum()}
 }
 \value{
 collapsed graph
