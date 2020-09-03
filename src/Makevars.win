@@ -1,15 +1,21 @@
 
 ## include OpenMP
 
+# detect R_arch 
+rarch := $(shell echo 'Sys.getenv("R_ARCH")' | ${R_HOME}/bin/R --vanilla --slave) 
 
-MACHINE=`echo 'Sys.getenv("R_ARCH")' | ${R_HOME}/bin/R --vanilla --slave`
+PKGB_PATH := $(shell echo 'library(igraph); cat(system.file("libs", package="igraph"))' | ${R_HOME}/bin/R --vanilla --slave)
 
 
-PKG_CXXFLAGS= -I"../inst/include"  -I"./leidenalg/igraph-R" -I"./leidenalg/include" $(SHLIB_OPENMP_CXXFLAGS) 
+## note: the space in '[1] "/i386" ' is important...
+## else, '[1] "/x64" '
+ifeq ($(rarch),[1] "/i386" )
+ IGRAPH_LIB := $(PKGB_PATH)/i386/igraph.dll
+else
+ IGRAPH_LIB := $(PKGB_PATH)/x64/igraph.dll
+endif
 
-PKGB_PATH=`echo 'library(igraph); cat(system.file("libs", package="igraph"))' \
-      | ${R_HOME}/bin/R --vanilla --slave`
-
+PKG_CXXFLAGS=-I"../inst/include"  -I"./leidenalg/igraph-R" -I"./leidenalg/include" $(SHLIB_OPENMP_CXXFLAGS) 
 
 PKG_LIBS=-L/usr/lib/ -L"." -lpthread -lstdc++ -lleidenalg -lm $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "Rcpp:::LdFlags()") $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) $(SHLIB_OPENMP_CXXFLAGS) $(IGRAPH_LIB)
 CXX_STD = CXX11
@@ -21,13 +27,7 @@ MkInclude = $(R_HOME)/etc${R_ARCH}/Makeconf
 SUBDIRS = leidenalg
 SUBLIBS = leidenalg.a
 
-
 all: $(SHLIB) 
-	ifeq ($(MACHINE), "/i386")
-		IGRAPH_LIB=$(PKGB_PATH)/i386/igraph.dll
-	else
-		IGRAPH_LIB=$(PKGB_PATH)/x64/igraph.dll
-	endif
 $(SHLIB): $(OBJECTS) sublibs
 sublibs: sublibraries
 
