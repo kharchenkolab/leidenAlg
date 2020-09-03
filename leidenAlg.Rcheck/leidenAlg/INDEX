@@ -1,0 +1,12 @@
+dendrogram.fakeCommunities
+                        Returns pre-calculated dendrogram
+find_partition          Finds the optimal partition using the Leiden
+                        algorithm
+leiden.community        Leiden algorithm community detection
+membership.fakeCommunities
+                        Returns pre-calculated membership factor
+papply                  Parallel lapply: Use mclapply if n.cores>1,
+                        otherwise use regular lapply() if n.cores=1
+rleiden.community       Recursive leiden communities Constructs an
+                        n-step recursive clustering, using
+                        leiden.community
