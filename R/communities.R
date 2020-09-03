@@ -55,6 +55,65 @@ papply <- function(..., progress=FALSE, n.cores=parallel::detectCores(), mc.pres
   return(result)
 }
 
+#' Collapse vertices belonging to each cluster in a graph
+#'
+#' @param graph igraph object Graph to be clustered
+#' @param groups Factor on vertices describing cluster assignment (can specify integer vertex ids, or character vertex names which will be matched)
+#' @param method string Method used, either "sum" or "paga" (default="sum"). "paga" refers to PAGA, <https://github.com/theislab/paga>
+#' @param node.scale numeric Value to scale the size of the nodes, via 'vertex.size' in igraph::plot() (default=50)
+#' @param edge.scale numeric Value to scale the edge thickness of the noes, via 'edge.width' in graph::plot()  (default=50)
+#' @param edge.alpha numeric Value to scale the opacity of 'alpha.f' in adjustcolor(); typically in [0,1] (default=0.3)
+#' @param plot boolean Whether to show collapsed graph plot (default=FALSE)
+#' @param seed numeric Set seed via set.seed() for plotting (default=1)
+#' @return collapsed graph
+#' @export
+getClusterGraph <- function(graph, groups, method="sum", plot=FALSE, set.seed=1, node.scale=50, edge.scale=50, edge.alpha=0.3, ...) {
+  V(graph)$num <- 1;
+  if(is.integer(groups) && is.null(names(groups))) {
+    nv <- vcount(graph)
+    if(length(groups)!=nv) stop('length of groups should be equal to the number of vertices')
+    if(max(groups)>nv) stop('groups specifies ids that are larger than the number of vertices in the graph')
+    if(any(is.na(groups))) {
+      # remove vertices that are not part of the groups
+      vi <- which(!is.na(groups));
+      g <- induced.subgraph(graph,vi);
+      groups <- groups[vi];
+    } else {
+      g <- graph;
+    }
+  } else {
+    gn <- V(graph)$name;
+    groups <- stats::na.omit(groups[names(groups) %in% gn]);
+    if(length(groups)<2) stop('valid names of groups elements include too few cells')
+    if(length(groups)<length(gn)) {
+      g <- induced.subgraph(graph,names(groups))
+    } else {
+      g <- graph;
+    }
+    if(is.factor(groups)) {
+      groups <- groups[V(g)$name]
+    } else {
+      groups <- as.factor(stats::setNames(as.character(groups[V(g)$name]),V(g)$name))
+    }
+  }
+
+  if (method == "sum") {
+    gcon <- collapseGraphSum(g, groups, ...)
+  } else if (method == "paga") {
+    gcon <- collapseGraphPaga(g, groups, ...)
+  } else {
+    stop("Unknown method: ", method)
+  }
+
+  if(plot) {
+    set.seed(set.seed)
+    par(mar = rep(0.1, 4))
+    plot.igraph(gcon, layout=layout_with_fr(gcon), vertex.size=V(gcon)$num/(sum(V(gcon)$num)/node.scale), 
+      edge.width=E(gcon)$weight/sum(E(gcon)$weight/edge.scale), adjustcolor('black', alpha.f=edge.alpha))
+  }
+  return(invisible(gcon))
+}
+
 #' Leiden algorithm community detection
 #'
 #' Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
@@ -252,61 +311,3 @@ membership.fakeCommunities <- function(obj) {
   return(obj$membership)
 }
 
-#' @description Collapse vertices belonging to each cluster in a graph
-#'
-#' @param graph igraph object Graph to be clustered
-#' @param groups Factor on vertices describing cluster assignment (can specify integer vertex ids, or character vertex names which will be matched)
-#' @param method string Method used, either "sum" or "paga" (default="sum"). "paga" refers to PAGA, <https://github.com/theislab/paga>
-#' @param node.scale numeric Value to scale the size of the nodes, via 'vertex.size' in igraph::plot() (default=50)
-#' @param edge.scale numeric Value to scale the edge thickness of the noes, via 'edge.width' in graph::plot()  (default=50)
-#' @param edge.alpha numeric Value to scale the opacity of 'alpha.f' in adjustcolor(); typically in [0,1] (default=0.3)
-#' @param plot boolean Whether to show collapsed graph plot (default=FALSE)
-#' @inheritParams collapseGraphPaga
-#' @return collapsed graph
-#' @export
-getClusterGraph <- function(graph, groups, method="sum", plot=FALSE, node.scale=50, edge.scale=50, edge.alpha=0.3, ...) {
-  V(graph)$num <- 1;
-  if(is.integer(groups) && is.null(names(groups))) {
-    nv <- vcount(graph)
-    if(length(groups)!=nv) stop('length of groups should be equal to the number of vertices')
-    if(max(groups)>nv) stop('groups specifies ids that are larger than the number of vertices in the graph')
-    if(any(is.na(groups))) {
-      # remove vertices that are not part of the groups
-      vi <- which(!is.na(groups));
-      g <- induced.subgraph(graph,vi);
-      groups <- groups[vi];
-    } else {
-      g <- graph;
-    }
-  } else {
-    gn <- V(graph)$name;
-    groups <- stats::na.omit(groups[names(groups) %in% gn]);
-    if(length(groups)<2) stop('valid names of groups elements include too few cells')
-    if(length(groups)<length(gn)) {
-      g <- induced.subgraph(graph,names(groups))
-    } else {
-      g <- graph;
-    }
-    if(is.factor(groups)) {
-      groups <- groups[V(g)$name]
-    } else {
-      groups <- as.factor(stats::setNames(as.character(groups[V(g)$name]),V(g)$name))
-    }
-  }
-
-  if (method == "sum") {
-    gcon <- collapseGraphSum(g, groups, ...)
-  } else if (method == "paga") {
-    gcon <- collapseGraphPaga(g, groups, ...)
-  } else {
-    stop("Unknown method: ", method)
-  }
-
-  if(plot) {
-    set.seed(1)
-    par(mar = rep(0.1, 4))
-    plot.igraph(gcon, layout=layout_with_fr(gcon), vertex.size=V(gcon)$num/(sum(V(gcon)$num)/node.scale), 
-      edge.width=E(gcon)$weight/sum(E(gcon)$weight/edge.scale), adjustcolor('black', alpha.f=edge.alpha))
-  }
-  return(invisible(gcon))
-}
