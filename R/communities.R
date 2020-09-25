@@ -1,4 +1,7 @@
 #' @useDynLib leidenAlg
+#' @exportPattern "^[[:alpha:]]+"
+
+#' @useDynLib leidenAlg
 #' @import Rcpp
 #' @import parallel
 #' @importFrom igraph E
