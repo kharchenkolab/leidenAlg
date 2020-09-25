@@ -46,3 +46,6 @@ a fakeCommunities object that returns membership and dendrogram
 Recursive leiden communities
 Constructs an n-step recursive clustering, using leiden.community
 }
+\examples{
+rleiden.community(conosGraph, n.cores=1)
+}

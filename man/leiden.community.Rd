@@ -19,3 +19,7 @@ a fakeCommunities object that returns membership and dendrogram
 \description{
 Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
 }
+\examples{
+leiden.community(conosGraph)
+
+}

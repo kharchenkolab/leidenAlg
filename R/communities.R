@@ -1,7 +1,8 @@
 #' @useDynLib leidenAlg
 #' @import Rcpp
-#' @import igraph
 #' @import parallel
+#' @import sccore
+#' @importFrom sccore adjacent_vertices
 #' @importFrom igraph decompose
 #' @importFrom igraph spectrum
 #' @importFrom graphics par
@@ -10,111 +11,6 @@
 NULL
 
 
-#' setNames wrapper function, also called 'sn' elsewhere
-#'
-#' @description Set names equal to values
-#' @param x an object for which names attribute will be meaningful 
-#' @return An object with names assigned equal to values
-#' @examples
-#' vec = c(1, 2, 3, 4)
-#' set.names(vec)
-#' 
-#' @export
-#' @keywords internal
-set.names <- function(x) { stats::setNames(x, x) }
-
-
-#' Parallel lapply: Use mclapply if n.cores>1, otherwise use regular lapply() if n.cores=1
-#'
-#' @description Parallel, optionally verbose lapply. See ?parallel::mclapply for more info.
-#' @param ... Arguments fed to parallel::mclapply(...), pbapply::pblapply(...), or lapply(...)
-#' @param progress Show progress bar via pbapply (default=FALSE)
-#' @param n.cores Number of cores to use (default=1)
-#' @param mc.preschedule See ?parllel::mclapply (default=FALSE) If TRUE then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X. The former is better for short computations or large number of values in X, the latter is better for jobs that have high variance of completion time and not too many values of X compared to mc.cores.
-#' @examples
-#' square = function(x){ x**2 }
-#' papply(1:10, square, n.cores=1, progress=TRUE)
-#'
-#' @return list, as returned by lapply
-#' @export
-papply <- function(..., progress=FALSE, n.cores=parallel::detectCores(), mc.preschedule=FALSE) {
-  if (progress && requireNamespace("pbapply", quietly=TRUE)) {
-    result <- pbapply::pblapply(..., cl=n.cores)
-  } else if(n.cores>1) {
-    result <- parallel::mclapply(..., mc.cores=n.cores, mc.preschedule=mc.preschedule)
-  } else {
-    # fall back on lapply
-    result <- lapply(...)
-  }
-
-  is.error <- (sapply(result, class) == "try-error")
-  if (any(is.error)) {
-    stop(paste("Errors in papply:", result[is.error]))
-  }
-
-  return(result)
-}
-
-#' Collapse vertices belonging to each cluster in a graph
-#'
-#' @param graph igraph object Graph to be clustered
-#' @param groups Factor on vertices describing cluster assignment (can specify integer vertex ids, or character vertex names which will be matched)
-#' @param method string Method used, either "sum" or "paga" (default="sum"). "paga" refers to PAGA, <https://github.com/theislab/paga>
-#' @param node.scale numeric Value to scale the size of the nodes, via 'vertex.size' in igraph::plot() (default=50)
-#' @param edge.scale numeric Value to scale the edge thickness of the noes, via 'edge.width' in graph::plot()  (default=50)
-#' @param edge.alpha numeric Value to scale the opacity of 'alpha.f' in adjustcolor(); typically in [0,1] (default=0.3)
-#' @param plot boolean Whether to show collapsed graph plot (default=FALSE)
-#' @param seed numeric Set seed via set.seed() for plotting (default=1)
-#' @param ... arguments passed to collapseGraphSum()
-#' @return collapsed graph
-#' @export
-getClusterGraph <- function(graph, groups, method="sum", plot=FALSE, seed=1, node.scale=50, edge.scale=50, edge.alpha=0.3, ...) {
-  V(graph)$num <- 1;
-  if(is.integer(groups) && is.null(names(groups))) {
-    nv <- vcount(graph)
-    if(length(groups)!=nv) stop('length of groups should be equal to the number of vertices')
-    if(max(groups)>nv) stop('groups specifies ids that are larger than the number of vertices in the graph')
-    if(any(is.na(groups))) {
-      # remove vertices that are not part of the groups
-      vi <- which(!is.na(groups));
-      g <- induced.subgraph(graph,vi);
-      groups <- groups[vi];
-    } else {
-      g <- graph;
-    }
-  } else {
-    gn <- V(graph)$name;
-    groups <- stats::na.omit(groups[names(groups) %in% gn]);
-    if(length(groups)<2) stop('valid names of groups elements include too few cells')
-    if(length(groups)<length(gn)) {
-      g <- induced.subgraph(graph,names(groups))
-    } else {
-      g <- graph;
-    }
-    if(is.factor(groups)) {
-      groups <- groups[V(g)$name]
-    } else {
-      groups <- as.factor(stats::setNames(as.character(groups[V(g)$name]),V(g)$name))
-    }
-  }
-
-  if (method == "sum") {
-    gcon <- collapseGraphSum(g, groups, ...)
-  } else if (method == "paga") {
-    gcon <- collapseGraphPaga(g, groups, ...)
-  } else {
-    stop("Unknown method: ", method)
-  }
-
-  if(plot) {
-    set.seed(seed)
-    par(mar = rep(0.1, 4))
-    plot.igraph(gcon, layout=layout_with_fr(gcon), vertex.size=V(gcon)$num/(sum(V(gcon)$num)/node.scale), 
-      edge.width=E(gcon)$weight/sum(E(gcon)$weight/edge.scale), adjustcolor('black', alpha.f=edge.alpha))
-  }
-  return(invisible(gcon))
-}
-
 #' Leiden algorithm community detection
 #'
 #' Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
@@ -122,13 +18,16 @@ getClusterGraph <- function(graph, groups, method="sum", plot=FALSE, seed=1, nod
 #' @param resolution resolution parameter (default=1.0) - higher numbers lead to more communities
 #' @param n.iterations number of iterations that the algorithm should be run for (default=2)
 #' @return a fakeCommunities object that returns membership and dendrogram
+#' @examples 
+#' leiden.community(conosGraph)
+#' 
 #' @export 
 leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 
   x <- find_partition(graph, igraph::E(graph)$weight, resolution, n.iterations)
 
   # enclose in a masquerading class
-  fv <- as.factor(stats::setNames(x, V(graph)$name))
+  fv <- as.factor(stats::setNames(x, igraph::V(graph)$name))
   res <- list(membership=fv, dendrogram=NULL, algorithm='leiden', resolution=resolution, n.iter=n.iterations, names=names(fv))
   class(res) <- rev("fakeCommunities")
   return(res)
@@ -149,22 +48,24 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 #' @param mc.preschedule boolean (default=FALSE) Parameter fed to mclapply(). If TRUE, then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X in mclapply(X, FUN, ...)
 #' @param ... passed to leiden.community
 #' @return a fakeCommunities object that returns membership and dendrogram
+#' @examples 
+#' ## rleiden.community(conosGraph, n.cores=1)
 #' @export
 rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(logical=FALSE), min.community.size=10, verbose=FALSE, resolution=1, cur.depth=1, hierarchical=TRUE, mc.preschedule=FALSE, ...) {
 
-  if(verbose & cur.depth==1){
+  if (verbose & cur.depth==1){
     message(paste0("running ",max.depth,"-recursive Leiden clustering: "))
   }
 
-  if(length(resolution)>1) {
-    if(length(resolution)!=max.depth) { stop("resolution value must be either a single number or a vector of length max.depth")}
+  if (length(resolution)>1){
+    if (length(resolution)!=max.depth) { stop("resolution value must be either a single number or a vector of length max.depth")}
     res <- resolution[cur.depth]
   } else { 
     res <- resolution 
   }
   mt <- leiden.community(graph, resolution=res, ...)
 
-  mem <- membership(mt)
+  mem <- igraph::membership(mt)
   tx <- table(mem)
   ivn <- names(tx)[tx<min.community.size]
   if(length(ivn)>1) {
@@ -193,56 +94,56 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
     return(merges)
   }
 
-  if(cur.depth<max.depth) {
+  if (cur.depth<max.depth) {
     # start recursive run
-    wtl <- papply(set.names(unique(mem)), function(cluster) {
-      cn <- names(mem)[which(mem==cluster)]
-      sg <- induced.subgraph(graph,cn)
-      rleiden.community(induced.subgraph(graph,cn), max.depth=max.depth, resolution=resolution, cur.depth=cur.depth+1, min.community.size=min.community.size, hierarchical=hierarchical, verbose=verbose, n.cores=1, ...)
-    }, n.cores=n.cores)
+wtl <- sccore::plapply(sccore::sn(unique(mem)), function(cluster) {
+  cn <- names(mem)[which(mem==cluster)]
+  sg <- igraph::induced.subgraph(graph, cn)
+  ## rleiden.community(igraph::induced.subgraph(graph,cn), max.depth=max.depth, resolution=resolution, cur.depth=cur.depth+1, min.community.size=min.community.size, hierarchical=hierarchical, verbose=verbose, n.cores=1, ...)
+}, n.cores=1)
 
     # merge clusters, cleanup
-    mbl <- lapply(wtl,membership)
+    mbl <- lapply(wtl, igraph::membership)
     # combined clustering factor
-    fv <- unlist(lapply(set.names(names(wtl)),function(cn) {
-      paste(cn,as.character(mbl[[cn]]),sep='-')
+    fv <- unlist(lapply(sccore::sn(names(wtl)), function(cn) {
+      paste(cn,as.character(mbl[[cn]]), sep='-')
     }))
-    names(fv) <- unlist(lapply(mbl,names))
+    names(fv) <- unlist(lapply(mbl, names))
   } else {
     fv <- mem
     if(hierarchical) {
       # use walktrap on the last level
-      wtl <- papply(set.names(unique(mem)), function(cluster) {
+      wtl <- sccore::plapply(sccore::sn(unique(mem)), function(cluster) {
         cn <- names(mem)[which(mem==cluster)]
-        sg <- induced.subgraph(graph,cn)
-        res <- walktrap.community(induced.subgraph(graph,cn))
-        res$merges <- complete.dend(res,FALSE)
+        sg <- igraph::induced.subgraph(graph,cn)
+        res <- igraph::walktrap.community(igraph::induced.subgraph(graph,cn))
+        res$merges <- complete.dend(res, FALSE)
         res
-      },n.cores=n.cores)
+      }, n.cores=n.cores)
     }
   }
 
   if(hierarchical) {
     # calculate hierarchy on the multilevel clusters
     if(length(wtl)>1) {
-      cgraph <- getClusterGraph(graph,mem)
-      chwt <- walktrap.community(cgraph,steps=8)
+      cgraph <- sccore::getClusterGraph(graph, mem)
+      chwt <- igraph::walktrap.community(cgraph, steps=8)
       d <- stats::as.dendrogram(chwt)
 
       # merge hierarchical portions
-      wtld <- lapply(wtl, as.dendrogram)
+      wtld <- lapply(wtl, stats::as.dendrogram)
       max.height <- max(unlist(lapply(wtld,attr,'height')))
 
       # shift leaf ids to fill in 1..N range
-      mn <- unlist(lapply(wtld,attr,'members'))
-      shift.leaf.ids <- function(l,v) { if(is.leaf(l)) { la <- attributes(l); l <- as.integer(l)+v; attributes(l) <- la; }; l  }
+      mn <- unlist(lapply(wtld,attr, 'members'))
+      shift.leaf.ids <- function(l, v) { if(is.leaf(l)) { la <- attributes(l); l <- as.integer(l)+v; attributes(l) <- la; }; l  }
       nshift <- cumsum(c(0,mn))[-(length(mn)+1)]; names(nshift) <- names(mn); # how much to shift ids in each tree
 
       get.heights <- function(l) {
         if(is.leaf(l)) {
           return(attr(l,'height'))
         } else {
-          return(c(attr(l,'height'),unlist(lapply(l, get.heights))))
+          return(c(attr(l,'height'), unlist(lapply(l, get.heights))))
         }
       }
       min.d.height <- min(get.heights(d))
@@ -265,7 +166,7 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
       }
       combd <- glue.dends(d)
     } else {
-      combd <- as.dendrogram(wtl[[1]])
+      combd <- stats::as.dendrogram(wtl[[1]])
     }
   } else {
     combd <- NULL
