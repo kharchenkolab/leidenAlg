@@ -17,3 +17,7 @@ dendrogram
 \description{
 Returns pre-calculated dendrogram
 }
+\examples{
+rLeidenComm = suppressWarnings(rleiden.community(conosGraph, n.cores=1))
+dendrogram.fakeCommunities(rLeidenComm)
+}

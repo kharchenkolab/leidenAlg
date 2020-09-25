@@ -1,3 +1,5 @@
+## 25 September 2020
+
 library(conos)
 library(dplyr)
 
@@ -14,9 +16,5 @@ con$buildGraph(k=30, k.self=5, space='PCA', ncomps=30, n.odgenes=2000, matching.
 conosGraph = con$graph
 conosGraph = igraph::induced_subgraph(conosGraph, v=V(conosGraph)[1:100]) ## length 100
 save(conosGraph, file="conosGraph.rda", compress="xz")
-
-getClusterGraph(conosGraph, groups=head( V(conosGraph), 20))
-
-
 
 

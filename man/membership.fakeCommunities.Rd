@@ -15,3 +15,7 @@ membership factor
 \description{
 Returns pre-calculated membership factor
 }
+\examples{
+leidenComm = leiden.community(conosGraph)
+membership.fakeCommunities(leidenComm)
+}
