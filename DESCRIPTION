@@ -16,9 +16,13 @@ Imports:
     igraph,
     parallel, 
     Rcpp (>= 1.0.5), 
-    stats,
+    sccore,
+    stats
 Suggests:
-    pbapply
+    pbapply,
+    testthat
+Remotes:
+    kharchenkolab/sccore
 LinkingTo: Rcpp, RcppArmadillo, RcppEigen
 SystemRequirements: GNU make
 RoxygenNote: 7.1.1

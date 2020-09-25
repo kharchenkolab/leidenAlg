@@ -47,5 +47,5 @@ Recursive leiden communities
 Constructs an n-step recursive clustering, using leiden.community
 }
 \examples{
-rleiden.community(conosGraph, n.cores=1)
+## rleiden.community(conosGraph, n.cores=1)
 }
