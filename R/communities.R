@@ -77,7 +77,7 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
 
   if(cur.depth<max.depth) {
     # start recursive run
-    wtl <- plapply(conos:::sn(unique(mem)), function(cluster) {
+    wtl <- plapply(sn(unique(mem)), function(cluster) {
       cn <- names(mem)[which(mem==cluster)]
       sg <- induced.subgraph(graph,cn)
       rleiden.community(induced.subgraph(graph,cn), max.depth=max.depth, resolution=resolution, cur.depth=cur.depth+1, min.community.size=min.community.size, hierarchical=hierarchical, verbose=verbose, n.cores=1, ...)
@@ -86,7 +86,7 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
     # merge clusters, cleanup
     mbl <- lapply(wtl,membership);
     # combined clustering factor
-    fv <- unlist(lapply(conos:::sn(names(wtl)),function(cn) {
+    fv <- unlist(lapply(sn(names(wtl)),function(cn) {
       paste(cn,as.character(mbl[[cn]]),sep='-')
     }))
     names(fv) <- unlist(lapply(mbl,names))
