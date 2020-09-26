@@ -8,7 +8,7 @@ Constructs an n-step recursive clustering, using leiden.community}
 rleiden.community(
   graph,
   max.depth = 2,
-  n.cores = parallel::detectCores(logical = F),
+  n.cores = parallel::detectCores(logical = FALSE),
   min.community.size = 10,
   verbose = FALSE,
   resolution = 1,
@@ -46,6 +46,6 @@ Recursive leiden communities
 Constructs an n-step recursive clustering, using leiden.community
 }
 \examples{
-rleiden.community(conosGraph, n.cores=1)
+rleiden.community(exampleGraph, n.cores=1)
 
 }

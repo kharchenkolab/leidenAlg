@@ -1,3 +1,3 @@
 #' Conos graph 
 #'
-"conosGraph"
+"exampleGraph"

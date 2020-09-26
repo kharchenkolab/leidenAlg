@@ -2,7 +2,7 @@
 % Please edit documentation in R/communities.R
 \name{leiden.community}
 \alias{leiden.community}
-\title{Leiden algorithm community detection}
+\title{Leiden algorithm community detectiond}
 \usage{
 leiden.community(graph, resolution = 1, n.iterations = 2)
 }
@@ -20,6 +20,6 @@ a fakeCommunities object that returns membership and dendrogram
 Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
 }
 \examples{
-leiden.community(conosGraph)
+leiden.community(exampleGraph)
 
 }

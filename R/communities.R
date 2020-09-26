@@ -10,14 +10,13 @@
 #' @importFrom igraph walktrap.community
 #' @importFrom igraph induced.subgraph
 #' @import sccore
-#' @importFrom sccore adjacent_vertices
 #' @importFrom graphics par
 #' @importFrom grDevices adjustcolor
 #' @importFrom stats as.dendrogram is.leaf
 NULL
 
 
-#' Leiden algorithm community detection
+#' Leiden algorithm community detectiond
 #'
 #' Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
 #' @param graph graph on which communities should be detected
@@ -25,7 +24,7 @@ NULL
 #' @param n.iterations number of iterations that the algorithm should be run for (default=2)
 #' @return a fakeCommunities object that returns membership and dendrogram
 #' @examples 
-#' leiden.community(conosGraph)
+#' leiden.community(exampleGraph)
 #' 
 #' @export 
 leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
@@ -55,12 +54,12 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 #' @param ... passed to leiden.community
 #' @return a fakeCommunities object that returns membership and dendrogram
 #' @examples 
-#' rleiden.community(conosGraph, n.cores=1)
+#' rleiden.community(exampleGraph, n.cores=1)
 #' 
 #' @export
-rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(logical=F), min.community.size=10, verbose=FALSE, resolution=1, cur.depth=1, hierarchical=TRUE, ...) {
+rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(logical=FALSE), min.community.size=10, verbose=FALSE, resolution=1, cur.depth=1, hierarchical=TRUE, ...) {
 
-  if(verbose & cur.depth==1) cat(paste0("running ",max.depth,"-recursive Leiden clustering: "));
+  if(verbose & cur.depth==1) message(paste0("running ",max.depth,"-recursive Leiden clustering: "));
   if(length(resolution)>1) {
     if(length(resolution)!=max.depth) { stop("resolution value must be either a single number or a vector of length max.depth")}
     res <- resolution[cur.depth]
@@ -73,11 +72,13 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
   if(length(ivn)>1) {
     mem[mem %in% ivn] <- as.integer(ivn[1]); # collapse into one group
   }
-  if(verbose) cat(length(unique(mem)),' ');
+  if(verbose) message(length(unique(mem)),' ');
+
+  setnames = function(x){names(x) <- x; x}
 
   if(cur.depth<max.depth) {
     # start recursive run
-    wtl <- plapply(sn(unique(mem)), function(cluster) {
+    wtl <- plapply(setnames(unique(mem)), function(cluster) {
       cn <- names(mem)[which(mem==cluster)]
       sg <- induced.subgraph(graph,cn)
       rleiden.community(induced.subgraph(graph,cn), max.depth=max.depth, resolution=resolution, cur.depth=cur.depth+1, min.community.size=min.community.size, hierarchical=hierarchical, verbose=verbose, n.cores=1, ...)
@@ -86,33 +87,33 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
     # merge clusters, cleanup
     mbl <- lapply(wtl,membership);
     # combined clustering factor
-    fv <- unlist(lapply(sn(names(wtl)),function(cn) {
-      paste(cn,as.character(mbl[[cn]]),sep='-')
+    fv <- unlist(lapply(setnames(names(wtl)), function(cn){
+      paste(cn,as.character(mbl[[cn]]), sep='-')
     }))
-    names(fv) <- unlist(lapply(mbl,names))
+    names(fv) <- unlist(lapply(mbl, names))
   } else {
     fv <- mem;
     if(hierarchical) {
       # use walktrap on the last level
-      wtl <- plapply(sn(unique(mem)), function(cluster) {
+      wtl <- plapply(setnames(unique(mem)), function(cluster) {
         cn <- names(mem)[which(mem==cluster)]
         sg <- induced.subgraph(graph,cn)
         res <- walktrap.community(induced.subgraph(graph,cn))
-        res$merges <- igraph:::complete.dend(res,FALSE)
+        res$merges <- igraph:::complete.dend(res, FALSE)
         res
-      },n.cores=n.cores)
+      }, n.cores=n.cores)
     }
   }
 
   if(hierarchical) {
     # calculate hierarchy on the multilevel clusters
     if(length(wtl)>1) {
-      cgraph <- sccore::getClusterGraph(graph, mem)
-      chwt <- walktrap.community(cgraph,steps=8)
+      cgraph <- sccore::getClusterGraph(graph,mem)
+      chwt <- walktrap.community(cgraph, steps=8) ## originally "communities"
       d <- as.dendrogram(chwt);
 
       # merge hierarchical portions
-      wtld <- lapply(wtl,as.dendrogram)
+      wtld <- lapply(wtl, as.dendrogram)
       max.height <- max(unlist(lapply(wtld,attr,'height')))
 
       # shift leaf ids to fill in 1..N range
@@ -155,8 +156,8 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
 
   if(cur.depth==1) {
     if(verbose) {
-      cat(paste0(' detected a total of ',length(unique(fv)),' clusters '));
-      cat("done\n");
+      message(paste0(' detected a total of ',length(unique(fv)),' clusters '));
+      message("done\n");
     }
   }
 
@@ -169,31 +170,28 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
     res$merges <- hcm + nrow(hcm) + 1
     res$merges[hcm < 0] <- -hcm[hcm < 0] - 1
   }
-  class(res) <- rev("fakeCommunities");
-  return(res);
+  class(res) <- rev("fakeCommunities")
+  return(res)
 }
-
 
 #' Returns pre-calculated dendrogram
 #'
 #' @param obj fakeCommunities object
-#' @param ... dropped
 #' @return dendrogram
 #' @examples 
-#' rLeidenComm = suppressWarnings(rleiden.community(conosGraph, n.cores=1))
-#' dendrogram.fakeCommunities(rLeidenComm)
+#' rLeidenComm = suppressWarnings(rleiden.community(exampleGraph, n.cores=1))
+#' as.dendrogram.fakeCommunities(rLeidenComm)
 #' @export
-dendrogram.fakeCommunities <- function(obj, ...) {
+as.dendrogram.fakeCommunities <- function(obj) {
   return(obj$dendrogram)
 }
-
 
 #' Returns pre-calculated membership factor
 #'
 #' @param obj fakeCommunities object
 #' @return membership factor
 #' @examples 
-#' leidenComm = leiden.community(conosGraph)
+#' leidenComm = leiden.community(exampleGraph)
 #' membership.fakeCommunities(leidenComm)
 #' @export
 membership.fakeCommunities <- function(obj) {
