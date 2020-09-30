@@ -7,16 +7,6 @@
 
 using namespace Rcpp;
 
-// checkOpenMP
-bool checkOpenMP();
-RcppExport SEXP _leidenAlg_checkOpenMP() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(checkOpenMP());
-    return rcpp_result_gen;
-END_RCPP
-}
 // find_partition
 std::vector<size_t> find_partition(SEXP graph, std::vector<double>& edge_weights, double resolution, int niter);
 RcppExport SEXP _leidenAlg_find_partition(SEXP graphSEXP, SEXP edge_weightsSEXP, SEXP resolutionSEXP, SEXP niterSEXP) {
@@ -33,7 +23,6 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_leidenAlg_checkOpenMP", (DL_FUNC) &_leidenAlg_checkOpenMP, 0},
     {"_leidenAlg_find_partition", (DL_FUNC) &_leidenAlg_find_partition, 4},
     {NULL, NULL, 0}
 };
