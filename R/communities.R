@@ -12,7 +12,9 @@
 #' @import sccore
 #' @importFrom graphics par
 #' @importFrom grDevices adjustcolor
-#' @importFrom stats as.dendrogram is.leaf
+#' @importFrom stats as.dendrogram is.leaf dendrapply as.hclust
+#' @import Matrix.utils
+#' @import Matrix
 NULL
 
 
@@ -50,7 +52,6 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 #' @param resolution resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth) (default=1) 
 #' @param cur.depth integer Current depth of clustering (default=1)
 #' @param hierarchical boolean If TRUE, calculate hierarchy on the multilevel clusters (default=TRUE)
-#' @param mc.preschedule boolean (default=FALSE) Parameter fed to mclapply(). If TRUE, then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X in mclapply(X, FUN, ...)
 #' @param ... passed to leiden.community
 #' @return a fakeCommunities object that returns membership and dendrogram
 #' @examples 

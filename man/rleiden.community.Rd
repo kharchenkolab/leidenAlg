@@ -35,8 +35,6 @@ rleiden.community(
 \item{hierarchical}{boolean If TRUE, calculate hierarchy on the multilevel clusters (default=TRUE)}
 
 \item{...}{passed to leiden.community}
-
-\item{mc.preschedule}{boolean (default=FALSE) Parameter fed to mclapply(). If TRUE, then the computation is first divided to (at most) as many jobs are there are cores and then the jobs are started, each job possibly covering more than one value. If FALSE, then one job is forked for each value of X in mclapply(X, FUN, ...)}
 }
 \value{
 a fakeCommunities object that returns membership and dendrogram
