@@ -23,48 +23,9 @@ For the original implementation in C++ with python bindings, see: https://github
 
 * `leiden.community()`: Detect communities using Leiden algorithm, output as `fakeCommunities` class for downstream use.
 
-* `rleiden.community()`: Recursive leiden communities, constructs an n-step recursive clustering, using leiden.community.detection. Returns a f`akeCommunities` object that has methods membership(), without dendrogram.
+* `rleiden.community()`: Recursive leiden communities, constructs an n-step recursive clustering, using leiden.community.detection. Returns a `fakeCommunities` object that has methods membership(), without dendrogram.
 
-* `dendrogram.fakeCommunities()`: Returns pre-calculated dendrogram
+* `as.dendrogram()`: Returns pre-calculated dendrogram from `"fakeCommunities"` object
 
-* `membership.fakeCommunities()`: Returns pre-calculated membership factor
+* `membership()`: Returns pre-calculated membership factor from `"fakeCommunities"` object
 
-
-## Installation
-
-For Mac OS X 10.15.5, 
-
-`brew install gcc gfortran`
-
-I've included `llvm` as well for my configuration below, though it's not required.
-
-including the following in my `~/.zshrc`:
-
-```
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/llvm/lib"
-export CPPFLAGS="-I/usr/local/opt/llvm/include"
-```
-
-and my `.R/Makevars` contains:
-
-```
-XCBASE:=$(shell xcrun --show-sdk-path)
-LLVMBASE:=$(shell brew --prefix llvm)
-GCCBASE:=$(shell brew --prefix gcc)
-GETTEXT:=$(shell brew --prefix gettext)
-
-CC=$(LLVMBASE)/bin/clang -fopenmp
-CXX=$(LLVMBASE)/bin/clang++ -fopenmp
-CXX11=$(LLVMBASE)/bin/clang++ -fopenmp
-CXX14=$(LLVMBASE)/bin/clang++ -fopenmp
-CXX17=$(LLVMBASE)/bin/clang++ -fopenmp
-CXX1X=$(LLVMBASE)/bin/clang++ -fopenmp
-
-CPPFLAGS=-isystem "$(LLVMBASE)/include" -isysroot "$(XCBASE)"
-LDFLAGS=-L"$(LLVMBASE)/lib" -L"$(GETTEXT)/lib" --sysroot="$(XCBASE)"
-
-FC=$(GCCBASE)/bin/gfortran -fopenmp
-F77=$(GCCBASE)/bin/gfortran -fopenmp
-FLIBS=-L$(GCCBASE)/lib/gcc/9/ -lm
-```
