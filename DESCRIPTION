@@ -21,8 +21,6 @@ Imports:
 Suggests:
     pbapply,
     testthat
-Remotes:
-    kharchenkolab/sccore
 LinkingTo: Rcpp, RcppArmadillo, RcppEigen
 SystemRequirements: GNU make
 RoxygenNote: 7.1.1
