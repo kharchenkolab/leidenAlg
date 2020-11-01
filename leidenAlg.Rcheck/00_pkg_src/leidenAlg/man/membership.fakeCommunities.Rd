@@ -9,7 +9,7 @@
 \arguments{
 \item{object}{fakeCommunities object}
 
-\item{...}{furthers parameters for generic}
+\item{...}{further parameters for generic}
 }
 \value{
 membership factor

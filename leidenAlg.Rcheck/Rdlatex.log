@@ -97,8 +97,8 @@ Overfull \hbox (2.74713pt too wide) in paragraph at lines 228--229
 Cores(logical=FALSE)).
 No file Rd2.ind.
 [5]
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.aux)
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -117,7 +117,7 @@ live/2020basic/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/
 2020basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020b
 asic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020basic/
 texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (5 pages, 89439 bytes).
+Output written on Rd2.pdf (5 pages, 89441 bytes).
 Transcript written on Rd2.log.
 This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex)
  restricted \write18 enabled.
@@ -186,8 +186,8 @@ Writing index file Rd2.idx
 
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.
 def)
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.aux)
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.aux)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/local/texlive/2020basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -195,15 +195,15 @@ def)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/refcount/refcount.sty)
 (/usr/local/texlive/2020basic/texmf-dist/tex/generic/gettitlestring/gettitlestr
 ing.sty))
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.out)
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.out)
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.out)
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.out)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.toc [1{/usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/upd
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.toc [1{/usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/upd
 map/pdftex.map}])
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/inconsolata/ts1zi4.fd)
 [2]
@@ -224,8 +224,8 @@ Overfull \hbox (2.74713pt too wide) in paragraph at lines 228--229
 Cores(logical=FALSE)).
 No file Rd2.ind.
 [5]
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.aux) )
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.aux) )
 (see the transcript file for additional information){/usr/local/texlive/2020bas
 ic/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/usr/local/texlive/2020ba
 sic/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2020basic/texmf-
@@ -238,7 +238,7 @@ live/2020basic/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/
 2020basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020b
 asic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020basic/
 texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (5 pages, 90325 bytes).
+Output written on Rd2.pdf (5 pages, 90329 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2020] (kpathsea + Thai support).
 Scanning input file Rd2.idx....done (7 entries accepted, 0 rejected).
@@ -313,8 +313,8 @@ Writing index file Rd2.idx
 
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.
 def)
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.aux)
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.aux)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/local/texlive/2020basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -322,15 +322,15 @@ def)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/refcount/refcount.sty)
 (/usr/local/texlive/2020basic/texmf-dist/tex/generic/gettitlestring/gettitlestr
 ing.sty))
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.out)
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.out)
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.out)
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.out)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.toc [1{/usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/upd
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.toc [1{/usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/upd
 map/pdftex.map}])
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/inconsolata/ts1zi4.fd)
 [2]
@@ -350,10 +350,10 @@ Overfull \hbox (2.74713pt too wide) in paragraph at lines 228--229
 []\T1/ptm/m/n/10 integer Num-ber of cores to use (de-fault = par-al-lel::detect
 Cores(logical=FALSE)).
 
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.ind [5] [6])
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.aux)
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.ind [5] [6])
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -373,7 +373,7 @@ al/texlive/2020basic/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local
 ive/2020basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2
 020basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020ba
 sic/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (6 pages, 98369 bytes).
+Output written on Rd2.pdf (6 pages, 98376 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2020] (kpathsea + Thai support).
 Scanning input file Rd2.idx....done (7 entries accepted, 0 rejected).
@@ -448,8 +448,8 @@ Writing index file Rd2.idx
 
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.
 def)
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.aux)
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.aux)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/local/texlive/2020basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -457,15 +457,15 @@ def)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/refcount/refcount.sty)
 (/usr/local/texlive/2020basic/texmf-dist/tex/generic/gettitlestring/gettitlestr
 ing.sty))
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.out)
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.out)
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.out)
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.out)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/psnfss/t1phv.fd)
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.toc [1{/usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/upd
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.toc [1{/usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/upd
 map/pdftex.map}])
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/inconsolata/ts1zi4.fd)
 [2]
@@ -485,10 +485,10 @@ Overfull \hbox (2.74713pt too wide) in paragraph at lines 228--229
 []\T1/ptm/m/n/10 integer Num-ber of cores to use (de-fault = par-al-lel::detect
 Cores(logical=FALSE)).
 
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.ind [5] [6])
-(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmphjCnVc/Rd2pdfcb37
-23ae400e/Rd2.aux) )
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.ind [5] [6])
+(/private/var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T/RtmpCqicFL/Rd2pdfd84a
+3e8d853d/Rd2.aux) )
 (see the transcript file for additional information){/usr/local/texlive/2020bas
 ic/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/usr/local/texlive/2020ba
 sic/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2020basic/texmf-
@@ -502,8 +502,8 @@ al/texlive/2020basic/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local
 ive/2020basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2
 020basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020ba
 sic/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (6 pages, 98535 bytes).
+Output written on Rd2.pdf (6 pages, 98540 bytes).
 Transcript written on Rd2.log.
 Saving output to ‘leidenAlg-manual.pdf’ ...
 Done
-You may want to clean up by 'rm -Rf /var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T//RtmphjCnVc/Rd2pdfcb3723ae400e'
+You may want to clean up by 'rm -Rf /var/folders/pt/x80rw07n57q7h9tdwt97nvfh0000gn/T//RtmpCqicFL/Rd2pdfd84a3e8d853d'

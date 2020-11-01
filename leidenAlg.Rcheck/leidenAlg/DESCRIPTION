@@ -22,5 +22,5 @@ BugReports: https://github.com/kharchenkolab/leidenAlg/issues
 NeedsCompilation: yes
 Author: Peter Kharchenko [aut], Viktor Petukhov [aut], V.A. Traag [ctb], Evan Biederstedt [cre, aut]
 Maintainer: Evan Biederstedt <evan.biederstedt@gmail.com>
-Packaged: 2020-11-01 06:40:39 UTC; evanbiederstedt
-Built: R 4.0.2; x86_64-apple-darwin17.0; 2020-11-01 06:40:59 UTC; unix
+Packaged: 2020-11-01 06:47:59 UTC; evanbiederstedt
+Built: R 4.0.2; x86_64-apple-darwin17.0; 2020-11-01 06:48:34 UTC; unix
