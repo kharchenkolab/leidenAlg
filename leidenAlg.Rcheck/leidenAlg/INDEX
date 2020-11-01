@@ -1,0 +1,14 @@
+as.dendrogram.fakeCommunities
+                        Returns pre-calculated dendrogram
+exampleGraph            Conos graph
+find_partition          Finds the optimal partition using the Leiden
+                        algorithm
+leiden.community        Leiden algorithm community detectiond Detect
+                        communities using Leiden algorithm
+                        (implementation copied from
+                        https://github.com/vtraag/leidenalg)
+membership.fakeCommunities
+                        Returns pre-calculated membership factor
+rleiden.community       Recursive leiden communities Constructs an
+                        n-step recursive clustering, using
+                        leiden.community
