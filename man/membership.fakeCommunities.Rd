@@ -4,10 +4,10 @@
 \alias{membership.fakeCommunities}
 \title{Returns pre-calculated membership factor}
 \usage{
-membership.fakeCommunities(obj, ...)
+\method{membership}{fakeCommunities}(object, ...)
 }
 \arguments{
-\item{obj}{fakeCommunities object}
+\item{object}{fakeCommunities object}
 
 \item{...}{furthers parameters for generic}
 }

@@ -177,31 +177,33 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
 
 #' Returns pre-calculated dendrogram
 #'
-#' @param obj fakeCommunities object
+#' @param object fakeCommunities object
 #' @param ... furthers parameters for generic
 #' @return dendrogram
 #' @examples 
 #' rLeidenComm = suppressWarnings(rleiden.community(exampleGraph, n.cores=1))
 #' as.dendrogram.fakeCommunities(rLeidenComm)
 #' 
-#' @rdname as.dendrogram.fakeCommunities
+#' @method as.dendrogram fakeCommunities
 #' @export
-as.dendrogram.fakeCommunities <- function(obj, ...) {
-  return(obj$dendrogram)
+as.dendrogram.fakeCommunities <- function(object) {
+  return(object$dendrogram)
 }
 
 #' Returns pre-calculated membership factor
 #'
-#' @param obj fakeCommunities object
+#' @param object fakeCommunities object
 #' @param ... furthers parameters for generic
 #' @return membership factor
 #' @examples 
 #' leidenComm = leiden.community(exampleGraph)
 #' membership.fakeCommunities(leidenComm)
 #' 
-#' @rdname membership.fakeCommunities
+#' @method membership fakeCommunities
 #' @export
-membership.fakeCommunities <- function(obj, ...) {
-  return(obj$membership)
+membership.fakeCommunities <- function(object, ...) {
+  return(object$membership)
 }
+
+
 

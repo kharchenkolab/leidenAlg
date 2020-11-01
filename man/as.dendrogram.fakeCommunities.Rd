@@ -4,10 +4,10 @@
 \alias{as.dendrogram.fakeCommunities}
 \title{Returns pre-calculated dendrogram}
 \usage{
-\method{as.dendrogram}{fakeCommunities}(obj, ...)
+\method{as.dendrogram}{fakeCommunities}(object)
 }
 \arguments{
-\item{obj}{fakeCommunities object}
+\item{object}{fakeCommunities object}
 
 \item{...}{furthers parameters for generic}
 }
