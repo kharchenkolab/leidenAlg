@@ -19,8 +19,8 @@ NULL
 
 
 #' Leiden algorithm community detectiond
-#'
 #' Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
+#'
 #' @param graph graph on which communities should be detected
 #' @param resolution resolution parameter (default=1.0) - higher numbers lead to more communities
 #' @param n.iterations number of iterations that the algorithm should be run for (default=2)
@@ -182,6 +182,7 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
 #' @examples 
 #' rLeidenComm = suppressWarnings(rleiden.community(exampleGraph, n.cores=1))
 #' as.dendrogram.fakeCommunities(rLeidenComm)
+#' @rdname as.dendrogram.fakeCommunities
 #' @export
 as.dendrogram.fakeCommunities <- function(obj) {
   return(obj$dendrogram)
@@ -194,6 +195,7 @@ as.dendrogram.fakeCommunities <- function(obj) {
 #' @examples 
 #' leidenComm = leiden.community(exampleGraph)
 #' membership.fakeCommunities(leidenComm)
+#' @rdname membership.fakeCommunities
 #' @export
 membership.fakeCommunities <- function(obj) {
   return(obj$membership)
