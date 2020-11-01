@@ -4,10 +4,12 @@
 \alias{membership.fakeCommunities}
 \title{Returns pre-calculated membership factor}
 \usage{
-membership.fakeCommunities(obj)
+membership.fakeCommunities(obj, ...)
 }
 \arguments{
 \item{obj}{fakeCommunities object}
+
+\item{...}{furthers parameters for generic}
 }
 \value{
 membership factor
@@ -18,4 +20,5 @@ Returns pre-calculated membership factor
 \examples{
 leidenComm = leiden.community(exampleGraph)
 membership.fakeCommunities(leidenComm)
+
 }

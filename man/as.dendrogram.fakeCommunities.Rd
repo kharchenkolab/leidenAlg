@@ -4,10 +4,12 @@
 \alias{as.dendrogram.fakeCommunities}
 \title{Returns pre-calculated dendrogram}
 \usage{
-\method{as.dendrogram}{fakeCommunities}(obj)
+\method{as.dendrogram}{fakeCommunities}(obj, ...)
 }
 \arguments{
 \item{obj}{fakeCommunities object}
+
+\item{...}{furthers parameters for generic}
 }
 \value{
 dendrogram
@@ -18,4 +20,5 @@ Returns pre-calculated dendrogram
 \examples{
 rLeidenComm = suppressWarnings(rleiden.community(exampleGraph, n.cores=1))
 as.dendrogram.fakeCommunities(rLeidenComm)
+
 }
