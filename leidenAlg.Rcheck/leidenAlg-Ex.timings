@@ -1,6 +1,0 @@
-name	user	system	elapsed
-as.dendrogram.fakeCommunities	0.061	0.003	0.063	
-find_partition	0.001	0.000	0.002	
-leiden.community	0.005	0.002	0.006	
-membership.fakeCommunities	0.003	0.001	0.004	
-rleiden.community	0.049	0.003	0.052	

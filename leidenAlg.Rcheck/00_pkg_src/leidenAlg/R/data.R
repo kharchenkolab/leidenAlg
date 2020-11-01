@@ -1,3 +1,0 @@
-#' Conos graph 
-#'
-"exampleGraph"
