@@ -100,7 +100,9 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
         cn <- names(mem)[which(mem==cluster)]
         sg <- induced.subgraph(graph,cn)
         res <- walktrap.community(induced.subgraph(graph,cn))
-        res$merges <- igraph:::complete.dend(res, FALSE)
+        ## otherwise, need to use igraph:::complete.dend
+        complete.dend = utils::getFromNamespace("complete.dend", "igraph")
+        res$merges <- complete.dend(res, FALSE)
         res
       }, n.cores=n.cores)
     }
