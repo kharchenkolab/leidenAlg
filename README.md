@@ -29,3 +29,11 @@ For the original implementation in C++ with python bindings, see: https://github
 
 * `membership()`: Returns pre-calculated membership factor from `"fakeCommunities"` object
 
+## Citation
+If you find `leidenAlg` useful for your publication, please cite:
+
+```
+Peter Kharchenko, Viktor Petukhov and Evan Biederstedt (2020).
+leidenAlg: Implements the Leiden Algorithm via an R Interface. R
+package version 0.1.0. https://github.com/kharchenkolab/leidenAlg
+```
