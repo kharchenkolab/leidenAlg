@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.com/kharchenkolab/leidenAlg.svg?branch=master)](https://travis-ci.com/kharchenkolab/leidenAlg)
+[![CRAN status](https://www.r-pkg.org/badges/version/leidenAlg)](https://cran.r-project.org/package=leidenAlg)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/leidenAlg)](https://cran.r-project.org/package=leidenAlg)
 
 # leidenAlg
 
