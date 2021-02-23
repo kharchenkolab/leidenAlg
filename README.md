@@ -21,6 +21,21 @@ For details on the algorithm, see ["From Louvain to Leiden: guaranteeing well-co
 
 For the original implementation in C++ with python bindings, see: https://github.com/vtraag/leidenalg
 
+## Installation
+
+To install the stable version from [CRAN](https://cran.r-project.org/web/packages/leidenAlg/index.html), use:
+
+```r
+install.packages('leidenAlg')
+```
+
+To install the latest version, use:
+
+```r
+install.packages('devtools')
+devtools::install_github('kharchenkolab/leidenAlg', build_vignettes = TRUE)
+```
+
 ## Functions
 
 * `leiden.community()`: Detect communities using Leiden algorithm, output as `fakeCommunities` class for downstream use.
