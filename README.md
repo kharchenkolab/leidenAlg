@@ -23,7 +23,7 @@ For the original implementation in C++ with python bindings, see: https://github
 
 ## Installation
 
-To install the stable version from [CRAN](https://cran.r-project.org/web/packages/leidenAlg/index.html), use:
+To install the stable version from [CRAN](https://CRAN.R-project.org/package=leidenAlg), use:
 
 ```r
 install.packages('leidenAlg')
