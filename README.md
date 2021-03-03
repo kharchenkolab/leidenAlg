@@ -35,7 +35,7 @@ For the original implementation in C++ with python bindings, see: https://github
 If you find `leidenAlg` useful for your publication, please cite:
 
 ```
-Peter Kharchenko, Viktor Petukhov and Evan Biederstedt (2020).
+Peter Kharchenko, Viktor Petukhov and Evan Biederstedt (2021).
 leidenAlg: Implements the Leiden Algorithm via an R Interface. R
-package version 0.1.0. https://github.com/kharchenkolab/leidenAlg
+package version 0.1.1. https://github.com/kharchenkolab/leidenAlg
 ```
