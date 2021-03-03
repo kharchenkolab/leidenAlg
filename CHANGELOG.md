@@ -1,6 +1,6 @@
 ## [0.1.1] - 2021-03-02
 
-* Fixed issue with unweighted graph. In this case, we set all edge weights to 1. 
+* Fixed issue with unweighted graph. In this case, we set all edge weights to 1 for input to `find_partition()`.
 
 
 ## [0.1.0] - 2020-11-11
