@@ -31,6 +31,12 @@ NULL
 #' @export 
 leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 
+  ## add check for unweighted graph, i.e. graph$weight is NULL
+  if (!igraph::is_weighted(graph)){
+    ## simply set the vector of edge weights to 1
+    igraph::E(graph)$weight <- 1
+  }
+
   x <- find_partition(graph, igraph::E(graph)$weight, resolution, n.iterations)
 
   # enclose in a masquerading class
