@@ -36,6 +36,22 @@ install.packages('devtools')
 devtools::install_github('kharchenkolab/leidenAlg', build_vignettes = TRUE)
 ```
 
+Note that this package depends on [igraph](https://CRAN.R-project.org/package=igraph), which requires various libraries to install correctly e.g. `libxml2`. Please see the installation instructions at that page for more details. 
+
+Debian-based users of Linux can install `libxml2` via
+
+```
+sudo apt-get update
+sudo apt-get install libxml2-dev
+```
+
+For Mac OS, the commands with the Homebrew package manager are as follows:
+
+```
+brew update
+brew install libxml2
+```
+
 ## Functions
 
 * `leiden.community()`: Detect communities using Leiden algorithm, output as `fakeCommunities` class for downstream use.
