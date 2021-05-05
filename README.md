@@ -45,7 +45,7 @@ sudo apt-get update
 sudo apt-get install libxml2-dev
 ```
 
-For Mac OS, the commands with the Homebrew package manager are as follows:
+For Mac OS, the commands with the [Homebrew package manager](https://brew.sh/) are as follows:
 
 ```
 brew update
