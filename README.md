@@ -42,14 +42,14 @@ Debian-based users of Linux can install `libxml2` via
 
 ```
 sudo apt-get update
-sudo apt-get install libxml2-dev
+sudo apt-get install libxml2-dev libgmp-dev libglpk-dev
 ```
 
 For Mac OS, the commands with the [Homebrew package manager](https://brew.sh/) are as follows:
 
 ```
 brew update
-brew install libxml2
+brew install libxml2 glpk gmp
 ```
 
 ## Functions
