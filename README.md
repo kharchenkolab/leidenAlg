@@ -36,7 +36,7 @@ install.packages('devtools')
 devtools::install_github('kharchenkolab/leidenAlg', build_vignettes = TRUE)
 ```
 
-Note that this package depends on [igraph](https://CRAN.R-project.org/package=igraph), which requires various libraries to install correctly e.g. `libxml2`. Please see the installation instructions at that page for more details. 
+Note that this package depends on [igraph](https://CRAN.R-project.org/package=igraph), which requires various libraries to install correctly e.g. `libxml2`. Please see the installation instructions at that page for more details, along with the README [here](https://github.com/igraph/rigraph).
 
 Debian-based users of Linux can install `libxml2` via
 
