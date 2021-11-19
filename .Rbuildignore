@@ -1,5 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-.travis.yml
 CHANGELOG.md
+^doc$
+^Meta$
+^vignettes\*.md$
+^vignettes\figure$
 data-raw
+^\.circleci$
