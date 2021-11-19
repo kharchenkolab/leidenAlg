@@ -5,4 +5,5 @@ CHANGELOG.md
 ^Meta$
 ^vignettes\*.md$
 ^vignettes\figure$
+data-raw
 ^\.circleci$
