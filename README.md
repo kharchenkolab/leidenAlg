@@ -59,7 +59,7 @@ brew update
 brew install libxml2 glpk gmp
 ```
  
-For Mac OS users, there is a guide for troubleshooting [here](https://github.com/kharchenkolab/leidenAlg/wiki/Installing-leidenAlg-for-Mac-OS) if issues arise. 
+**Note:** For Mac OS users, there is a guide for troubleshooting [here](https://github.com/kharchenkolab/leidenAlg/wiki/Installing-leidenAlg-for-Mac-OS) if issues arise. 
 
 ## Functions
 
