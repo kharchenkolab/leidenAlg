@@ -7,7 +7,7 @@ PKGB_PATH=`echo 'library(igraph); cat(system.file("libs", package="igraph"))' \
       | ${R_HOME}/bin/R --vanilla --slave`
 
 
-PKG_LIBS=-L/usr/lib/ -L"." -lpthread -lstdc++ -lleidenalg -lm `$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) $(SHLIB_OPENMP_CXXFLAGS) $(PKGB_PATH)/igraph.so
+PKG_LIBS=-L/usr/lib/ -L"." -lpthread -lstdc++ -lleidenalg -lm `$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) $(SHLIB_OPENMP_CXXFLAGS) $(PKGB_PATH)/igraph$(SHLIB_EXT)
 CXX_STD = CXX11
 MkInclude = $(R_HOME)/etc${R_ARCH}/Makeconf
 
@@ -17,7 +17,7 @@ MkInclude = $(R_HOME)/etc${R_ARCH}/Makeconf
 SUBDIRS = leidenalg
 SUBLIBS = leidenalg.a
 
-IGRAPH_LIB = $(PKGB_PATH)/igraph.so
+IGRAPH_LIB = $(PKGB_PATH)/igraph$(SHLIB_EXT)
 
 all: $(SHLIB) 
 	if [ "$(OS)" != "Windows_NT" ] && [ `uname -s` = 'Darwin' ]; then install_name_tool -id '@rpath/igraph.so' $(IGRAPH_LIB); fi 
