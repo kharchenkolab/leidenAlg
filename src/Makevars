@@ -20,7 +20,7 @@ SUBLIBS = leidenalg.a
 IGRAPH_LIB = $(PKGB_PATH)/igraph$(SHLIB_EXT)
 
 all: $(SHLIB) 
-	if [ "$(OS)" != "Windows_NT" ] && [ `uname -s` = 'Darwin' ]; then install_name_tool -id '@rpath/igraph.so' $(IGRAPH_LIB); fi 
+	if [ "$(OS)" != "Windows_NT" ] && [ `uname -s` = 'Darwin' ]; then install_name_tool -id '@rpath/igraph$(SHLIB_EXT)' $(IGRAPH_LIB); fi 
 
 $(SHLIB): $(OBJECTS) sublibs
 sublibs: sublibraries
