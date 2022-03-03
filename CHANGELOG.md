@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.0.2] - 2022 March 3
+* Modified the Makevars file to correctly add an rpath (Runpath Search Path) for Mac OS users with `install_name_tool`. From the manual, the command used is `-change old new` whereby this "Changes  the dependent shared library install name old to new in the specified Mach-O binary.  More than one of these options can be specified.  If the Mach-O binary does not contain the old install name in a specified -change option the option is ignored."
+
 ## [1.0.1] - 2021 Dec 03
 * Modified the Makevars to use SHLIB_EXT to account for both shared library extensions on Mac OS (either *.so or *dylib)
 

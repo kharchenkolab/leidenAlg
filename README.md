@@ -77,5 +77,5 @@ If you find `leidenAlg` useful for your publication, please cite:
 ```
 Peter Kharchenko, Viktor Petukhov and Evan Biederstedt (2021).
 leidenAlg: Implements the Leiden Algorithm via an R Interface. R
-package version 1.0.1. https://github.com/kharchenkolab/leidenAlg
+package version 1.0.2. https://github.com/kharchenkolab/leidenAlg
 ```
