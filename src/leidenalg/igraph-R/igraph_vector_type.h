@@ -1,7 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2013  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -21,19 +21,13 @@
 
 */
 
-typedef struct TYPE(igraph_heap) {
+/**
+ * Vector, dealing with arrays efficiently.
+ * \ingroup types
+ */
+
+typedef struct TYPE(igraph_vector) {
     BASE* stor_begin;
     BASE* stor_end;
     BASE* end;
-    int destroy;
-} TYPE(igraph_heap);
-
-IGRAPH_EXPORT int FUNCTION(igraph_heap, init)(TYPE(igraph_heap)* h, long int size);
-IGRAPH_EXPORT int FUNCTION(igraph_heap, init_array)(TYPE(igraph_heap) *t, BASE* data, long int len);
-IGRAPH_EXPORT void FUNCTION(igraph_heap, destroy)(TYPE(igraph_heap)* h);
-IGRAPH_EXPORT igraph_bool_t FUNCTION(igraph_heap, empty)(TYPE(igraph_heap)* h);
-IGRAPH_EXPORT int FUNCTION(igraph_heap, push)(TYPE(igraph_heap)* h, BASE elem);
-IGRAPH_EXPORT BASE FUNCTION(igraph_heap, top)(TYPE(igraph_heap)* h);
-IGRAPH_EXPORT BASE FUNCTION(igraph_heap, delete_top)(TYPE(igraph_heap)* h);
-IGRAPH_EXPORT long int FUNCTION(igraph_heap, size)(TYPE(igraph_heap)* h);
-IGRAPH_EXPORT int FUNCTION(igraph_heap, reserve)(TYPE(igraph_heap)* h, long int size);
+} TYPE(igraph_vector);
