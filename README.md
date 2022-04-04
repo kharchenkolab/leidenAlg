@@ -6,6 +6,10 @@
 
 Implements the Leiden algorithm via an R interface
 
+## Note: Leiden Algorithm now in igraph
+
+Since [October 2020](https://github.com/igraph/rigraph/pull/399), the R package [igraph](https://cran.r-project.org/web/packages/igraph/) contains the function `cluster_leiden()` implemented by Vincent Traag ([@vtraag](https://github.com/vtraag)). The usage of this function is detailed in the igraph documentation [here](https://igraph.org/r/html/1.2.7/cluster_leiden.html). We recommend users use this function. 
+
 ## Summary
 
 The Leiden algorithm is an iterative community detection algorithm on networks---the algorithm is designed to converge to a partition in which all subsets of all communities are locally optimally assigned, yielding communities guaranteed to be connected.
@@ -77,5 +81,5 @@ If you find `leidenAlg` useful for your publication, please cite:
 ```
 Peter Kharchenko, Viktor Petukhov and Evan Biederstedt (2021).
 leidenAlg: Implements the Leiden Algorithm via an R Interface. R
-package version 1.0.2. https://github.com/kharchenkolab/leidenAlg
+package version 1.0.3. https://github.com/kharchenkolab/leidenAlg
 ```
