@@ -2262,7 +2262,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-ac_config_headers="$ac_config_headers src/config.h"
+ac_config_headers="$ac_config_headers src/rigraph/config.h"
 
 
 : ${R_HOME=`R RHOME`}
@@ -2996,7 +2996,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #include <stdarg.h>
 #include <stdio.h>
 struct stat;
-/* Most of the following tests are stolen from RCS 5.7's src/conf.sh.  */
+/* Most of the following tests are stolen from RCS 5.7's src/rigraph/conf.sh.  */
 struct buf { int x; };
 FILE * (*rcsopen) (struct buf *, struct stat *, int);
 static char *e (p, i)
@@ -4353,7 +4353,7 @@ fi
 $as_echo "#define IGRAPH_THREAD_LOCAL /**/" >>confdefs.h
 
 
-ac_config_files="$ac_config_files src/Makevars.tmp:src/Makevars.in"
+ac_config_files="$ac_config_files src/rigraph/Makevars.tmp:src/rigraph/Makevars.in"
 
 
 cat >confcache <<\_ACEOF
@@ -5045,8 +5045,8 @@ cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
 for ac_config_target in $ac_config_targets
 do
   case $ac_config_target in
-    "src/config.h") CONFIG_HEADERS="$CONFIG_HEADERS src/config.h" ;;
-    "src/Makevars.tmp") CONFIG_FILES="$CONFIG_FILES src/Makevars.tmp:src/Makevars.in" ;;
+    "src/rigraph/config.h") CONFIG_HEADERS="$CONFIG_HEADERS src/rigraph/config.h" ;;
+    "src/rigraph/Makevars.tmp") CONFIG_FILES="$CONFIG_FILES src/rigraph/Makevars.tmp:src/rigraph/Makevars.in" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
@@ -5594,17 +5594,17 @@ $as_echo "$as_me: $ac_file is unchanged" >&6;}
 
 
   case $ac_file$ac_mode in
-    "src/Makevars.tmp":F)
-    if test -f src/Makevars && cmp -s src/Makevars.tmp src/Makevars; then
-      { $as_echo "$as_me:${as_lineno-$LINENO}: creating src/Makevars" >&5
-$as_echo "$as_me: creating src/Makevars" >&6;}
-      { $as_echo "$as_me:${as_lineno-$LINENO}: src/Makevars is unchanged" >&5
-$as_echo "$as_me: src/Makevars is unchanged" >&6;}
-      rm src/Makevars.tmp
+    "src/rigraph/Makevars.tmp":F)
+    if test -f src/rigraph/Makevars && cmp -s src/rigraph/Makevars.tmp src/rigraph/Makevars; then
+      { $as_echo "$as_me:${as_lineno-$LINENO}: creating src/rigraph/Makevars" >&5
+$as_echo "$as_me: creating src/rigraph/Makevars" >&6;}
+      { $as_echo "$as_me:${as_lineno-$LINENO}: src/rigraph/Makevars is unchanged" >&5
+$as_echo "$as_me: src/rigraph/Makevars is unchanged" >&6;}
+      rm src/rigraph/Makevars.tmp
     else
-      { $as_echo "$as_me:${as_lineno-$LINENO}: creating src/Makevars" >&5
-$as_echo "$as_me: creating src/Makevars" >&6;}
-      mv src/Makevars.tmp src/Makevars
+      { $as_echo "$as_me:${as_lineno-$LINENO}: creating src/rigraph/Makevars" >&5
+$as_echo "$as_me: creating src/rigraph/Makevars" >&6;}
+      mv src/rigraph/Makevars.tmp src/rigraph/Makevars
     fi
 
  ;;

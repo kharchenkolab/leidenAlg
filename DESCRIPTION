@@ -12,6 +12,7 @@ Depends: R (>= 3.5.0), Matrix
 Imports: 
     graphics,
     grDevices,
+    igraph,
     Matrix.utils,
     parallel, 
     Rcpp (>= 1.0.5), 
