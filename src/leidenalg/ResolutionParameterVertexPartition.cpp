@@ -1,5 +1,6 @@
 #include "ResolutionParameterVertexPartition.h"
-#include <igraph.h>
+#include "igraph.h"
+
 
 ResolutionParameterVertexPartition::ResolutionParameterVertexPartition(Graph* graph,
       vector<size_t> membership, double resolution_parameter) :

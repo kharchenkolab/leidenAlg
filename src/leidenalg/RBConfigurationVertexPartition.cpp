@@ -1,5 +1,6 @@
 #include "RBConfigurationVertexPartition.h"
-#include <igraph.h>
+#include "igraph.h"
+
 
 RBConfigurationVertexPartition::RBConfigurationVertexPartition(Graph* graph,
       vector<size_t> const& membership, double resolution_parameter) :

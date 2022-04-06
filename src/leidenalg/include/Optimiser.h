@@ -4,7 +4,9 @@
 #include "MutableVertexPartition.h"
 #include <set>
 #include <map>
-#include <igraph.h>
+
+#include "igraph.h"
+
 
 #include <iostream>
 using std::cerr;

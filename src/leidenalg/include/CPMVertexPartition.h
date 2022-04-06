@@ -2,6 +2,7 @@
 #define CPMVERTEXPARTITION_H
 
 #include <LinearResolutionParameterVertexPartition.h>
+#include "igraph.h"
 
 class CPMVertexPartition : public LinearResolutionParameterVertexPartition
 {
