@@ -1,5 +1,6 @@
 #include "Optimiser.h"
 #include "igraph-R/igraph.h"
+#include <igraph.h>
 
 /****************************************************************************
   Create a new Optimiser object
