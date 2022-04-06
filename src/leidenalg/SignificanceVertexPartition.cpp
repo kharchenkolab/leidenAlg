@@ -1,4 +1,5 @@
 #include "SignificanceVertexPartition.h"
+#include <igraph.h>
 
 #ifdef DEBUG
 #include <iostream>

@@ -2,7 +2,7 @@
 #define SIGNIFICANCEVERTEXPARTITION_H
 
 #include <MutableVertexPartition.h>
-
+#include <igraph.h>
 
 class SignificanceVertexPartition : public MutableVertexPartition
 {

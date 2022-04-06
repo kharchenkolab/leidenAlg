@@ -1,4 +1,5 @@
 #include "ModularityVertexPartition.h"
+#include <igraph.h>
 
 #ifdef DEBUG
 #include <iostream>

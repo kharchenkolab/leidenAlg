@@ -7,6 +7,7 @@
 #include "leidenalg/include/Optimiser.h"
 #include "leidenalg/include/RBERVertexPartition.h"
 #include "leidenalg/include/RBConfigurationVertexPartition.h"
+#include <igraph.h>
 
 using namespace std;
 using namespace Rcpp;

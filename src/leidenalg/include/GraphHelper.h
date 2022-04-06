@@ -13,6 +13,8 @@
   using std::endl;
 //#endif
 
+#include <igraph.h>
+
 class MutableVertexPartition;
 
 using std::vector;
