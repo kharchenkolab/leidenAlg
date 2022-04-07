@@ -27,9 +27,9 @@
 #include "igraph_stack.h"
 #include "igraph_dqueue.h"
 
-#include "core/indheap.h"
-#include "core/interruption.h"
-#include "core/math.h"
+#include "../core/indheap.h"
+#include "../core/interruption.h"
+#include "../core/math.h"
 
 /***** Vertex betweenness *****/
 
