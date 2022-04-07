@@ -13,13 +13,14 @@
 NULL
 
 
-#' Leiden algorithm community detectiond
-#' Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
+#' Leiden algorithm community detection
+#' Detect communities using Leiden algorithm
+#' @description Used to be a wrapper around \url{https://github.com/vtraag/leidenalg}, but now it's deprecated in favour of \link[igraph:cluster_leiden]{igraph::cluster_leiden}.
 #'
 #' @param graph graph on which communities should be detected
 #' @param resolution resolution parameter (default=1.0) - higher numbers lead to more communities
 #' @param n.iterations number of iterations that the algorithm should be run for (default=2)
-#' @inheritDotParams igraph::cluster_leiden
+#' @inheritDotParams igraph::cluster_leiden -resolution_parameter -n_iterations
 #' @return a fakeCommunities object that returns membership and dendrogram
 #' @examples
 #' leiden.community(exampleGraph)
@@ -46,9 +47,10 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2, ...) {
 #' @param min.community.size integer Minimal community size parameter for the walktrap communities---Communities smaller than that will be merged (default=10)
 #' @param verbose boolean Whether to output progress messages (default=FALSE)
 #' @param resolution resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth) (default=1)
+#' @param n.iterations number of iterations that the algorithm should be run for (default=2)
 #' @param cur.depth integer Current depth of clustering (default=1)
 #' @param hierarchical boolean If TRUE, calculate hierarchy on the multilevel clusters (default=TRUE)
-#' @inheritDotParams igraph::cluster_leiden
+#' @inheritDotParams igraph::cluster_leiden -resolution_parameter -n_iterations
 #' @return a fakeCommunities object that returns membership and dendrogram
 #' @examples
 #' rleiden.community(exampleGraph, n.cores=1)

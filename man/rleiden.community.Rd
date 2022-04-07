@@ -14,6 +14,7 @@ rleiden.community(
   resolution = 1,
   cur.depth = 1,
   hierarchical = TRUE,
+  n.iterations = 2,
   ...
 )
 }
@@ -34,7 +35,30 @@ rleiden.community(
 
 \item{hierarchical}{boolean If TRUE, calculate hierarchy on the multilevel clusters (default=TRUE)}
 
-\item{...}{passed to leiden.community}
+\item{n.iterations}{number of iterations that the algorithm should be run for (default=2)}
+
+\item{...}{
+  Arguments passed on to \code{\link[igraph:cluster_leiden]{igraph::cluster_leiden}}
+  \describe{
+    \item{\code{objective_function}}{Whether to use the Constant Potts Model (CPM) or
+modularity. Must be either \code{"CPM"} or \code{"modularity"}.}
+    \item{\code{weights}}{The weights of the edges. It must be a positive numeric vector,
+\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+\sQuote{weight} edge attribute, then that attribute will be used. If
+\code{NULL} and no such attribute is present, then the edges will have equal
+weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+attribute, but you don't want to use it for community detection. A larger
+edge weight means a stronger connection for this function.}
+    \item{\code{beta}}{Parameter affecting the randomness in the Leiden algorithm.
+This affects only the refinement step of the algorithm.}
+    \item{\code{initial_membership}}{If provided, the Leiden algorithm
+will try to improve this provided membership. If no argument is
+provided, the aglorithm simply starts from the singleton partition.}
+    \item{\code{vertex_weights}}{the vertex weights used in the Leiden algorithm.
+If this is not provided, it will be automatically determined on the
+basis of whether you want to use CPM or modularity. If you do provide
+this, please make sure that you understand what you are doing.}
+  }}
 }
 \value{
 a fakeCommunities object that returns membership and dendrogram
