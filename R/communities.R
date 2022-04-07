@@ -31,7 +31,7 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2, ...) {
   x <- igraph::cluster_leiden(graph=graph, n_iterations=n.iterations, resolution_parameter=resolution, ...)
 
   # enclose in a masquerading class
-  fv <- as.factor(stats::setNames(x, igraph::V(graph)$name))
+  fv <- membership(x)
   res <- list(membership=fv, dendrogram=NULL, algorithm='leiden', resolution=resolution, n.iter=n.iterations, names=names(fv))
   class(res) <- rev("fakeCommunities")
   return(res)
