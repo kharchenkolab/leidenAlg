@@ -1,8 +1,3 @@
-#' @useDynLib leidenAlg
-#' @exportPattern "^[[:alpha:]]+"
-
-#' @useDynLib leidenAlg
-#' @import Rcpp
 #' @import parallel
 #' @importFrom igraph E
 #' @importFrom igraph V
@@ -24,20 +19,15 @@ NULL
 #' @param graph graph on which communities should be detected
 #' @param resolution resolution parameter (default=1.0) - higher numbers lead to more communities
 #' @param n.iterations number of iterations that the algorithm should be run for (default=2)
+#' @inheritDotParams igraph::cluster_leiden
 #' @return a fakeCommunities object that returns membership and dendrogram
-#' @examples 
+#' @examples
 #' leiden.community(exampleGraph)
-#' 
-#' @export 
-leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
-
-  ## add check for unweighted graph, i.e. graph$weight is NULL
-  if (!igraph::is_weighted(graph)){
-    ## simply set the vector of edge weights to 1
-    igraph::E(graph)$weight <- 1
-  }
-
-  x <- find_partition(graph, igraph::E(graph)$weight, resolution, n.iterations)
+#'
+#' @export
+leiden.community <- function(graph, resolution=1.0, n.iterations=2, ...) {
+  .Deprecated("cluster_leiden", package="igraph")
+  x <- igraph::cluster_leiden(graph=graph, n_iterations=n.iterations, resolution_parameter=resolution, ...)
 
   # enclose in a masquerading class
   fv <- as.factor(stats::setNames(x, igraph::V(graph)$name))
@@ -49,29 +39,30 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 
 #' Recursive leiden communities
 #' Constructs an n-step recursive clustering, using leiden.community
-#' 
+#'
 #' @param graph graph
 #' @param max.depth Recursive depth (default=2)
 #' @param n.cores integer Number of cores to use (default = parallel::detectCores(logical=FALSE)). If logical=FALSE, uses the number of physical CPUs/cores. If logical=TRUE, uses the logical number of CPUS/cores. See parallel::detectCores()
-#' @param min.community.size integer Minimal community size parameter for the walktrap communities---Communities smaller than that will be merged (default=10) 
+#' @param min.community.size integer Minimal community size parameter for the walktrap communities---Communities smaller than that will be merged (default=10)
 #' @param verbose boolean Whether to output progress messages (default=FALSE)
-#' @param resolution resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth) (default=1) 
+#' @param resolution resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth) (default=1)
 #' @param cur.depth integer Current depth of clustering (default=1)
 #' @param hierarchical boolean If TRUE, calculate hierarchy on the multilevel clusters (default=TRUE)
-#' @param ... passed to leiden.community
+#' @inheritDotParams igraph::cluster_leiden
 #' @return a fakeCommunities object that returns membership and dendrogram
-#' @examples 
+#' @examples
 #' rleiden.community(exampleGraph, n.cores=1)
-#' 
+#'
 #' @export
-rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(logical=FALSE), min.community.size=10, verbose=FALSE, resolution=1, cur.depth=1, hierarchical=TRUE, ...) {
+rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(logical=FALSE), min.community.size=10,
+                              verbose=FALSE, resolution=1, cur.depth=1, hierarchical=TRUE, n.iterations=2, ...) {
 
   if(verbose & cur.depth==1) message(paste0("running ",max.depth,"-recursive Leiden clustering: "));
   if(length(resolution)>1) {
     if(length(resolution)!=max.depth) { stop("resolution value must be either a single number or a vector of length max.depth")}
     res <- resolution[cur.depth]
   } else { res <- resolution }
-  mt <- leiden.community(graph, resolution=res, ...);
+  mt <- igraph::cluster_leiden(graph, resolution_parameter=res, n_iterations=n.iterations, ...);
 
   mem <- membership(mt);
   tx <- table(mem)
@@ -188,10 +179,10 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
 #' @param object fakeCommunities object
 #' @param ... further parameters for generic
 #' @return dendrogram
-#' @examples 
+#' @examples
 #' rLeidenComm = suppressWarnings(rleiden.community(exampleGraph, n.cores=1))
 #' as.dendrogram.fakeCommunities(rLeidenComm)
-#' 
+#'
 #' @method as.dendrogram fakeCommunities
 #' @export
 as.dendrogram.fakeCommunities <- function(object, ...) {
@@ -203,10 +194,10 @@ as.dendrogram.fakeCommunities <- function(object, ...) {
 #' @param object fakeCommunities object
 #' @param ... further parameters for generic
 #' @return membership factor
-#' @examples 
+#' @examples
 #' leidenComm = leiden.community(exampleGraph)
 #' membership.fakeCommunities(leidenComm)
-#' 
+#'
 #' @method membership fakeCommunities
 #' @export
 membership.fakeCommunities <- function(object, ...) {

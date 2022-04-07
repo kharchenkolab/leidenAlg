@@ -8,23 +8,19 @@ License: GPL-3
 Copyright: See the file COPYRIGHTS for various leidenAlg copyright details
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 3.5.0), Matrix, igraph
+Depends: R (>= 3.5.0), Matrix, igraph (>= 1.2.7)
 Imports: 
     graphics,
     grDevices,
     Matrix.utils,
     parallel, 
-    Rcpp (>= 1.0.5), 
     sccore,
     stats
 Suggests:
     pbapply,
     testthat (>= 3.1.0)
-LinkingTo: Rcpp, RcppArmadillo, RcppEigen
-SystemRequirements: GNU make
 RoxygenNote: 7.1.2
 URL: https://github.com/kharchenkolab/leidenAlg
 BugReports: https://github.com/kharchenkolab/leidenAlg/issues
-NeedsCompilation: yes
 Author: Peter Kharchenko [aut], Viktor Petukhov [aut], V.A. Traag [ctb], Gábor Csárdi [ctb], Tamás Nepusz [ctb], Minh Van Nguyen [ctb], Evan Biederstedt [cre, aut]
 Maintainer: Evan Biederstedt <evan.biederstedt@gmail.com>
