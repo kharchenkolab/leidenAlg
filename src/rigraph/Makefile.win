@@ -1,6 +1,6 @@
 C ?= gcc 
 CFLAGS = -O3 -std=c11 -std=gnu11
-PKG_CFLAGS = -O3 -std=c11 -std=gnu11 -pthread -fPIC $(SHLIB_OPENMP_CXXFLAGS)
+PKG_CFLAGS = -O3 -std=c11 -std=gnu11 -pthread -fPIC 
 PKG_CFLAGS += -I"./include"  -I"../rigraph/include"
 LDFLAGS += -lpthread
 
