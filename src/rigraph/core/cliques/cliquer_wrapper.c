@@ -3,9 +3,9 @@
 #include "igraph_memory.h"
 #include "igraph_constants.h"
 
-#include "core/interruption.h"
-#include "cliques/cliquer_internal.h"
-#include "cliques/cliquer/cliquer.h"
+#include "../core/interruption.h"
+#include "cliquer_internal.h"
+#include "cliquer/cliquer.h"
 
 #include "config.h"
 
@@ -29,7 +29,7 @@
 
 
 /* Nonzero value signals interuption from Cliquer callback function */
-static IGRAPH_THREAD_LOCAL int cliquer_interrupted;
+static int cliquer_interrupted;
 
 
 /* For use with IGRAPH_FINALLY */
@@ -43,7 +43,7 @@ static void free_clique_list(igraph_vector_ptr_t *vp) {
 }
 
 /* We shall use this option struct for all calls to Cliquer */
-static IGRAPH_THREAD_LOCAL clique_options igraph_cliquer_opt = {
+static clique_options igraph_cliquer_opt = {
     reorder_by_default, NULL, NULL, NULL, NULL, NULL, NULL, 0
 };
 

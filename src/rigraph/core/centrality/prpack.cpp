@@ -19,10 +19,16 @@
 
 #include "igraph_error.h"
 
-#include "centrality/prpack_internal.h"
-#include "centrality/prpack/prpack_igraph_graph.h"
-#include "centrality/prpack/prpack_solver.h"
-#include "core/exceptions.h"
+//#include "centrality/prpack_internal.h"
+//#include "centrality/prpack/prpack_igraph_graph.h"
+//#include "centrality/prpack/prpack_solver.h"
+// #include "core/exceptions.h"
+
+#include "prpack_internal.h"
+#include "prpack/prpack_igraph_graph.h"
+#include "prpack/prpack_solver.h"
+#include "../core/exceptions.h"
+
 
 using namespace prpack;
 using namespace std;

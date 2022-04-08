@@ -4,7 +4,7 @@
 
 #include "igraph_interface.h"
 
-using namespace prpack;
+//using namespace prpack;
 using namespace std;
 
 #ifdef PRPACK_IGRAPH_SUPPORT

@@ -23,7 +23,7 @@
 #include "igraph_interface.h"
 #include "igraph_vector.h"
 
-#include "core/math.h"
+#include "../core/math.h"
 
 /**
  * \function igraph_centralization
