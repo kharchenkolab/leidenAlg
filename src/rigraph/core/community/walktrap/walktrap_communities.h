@@ -69,15 +69,15 @@ namespace walktrap {
 class Communities;
 class Probabilities {
 public:
-    static IGRAPH_THREAD_LOCAL float* tmp_vector1;    //
-    static IGRAPH_THREAD_LOCAL float* tmp_vector2;    //
-    static IGRAPH_THREAD_LOCAL int* id;       //
-    static IGRAPH_THREAD_LOCAL int* vertices1;    //
-    static IGRAPH_THREAD_LOCAL int* vertices2;    //
-    static IGRAPH_THREAD_LOCAL int current_id;    //
+    static float* tmp_vector1;    //
+    static float* tmp_vector2;    //
+    static int* id;       //
+    static int* vertices1;    //
+    static int* vertices2;    //
+    static int current_id;    //
 
-    static IGRAPH_THREAD_LOCAL Communities* C;                    // pointer to all the communities
-    static IGRAPH_THREAD_LOCAL int length;                        // length of the random walks
+    static Communities* C;                    // pointer to all the communities
+    static int length;                        // length of the random walks
 
 
     int size;                         // number of probabilities stored

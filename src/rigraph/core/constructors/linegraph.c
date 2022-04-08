@@ -24,7 +24,7 @@
 
 #include "igraph_interface.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 /* Note to self: tried using adjacency lists instead of igraph_incident queries,
  * with minimal performance improvements on a graph with 70K vertices and 360K

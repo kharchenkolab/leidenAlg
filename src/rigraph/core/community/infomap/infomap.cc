@@ -32,7 +32,7 @@
 #include <cmath>
 #include "igraph_interface.h"
 #include "igraph_community.h"
-#include "core/interruption.h"
+#include "../../core/interruption.h"
 
 
 #include "infomap_Node.h"

@@ -33,7 +33,7 @@
 #include "igraph_vector.h"
 #include "igraph_constructors.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 /* Move nodes in order to improve the quality of a partition.
  *

@@ -33,8 +33,8 @@
 #include "igraph_structural.h"
 #include "igraph_vector.h"
 
-#include "core/interruption.h"
-#include "operators/subgraph.h"
+#include "../core/interruption.h"
+#include "../operators/subgraph.h"
 
 #include <limits.h>
 

@@ -29,7 +29,7 @@
 #include "igraph_qsort.h"
 #include "igraph_random.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 /* Structure storing a community */
 typedef struct {

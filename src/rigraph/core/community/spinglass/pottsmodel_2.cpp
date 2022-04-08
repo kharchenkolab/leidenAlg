@@ -46,7 +46,7 @@
 #include "NetRoutines.h"
 
 #include "igraph_random.h"
-#include "core/interruption.h"
+#include "../../core/interruption.h"
 
 #include <cstring>
 #include <cmath>

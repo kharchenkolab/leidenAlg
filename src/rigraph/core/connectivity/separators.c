@@ -33,7 +33,7 @@
 #include "igraph_structural.h"
 #include "igraph_vector.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 static int igraph_i_is_separator(const igraph_t *graph,
                                  igraph_vit_t *vit,

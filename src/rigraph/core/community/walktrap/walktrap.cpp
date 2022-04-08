@@ -60,8 +60,8 @@
 #include "igraph_components.h"
 #include "igraph_interface.h"
 
-#include "core/exceptions.h"
-#include "core/interruption.h"
+#include "../../core/exceptions.h"
+#include "../../core/interruption.h"
 
 using namespace igraph::walktrap;
 

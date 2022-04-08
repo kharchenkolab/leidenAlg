@@ -26,7 +26,7 @@
 #include "igraph_memory.h"
 #include "igraph_operators.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 /**
  * \ingroup generators

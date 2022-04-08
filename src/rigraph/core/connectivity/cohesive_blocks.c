@@ -33,7 +33,7 @@
 #include "igraph_statusbar.h"
 #include "igraph_structural.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 static void igraph_i_cohesive_blocks_free_graphs(igraph_vector_ptr_t *ptr) {
     long int i, n = igraph_vector_ptr_size(ptr);

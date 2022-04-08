@@ -32,7 +32,7 @@
 #include "igraph_statusbar.h"
 #include "igraph_structural.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 /**
  * \section about_leading_eigenvector_methods

@@ -38,8 +38,8 @@
 #include "igraph_centrality.h"
 #include "igraph_structural.h"
 
-#include "core/indheap.h"
-#include "core/interruption.h"
+#include "../core/indheap.h"
+#include "../core/interruption.h"
 
 #include "config.h"
 

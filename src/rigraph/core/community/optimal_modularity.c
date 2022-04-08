@@ -28,8 +28,8 @@
 #include "igraph_interface.h"
 #include "igraph_structural.h"
 
-#include "core/interruption.h"
-#include "internal/glpk_support.h"
+#include "../core/interruption.h"
+#include "../internal/glpk_support.h"
 
 #include "config.h"
 

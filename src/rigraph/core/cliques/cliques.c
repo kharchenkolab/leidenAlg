@@ -31,9 +31,9 @@
 #include "igraph_progress.h"
 #include "igraph_stack.h"
 
-#include "cliques/cliquer_internal.h"
-#include "core/interruption.h"
-#include "core/set.h"
+#include "cliquer_internal.h"
+#include "../core/interruption.h"
+#include "../core/set.h"
 
 #include <string.h>    /* memset */
 
