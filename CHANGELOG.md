@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3] - 2022 April 08
+* Install rigraph directly
+
+
+## [1.0.2] - 2022 March 03
+* Fixed Makevars to use `install_name_tool -change`.
+
 ## [1.0.1] - 2021 Dec 03
 * Modified the Makevars to use SHLIB_EXT to account for both shared library extensions on Mac OS (either *.so or *dylib)
 

@@ -46,9 +46,9 @@
 #define UUID MYUUID
 #endif
 #include <stdio.h>
-#ifdef HAVE_UNISTD_H
+
 #include <unistd.h>
-#endif
+
 #ifdef HAVE_STDLIB_H
 #include <stdlib.h>
 #endif
@@ -92,11 +92,14 @@
 #include "uuidP.h"
 #include "uuidd.h"
 
-#ifdef USING_R
+#include <stdio.h>
+
+#include <unistd.h>
+
 #include "igraph_random.h"
 #define srand(x) ;
 #define rand() RNG_INTEGER(0, RAND_MAX)
-#endif
+
 
 #ifdef HAVE_TLS
 #define THREAD_LOCAL static __thread
@@ -314,6 +317,8 @@ static void random_get_bytes(void *buf, size_t nbytes)
 /* Assume that the gettimeofday() has microsecond granularity */
 #define MAX_ADJUSTMENT 10
 
+
+#include <unistd.h>
 /*
  * Get clock from global sequence clock counter.
  *
