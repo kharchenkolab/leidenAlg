@@ -23,7 +23,7 @@
 #define BLISS_USE_GMP
 
 #if defined(BLISS_USE_GMP)
-#include "internal/gmp_internal.h"
+#include "../../internal/gmp_internal.h"
 #endif
 
 #include <cstdlib>

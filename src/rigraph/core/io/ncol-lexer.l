@@ -47,8 +47,8 @@
 #include "config.h"
 #include <stdlib.h>
 
-#include "io/ncol-header.h"
-#include "io/parsers/ncol-parser.h"
+#include "ncol-header.h"
+#include "ncol-parser.h"
 
 #define YY_EXTRA_TYPE igraph_i_ncol_parsedata_t*
 #define YY_USER_ACTION yylloc->first_line = yylineno;

@@ -26,7 +26,7 @@
 #include "igraph_constructors.h"
 #include "igraph_random.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 /**
  * \function igraph_grg_game

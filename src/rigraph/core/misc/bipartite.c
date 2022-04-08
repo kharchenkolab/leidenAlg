@@ -30,7 +30,7 @@
 #include "igraph_random.h"
 #include "igraph_nongraph.h"
 
-#include "graph/attributes.h"
+#include "../graph/attributes.h"
 
 /**
  * \section about_bipartite Bipartite networks in igraph

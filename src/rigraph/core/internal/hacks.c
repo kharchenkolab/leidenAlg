@@ -21,7 +21,7 @@
 
 */
 
-#include "internal/hacks.h"
+//#include "hacks.h"
 
 #include <string.h>
 #include <stdlib.h>

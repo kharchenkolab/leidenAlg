@@ -43,7 +43,7 @@ using namespace std;
 #include "igraph_random.h"
 #include "igraph_interface.h"
 #include "igraph_progress.h"
-#include "core/interruption.h"
+#include "../../core/interruption.h"
 #ifdef MUSE_MPI
     #include <mpi.h>
 #endif

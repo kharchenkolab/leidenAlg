@@ -86,7 +86,7 @@
 #include "igraph_memory.h"
 #include "igraph_qsort.h"
 
-#include "misc/conversion_internal.h"
+#include "../misc/conversion_internal.h"
 
 #include "scg_headers.h"
 

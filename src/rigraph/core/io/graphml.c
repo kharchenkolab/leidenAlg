@@ -26,10 +26,10 @@
 #include "igraph_interface.h"
 #include "igraph_memory.h"
 
-#include "core/math.h"
-#include "core/trie.h"
-#include "graph/attributes.h"
-#include "internal/hacks.h" /* strcasecmp */
+#include "../core/math.h"
+#include "../core/trie.h"
+#include "../graph/attributes.h"
+//#include "internal/hacks.h" /* strcasecmp */
 
 #include "config.h"
 

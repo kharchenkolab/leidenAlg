@@ -26,8 +26,8 @@
 #include "igraph_memory.h"
 #include "igraph_progress.h"
 
-#include "core/indheap.h"
-#include "core/interruption.h"
+#include "../core/indheap.h"
+#include "../core/interruption.h"
 
 #include <string.h>
 

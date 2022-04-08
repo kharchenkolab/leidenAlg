@@ -26,9 +26,9 @@
 #include "igraph_interface.h"
 #include "igraph_memory.h"
 
-#include "core/interruption.h"
-#include "graph/attributes.h"
-#include "operators/subgraph.h"
+#include "../core/interruption.h"
+#include "../graph/attributes.h"
+#include "subgraph.h"
 
 /**
  * Subgraph creation, old version: it copies the graph and then deletes

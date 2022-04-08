@@ -27,7 +27,7 @@
 #include "igraph_interface.h"
 #include "igraph_memory.h"
 
-#include "graph/attributes.h"
+#include "../graph/attributes.h"
 
 #include "pajek-header.h"
 

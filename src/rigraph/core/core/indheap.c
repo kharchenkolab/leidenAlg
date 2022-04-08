@@ -24,7 +24,7 @@
 #include "igraph_memory.h"
 #include "igraph_error.h"
 
-#include "core/indheap.h"
+#include "indheap.h"
 
 #include <string.h>         /* memcpy & co. */
 #include <stdlib.h>

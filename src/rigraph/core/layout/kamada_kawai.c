@@ -27,7 +27,7 @@
 #include "igraph_paths.h"
 #include "igraph_random.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 /**
  * \ingroup layout

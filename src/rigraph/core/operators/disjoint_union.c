@@ -25,7 +25,7 @@
 #include "igraph_constructors.h"
 #include "igraph_interface.h"
 
-#include "operators/misc_internal.h"
+#include "../operators/misc_internal.h"
 
 /**
  * \function igraph_disjoint_union

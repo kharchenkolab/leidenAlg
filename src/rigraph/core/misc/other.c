@@ -25,9 +25,9 @@
 #include "igraph_random.h"
 #include "igraph_types.h"
 
-#include "core/interruption.h"
-#include "plfit/plfit_error.h"
-#include "plfit/plfit.h"
+#include "../core/interruption.h"
+#include "../../vendor/plfit/plfit_error.h"
+#include "../../vendor/plfit/plfit.h"
 
 #include <math.h>
 

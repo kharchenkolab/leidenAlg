@@ -65,7 +65,7 @@ using namespace drl;
 #include "igraph_random.h"
 #include "igraph_interface.h"
 
-#include "core/exceptions.h"
+#include "../../core/exceptions.h"
 
 namespace drl {
 

@@ -65,9 +65,9 @@
 #ifndef IGRAPH_HRG_DENDRO
 #define IGRAPH_HRG_DENDRO
 
-#include "hrg/graph.h"
-#include "hrg/rbtree.h"
-#include "hrg/splittree_eq.h"
+#include "graph.h"
+#include "rbtree.h"
+#include "splittree_eq.h"
 
 #include "igraph_hrg.h"
 

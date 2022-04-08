@@ -27,9 +27,9 @@
 #include "igraph_memory.h"
 #include "igraph_version.h"
 
-#include "core/trie.h"
-#include "graph/attributes.h"
-#include "io/gml-header.h"
+#include "../core/trie.h"
+#include "../graph/attributes.h"
+#include "gml-header.h"
 
 #include <ctype.h>
 #include <time.h>

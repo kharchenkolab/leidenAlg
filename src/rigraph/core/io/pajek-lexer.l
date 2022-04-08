@@ -47,8 +47,8 @@
 #include "config.h"
 #include <stdlib.h>
 
-#include "io/pajek-header.h"
-#include "io/parsers/pajek-parser.h"
+#include "pajek-header.h"
+#include "pajek-parser.h"
 
 #define YY_EXTRA_TYPE igraph_i_pajek_parsedata_t*
 #define YY_USER_ACTION yylloc->first_line = yylineno;

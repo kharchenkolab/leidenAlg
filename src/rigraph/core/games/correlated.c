@@ -30,7 +30,7 @@
 #include "igraph_random.h"
 #include "igraph_structural.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 /* The "code" of an edge is a single index representing its location in the adjacency matrix,
  * More specifically, the relevant parts of the adjacency matrix (i.e. non-diagonal in directed,

@@ -34,8 +34,8 @@
 #include "igraph_stack.h"
 #include "igraph_structural.h"
 
-#include "core/interruption.h"
-#include "properties/properties_internal.h"
+#include "../core/interruption.h"
+#include "../properties/properties_internal.h"
 
 /**
  * \section about_local_scan

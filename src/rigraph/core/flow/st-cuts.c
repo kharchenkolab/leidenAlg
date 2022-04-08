@@ -34,11 +34,11 @@
 #include "igraph_stack.h"
 #include "igraph_visitor.h"
 
-#include "core/math.h"
-#include "core/estack.h"
-#include "core/marked_queue.h"
-#include "graph/attributes.h"
-#include "flow/flow_internal.h"
+#include "../core/math.h"
+#include "../core/estack.h"
+#include "../core/marked_queue.h"
+#include "../graph/attributes.h"
+#include "flow_internal.h"
 
 typedef int igraph_provan_shier_pivot_t(const igraph_t *graph,
                                         const igraph_marked_queue_t *S,

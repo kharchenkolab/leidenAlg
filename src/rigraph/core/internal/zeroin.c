@@ -82,7 +82,7 @@
 #include "igraph_nongraph.h"
 #include "igraph_types.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 #include <float.h>
 #include <math.h>

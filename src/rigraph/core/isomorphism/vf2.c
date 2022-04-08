@@ -28,7 +28,7 @@
 #include "igraph_memory.h"
 #include "igraph_stack.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 /**
  * \section about_vf2

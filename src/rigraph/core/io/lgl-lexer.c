@@ -705,8 +705,8 @@ static const flex_int16_t yy_chk[19] =
 #include "config.h"
 #include <stdlib.h>
 
-#include "io/lgl-header.h"
-#include "io/lgl-parser.h"
+#include "lgl-header.h"
+#include "lgl-parser.h"
 
 #define YY_EXTRA_TYPE igraph_i_lgl_parsedata_t*
 #define YY_USER_ACTION yylloc->first_line = yylineno;

@@ -23,7 +23,7 @@
 #include "igraph_memory.h"
 #include "igraph_error.h"
 
-#include "io/gml-tree.h"
+#include "gml-tree.h"
 
 #include <string.h>
 

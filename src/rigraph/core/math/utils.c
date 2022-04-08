@@ -23,7 +23,7 @@
 
 #include "igraph_types.h"
 
-#include "core/math.h"
+#include "../core/math.h"
 
 #include "config.h"
 
@@ -148,8 +148,8 @@ double igraph_log1p(double x) {
             +.63533936180236187354180266666666e-31,
         };
 
-    static IGRAPH_THREAD_LOCAL int nlnrel = 0;
-    static IGRAPH_THREAD_LOCAL double xmin = 0.0;
+    static int nlnrel = 0;
+    static double xmin = 0.0;
 
     if (xmin == 0.0) {
         xmin = -1 + sqrt(DBL_EPSILON);    /*was sqrt(d1mach(4)); */

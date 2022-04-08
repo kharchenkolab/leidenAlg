@@ -106,11 +106,11 @@
 #include "igraph_attributes.h"
 #include "config.h"
 
-#include "core/math.h"
-#include "io/pajek-header.h"
-#include "io/pajek-parser.h" /* it must come first because of YYSTYPE */
-#include "io/pajek-lexer.h"
-#include "internal/hacks.h"
+#include "../core/math.h"
+#include "pajek-header.h"
+#include "pajek-parser.h" /* it must come first because of YYSTYPE */
+#include "pajek-lexer.h"
+//#include "internal/hacks.h"
 
 int igraph_pajek_yyerror(YYLTYPE* locp,
                          igraph_i_pajek_parsedata_t *context,

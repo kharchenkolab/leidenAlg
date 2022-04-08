@@ -70,9 +70,9 @@
 #include "igraph_pmt_off.h"
 #undef BASE_COMPLEX
 
-#include "core/math.h"
+#include "../core/math.h"
 
-#include "core/indheap.h"
+#include "../core/indheap.h"
 
 /**
  * \ingroup vector

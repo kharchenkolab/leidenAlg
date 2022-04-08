@@ -26,7 +26,7 @@
 #include "igraph_interface.h"
 #include "igraph_iterators.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 #include <string.h>
 

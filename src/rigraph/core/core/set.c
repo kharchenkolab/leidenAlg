@@ -25,7 +25,7 @@
 #include "igraph_memory.h"
 #include "igraph_error.h"
 
-#include "core/set.h"
+#include "set.h"
 
 #include <string.h>     /* memmove */
 

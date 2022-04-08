@@ -98,11 +98,11 @@
 
 #include "config.h"
 
-#include "core/math.h"
-#include "internal/hacks.h"
-#include "io/dl-header.h"
-#include "io/dl-parser.h"
-#include "io/dl-lexer.h"
+#include "../core/math.h"
+//#include "../internal/hacks.h"
+#include "dl-header.h"
+#include "dl-parser.h"
+#include "dl-lexer.h"
 
 #include <stdio.h>
 

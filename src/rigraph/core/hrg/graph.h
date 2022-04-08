@@ -61,7 +61,7 @@
 #ifndef IGRAPH_HRG_GRAPH
 #define IGRAPH_HRG_GRAPH
 
-#include "hrg/rbtree.h"
+#include "rbtree.h"
 
 #include <string>
 #include <cstring>

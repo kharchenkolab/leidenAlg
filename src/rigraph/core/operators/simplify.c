@@ -25,8 +25,8 @@
 #include "igraph_constructors.h"
 #include "igraph_interface.h"
 
-#include "core/fixed_vectorlist.h"
-#include "graph/attributes.h"
+#include "../core/fixed_vectorlist.h"
+#include "../graph/attributes.h"
 
 /**
  * \ingroup structural

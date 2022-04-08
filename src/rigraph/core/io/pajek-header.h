@@ -24,7 +24,7 @@
 #include "igraph_vector.h"
 #include "igraph_vector_ptr.h"
 
-#include "core/trie.h"
+#include "../core/trie.h"
 
 typedef struct {
     void *scanner;

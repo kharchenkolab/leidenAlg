@@ -28,7 +28,7 @@
 #include "igraph_interface.h"
 #include "igraph_random.h"
 
-#include "graph/attributes.h"
+#include "../graph/attributes.h"
 
 static int igraph_i_rewire_edges_no_multiple(igraph_t *graph, igraph_real_t prob,
                                              igraph_bool_t loops,

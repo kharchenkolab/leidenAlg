@@ -27,9 +27,9 @@
 #include "igraph_hrg.h"
 #include "igraph_random.h"
 
-#include "hrg/dendro.h"
-#include "hrg/graph.h"
-#include "hrg/graph_simp.h"
+#include "dendro.h"
+#include "graph.h"
+#include "graph_simp.h"
 
 using namespace fitHRG;
 

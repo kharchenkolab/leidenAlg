@@ -29,7 +29,7 @@
 #include "igraph_adjlist.h"
 #include "igraph_stack.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 /**
  * \function igraph_get_all_simple_paths

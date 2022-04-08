@@ -55,7 +55,7 @@
 #include "igraph_matrix.h"
 #include "igraph_qsort.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 #include <stdlib.h>
 #include <string.h>

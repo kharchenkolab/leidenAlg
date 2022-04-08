@@ -78,10 +78,10 @@ static IGRAPH_NORETURN void igraph_abort() {
 
 /***** Handling errors *****/
 
-static IGRAPH_THREAD_LOCAL igraph_error_handler_t *igraph_i_error_handler = 0;
-static IGRAPH_THREAD_LOCAL char igraph_i_errormsg_buffer[500];
-static IGRAPH_THREAD_LOCAL char igraph_i_warningmsg_buffer[500];
-static IGRAPH_THREAD_LOCAL char igraph_i_fatalmsg_buffer[500];
+static igraph_error_handler_t *igraph_i_error_handler = 0;
+static char igraph_i_errormsg_buffer[500];
+static char igraph_i_warningmsg_buffer[500];
+static char igraph_i_fatalmsg_buffer[500];
 
 /* Error strings corresponding to each igraph_error_type_t enum value. */
 static const char *igraph_i_error_strings[] = {
@@ -227,7 +227,7 @@ igraph_error_handler_t *igraph_set_error_handler(igraph_error_handler_t *new_han
 
 /***** "Finally" stack *****/
 
-IGRAPH_THREAD_LOCAL struct igraph_i_protectedPtr igraph_i_finally_stack[100];
+struct igraph_i_protectedPtr igraph_i_finally_stack[100];
 
 /*
  * Adds another element to the free list
@@ -270,7 +270,7 @@ int IGRAPH_FINALLY_STACK_SIZE(void) {
 
 /***** Handling warnings *****/
 
-static IGRAPH_THREAD_LOCAL igraph_warning_handler_t *igraph_i_warning_handler = 0;
+static igraph_warning_handler_t *igraph_i_warning_handler = 0;
 
 /**
  * \function igraph_warning_handler_ignore
@@ -348,7 +348,7 @@ igraph_warning_handler_t *igraph_set_warning_handler(igraph_warning_handler_t *n
 
 /***** Handling fatal errors *****/
 
-static IGRAPH_THREAD_LOCAL igraph_fatal_handler_t *igraph_i_fatal_handler = NULL;
+static igraph_fatal_handler_t *igraph_i_fatal_handler = NULL;
 
 igraph_fatal_handler_t *igraph_set_fatal_handler(igraph_fatal_handler_t *new_handler) {
     igraph_fatal_handler_t *previous_handler = igraph_i_fatal_handler;

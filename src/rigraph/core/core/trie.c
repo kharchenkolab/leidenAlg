@@ -26,7 +26,7 @@
 #include "igraph_random.h"
 #include "igraph_error.h"
 
-#include "core/trie.h"
+#include "trie.h"
 
 #include "config.h"
 

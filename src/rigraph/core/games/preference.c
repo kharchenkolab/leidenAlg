@@ -27,7 +27,7 @@
 #include "igraph_memory.h"
 #include "igraph_random.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 static void igraph_i_preference_game_free_vids_by_type(igraph_vector_ptr_t *vecs) {
     int i = 0, n;

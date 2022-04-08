@@ -26,7 +26,7 @@
 #include "igraph_interface.h"
 #include "igraph_iterators.h"
 
-#include "graph/attributes.h"
+#include "../graph/attributes.h"
 
 #include <string.h>
 

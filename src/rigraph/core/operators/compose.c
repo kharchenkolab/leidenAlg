@@ -25,7 +25,7 @@
 #include "igraph_constructors.h"
 #include "igraph_interface.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 /**
  * \function igraph_compose

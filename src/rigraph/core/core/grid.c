@@ -23,7 +23,7 @@
 
 #include "igraph_types.h"
 
-#include "core/grid.h"
+#include "grid.h"
 
 #include <math.h>
 

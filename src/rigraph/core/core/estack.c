@@ -21,7 +21,7 @@
 
 */
 
-#include "core/estack.h"
+#include "estack.h"
 
 int igraph_estack_init(igraph_estack_t *s, long int setsize,
                        long int stacksize) {

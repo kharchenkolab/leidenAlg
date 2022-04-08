@@ -30,7 +30,7 @@
 #include "igraph_psumtree.h"
 #include "igraph_random.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 static int igraph_i_barabasi_game_bag(igraph_t *graph, igraph_integer_t n,
                                       igraph_integer_t m,

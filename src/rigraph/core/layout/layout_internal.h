@@ -25,7 +25,7 @@
 
 #include "igraph_types.h"
 
-#include "layout/merge_grid.h"
+#include "merge_grid.h"
 
 __BEGIN_DECLS
 

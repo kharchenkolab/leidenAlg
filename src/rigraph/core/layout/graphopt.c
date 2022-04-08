@@ -26,7 +26,7 @@
 #include "igraph_interface.h"
 #include "igraph_progress.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 #define COULOMBS_CONSTANT 8987500000.0
 

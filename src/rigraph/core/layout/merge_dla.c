@@ -25,11 +25,11 @@
 #include "igraph_progress.h"
 #include "igraph_random.h"
 
-#include "core/grid.h"
-#include "core/interruption.h"
-#include "core/math.h"
-#include "layout/merge_grid.h"
-#include "layout/layout_internal.h"
+#include "../core/grid.h"
+#include "../core/interruption.h"
+#include "../core/math.h"
+#include "merge_grid.h"
+#include "layout_internal.h"
 
 /**
  * \function igraph_layout_merge_dla

@@ -29,8 +29,8 @@
 #include "igraph_structural.h"
 #include "igraph_visitor.h"
 
-#include "internal/glpk_support.h"
-#include "misc/feedback_arc_set.h"
+#include "../internal/glpk_support.h"
+#include "feedback_arc_set.h"
 
 int igraph_i_feedback_arc_set_ip(const igraph_t *graph, igraph_vector_t *result,
                                  const igraph_vector_t *weights);

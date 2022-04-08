@@ -29,7 +29,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-static IGRAPH_THREAD_LOCAL igraph_status_handler_t *igraph_i_status_handler = 0;
+static igraph_status_handler_t *igraph_i_status_handler = 0;
 
 /**
  * \function igraph_status

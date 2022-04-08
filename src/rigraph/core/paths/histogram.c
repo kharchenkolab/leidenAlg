@@ -27,7 +27,7 @@
 #include "igraph_interface.h"
 #include "igraph_progress.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 /**
  * \function igraph_path_length_hist

@@ -22,13 +22,13 @@
 
 */
 
-#include "internal/glpk_support.h"
+#include "glpk_support.h"
 
 #ifdef HAVE_GLPK
 
 #include "igraph_error.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 #include <stdio.h>
 

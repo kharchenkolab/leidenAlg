@@ -31,8 +31,8 @@
 #include "igraph_random.h"
 #include "igraph_structural.h"
 
-#include "core/interruption.h"
-#include "operators/rewire_internal.h"
+#include "../core/interruption.h"
+#include "../operators/rewire_internal.h"
 
 /* Threshold that defines when to switch over to using adjacency lists during
  * rewiring */

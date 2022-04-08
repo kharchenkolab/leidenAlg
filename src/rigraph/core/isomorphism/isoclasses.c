@@ -24,7 +24,7 @@
 #include "igraph_constructors.h"
 #include "igraph_interface.h"
 
-#include "isomorphism/isoclasses.h"
+#include "isoclasses.h"
 
 /*
  * Small labelled graphs are encoded into a compact representation, a "code",

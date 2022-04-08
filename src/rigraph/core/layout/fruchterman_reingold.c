@@ -27,8 +27,8 @@
 #include "igraph_interface.h"
 #include "igraph_components.h"
 
-#include "core/grid.h"
-#include "core/interruption.h"
+#include "../core/grid.h"
+#include "../core/interruption.h"
 
 static int igraph_layout_i_fr(const igraph_t *graph,
                               igraph_matrix_t *res,

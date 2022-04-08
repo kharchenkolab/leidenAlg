@@ -28,8 +28,8 @@
 #include "igraph_memory.h"
 #include "igraph_version.h"
 
-#include "graph/attributes.h"
-#include "internal/hacks.h" /* strcasecmp */
+#include "../graph/attributes.h"
+//#include "internal/hacks.h" /* strcasecmp */
 
 #include <ctype.h>
 #include <string.h>

@@ -31,8 +31,8 @@
 #include "igraph_random.h"
 #include "igraph_vector_ptr.h"
 
-#include "core/interruption.h"
-#include "core/set.h"
+#include "../core/interruption.h"
+#include "../core/set.h"
 
 static int igraph_i_degree_sequence_game_simple(igraph_t *graph,
                                        const igraph_vector_t *out_seq,

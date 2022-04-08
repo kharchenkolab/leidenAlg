@@ -25,8 +25,8 @@
 
 #include "config.h"
 
-static IGRAPH_THREAD_LOCAL igraph_progress_handler_t *igraph_i_progress_handler = 0;
-static IGRAPH_THREAD_LOCAL char igraph_i_progressmsg_buffer[1000];
+static igraph_progress_handler_t *igraph_i_progress_handler = 0;
+static char igraph_i_progressmsg_buffer[1000];
 
 /**
  * \function igraph_progress

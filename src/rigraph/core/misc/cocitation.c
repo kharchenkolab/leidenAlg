@@ -27,7 +27,7 @@
 #include "igraph_adjlist.h"
 #include "igraph_interface.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 #include <math.h>
 

@@ -30,7 +30,7 @@
 #include "igraph_memory.h"
 #include "igraph_qsort.h"
 
-#include "operators/misc_internal.h"
+#include "misc_internal.h"
 
 /**
  * \function igraph_union

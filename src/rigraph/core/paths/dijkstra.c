@@ -29,9 +29,9 @@
 #include "igraph_memory.h"
 #include "igraph_stack.h"
 
-#include "core/indheap.h"
-#include "core/interruption.h"
-#include "core/math.h"
+#include "../core/indheap.h"
+#include "../core/interruption.h"
+#include "../core/math.h"
 
 #include <string.h>   /* memset */
 

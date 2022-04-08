@@ -25,7 +25,7 @@
 #include "igraph_attributes.h"
 #include "igraph_interface.h"
 
-#include "io/dl-header.h"
+#include "dl-header.h"
 
 int igraph_dl_yylex_init_extra (igraph_i_dl_parsedata_t* user_defined,
                                 void* scanner);

@@ -29,7 +29,7 @@
 #include "igraph_constructors.h"
 #include "igraph_games.h"
 
-#include "core/interruption.h"
+#include "../core/interruption.h"
 
 #include <float.h>      /* for DBL_EPSILON */
 #include <math.h>       /* for sqrt */

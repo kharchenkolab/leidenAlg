@@ -25,7 +25,7 @@
 #include <math.h>
 #include <string.h>
 
-#include "internal/hacks.h"
+//#include "../../internal/hacks.h"
 
 namespace gengraph {
 

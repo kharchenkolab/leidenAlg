@@ -21,7 +21,7 @@
 
 */
 
-#include "core/marked_queue.h"
+#include "marked_queue.h"
 
 #define BATCH_MARKER -1
 

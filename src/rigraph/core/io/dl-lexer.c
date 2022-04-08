@@ -810,8 +810,8 @@ static const flex_int16_t yy_chk[318] =
 #include <stdlib.h>
 #include <stdarg.h>
 
-#include "io/dl-header.h"
-#include "io/dl-parser.h"
+#include "dl-header.h"
+#include "dl-parser.h"
 
 #define YY_EXTRA_TYPE igraph_i_dl_parsedata_t*
 #define YY_USER_ACTION yylloc->first_line = yylineno;

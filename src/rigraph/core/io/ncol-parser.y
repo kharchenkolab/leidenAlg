@@ -52,11 +52,11 @@
 #include "igraph_error.h"
 #include "config.h"
 
-#include "core/math.h"
-#include "io/ncol-header.h"
-#include "io/parsers/ncol-parser.h"
-#include "io/parsers/ncol-lexer.h"
-#include "internal/hacks.h"
+#include "../core/math.h"
+#include "ncol-header.h"
+#include "ncol-parser.h"
+#include "ncol-lexer.h"
+//#include "internal/hacks.h"
 
 int igraph_ncol_yyerror(YYLTYPE* locp,
                         igraph_i_ncol_parsedata_t *context,

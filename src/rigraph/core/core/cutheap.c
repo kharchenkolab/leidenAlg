@@ -22,7 +22,7 @@
 
 #include "igraph_types.h"
 
-#include "core/cutheap.h"
+#include "cutheap.h"
 
 #define PARENT(x)     ((x)/2)
 #define LEFTCHILD(x)  ((x)*2+1)

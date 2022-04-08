@@ -47,8 +47,8 @@
 #include "config.h"
 #include <stdlib.h>
 
-#include "io/gml-header.h"
-#include "io/parsers/gml-parser.h"
+#include "gml-header.h"
+#include "gml-parser.h"
 
 #define YY_EXTRA_TYPE igraph_i_gml_parsedata_t*
 #define YY_USER_ACTION yylloc->first_line = yylineno;

@@ -23,7 +23,7 @@
 
 #include "igraph_types.h"
 
-#include "core/buckets.h"
+#include "buckets.h"
 
 /* The igraph_buckets_t data structure can store at most 'size'
  * unique integers in 'bsize' buckets. It has the following simple

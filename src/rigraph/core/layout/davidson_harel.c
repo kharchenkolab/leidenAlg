@@ -26,9 +26,9 @@
 #include "igraph_interface.h"
 #include "igraph_random.h"
 
-#include "core/math.h"
-#include "core/interruption.h"
-#include "layout/layout_internal.h"
+#include "../core/math.h"
+#include "../core/interruption.h"
+#include "layout_internal.h"
 
 #include <math.h>
 

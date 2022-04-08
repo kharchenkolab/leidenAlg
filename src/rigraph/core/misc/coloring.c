@@ -22,8 +22,8 @@
 #include "igraph_interface.h"
 #include "igraph_adjlist.h"
 
-#include "core/indheap.h"
-#include "core/interruption.h"
+#include "../core/indheap.h"
+#include "../core/interruption.h"
 
 static int igraph_i_vertex_coloring_greedy_cn(const igraph_t *graph, igraph_vector_int_t *colors) {
     long i, vertex, maxdeg;

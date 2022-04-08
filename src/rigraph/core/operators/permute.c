@@ -25,7 +25,7 @@
 #include "igraph_constructors.h"
 #include "igraph_interface.h"
 
-#include "graph/attributes.h"
+#include "../graph/attributes.h"
 
 /**
  * \function igraph_permute_vertices
