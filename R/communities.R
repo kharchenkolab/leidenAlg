@@ -20,15 +20,16 @@ NULL
 #' @param graph graph on which communities should be detected
 #' @param resolution resolution parameter (default=1.0) - higher numbers lead to more communities
 #' @param n.iterations number of iterations that the algorithm should be run for (default=2)
+#' @inheritParams igraph::cluster_leiden
 #' @inheritDotParams igraph::cluster_leiden -resolution_parameter -n_iterations
 #' @return a fakeCommunities object that returns membership and dendrogram
 #' @examples
 #' leiden.community(exampleGraph)
 #'
 #' @export
-leiden.community <- function(graph, resolution=1.0, n.iterations=2, ...) {
+leiden.community <- function(graph, resolution=1.0, n.iterations=2, objective_function="modularity", ...) {
   .Deprecated("cluster_leiden", package="igraph")
-  x <- igraph::cluster_leiden(graph=graph, n_iterations=n.iterations, resolution_parameter=resolution, ...)
+  x <- igraph::cluster_leiden(graph=graph, n_iterations=n.iterations, resolution_parameter=resolution, objective_function=objective_function, ...)
 
   # enclose in a masquerading class
   fv <- membership(x)

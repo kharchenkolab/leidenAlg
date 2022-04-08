@@ -5,7 +5,13 @@
 \title{Leiden algorithm community detection
 Detect communities using Leiden algorithm}
 \usage{
-leiden.community(graph, resolution = 1, n.iterations = 2, ...)
+leiden.community(
+  graph,
+  resolution = 1,
+  n.iterations = 2,
+  objective_function = "modularity",
+  ...
+)
 }
 \arguments{
 \item{graph}{graph on which communities should be detected}
@@ -14,11 +20,12 @@ leiden.community(graph, resolution = 1, n.iterations = 2, ...)
 
 \item{n.iterations}{number of iterations that the algorithm should be run for (default=2)}
 
+\item{objective_function}{Whether to use the Constant Potts Model (CPM) or
+modularity. Must be either \code{"CPM"} or \code{"modularity"}.}
+
 \item{...}{
   Arguments passed on to \code{\link[igraph:cluster_leiden]{igraph::cluster_leiden}}
   \describe{
-    \item{\code{objective_function}}{Whether to use the Constant Potts Model (CPM) or
-modularity. Must be either \code{"CPM"} or \code{"modularity"}.}
     \item{\code{weights}}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
 \sQuote{weight} edge attribute, then that attribute will be used. If
