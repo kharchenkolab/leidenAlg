@@ -2,6 +2,10 @@
 #define SURPRISEVERTEXPARTITION_H
 
 #include "MutableVertexPartition.h"
+
+#include "igraph.h"
+
+
 #include <iostream>
   using std::cerr;
   using std::endl;

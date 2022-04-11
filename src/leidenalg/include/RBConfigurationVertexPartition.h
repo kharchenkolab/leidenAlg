@@ -3,6 +3,9 @@
 
 #include "LinearResolutionParameterVertexPartition.h"
 
+#include "igraph.h"
+
+
 class RBConfigurationVertexPartition : public LinearResolutionParameterVertexPartition
 {
   public:

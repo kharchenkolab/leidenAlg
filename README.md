@@ -6,9 +6,12 @@
 
 Implements the Leiden algorithm via an R interface
 
-## Note: Leiden Algorithm now in igraph
 
-Since [October 2020](https://github.com/igraph/rigraph/pull/399), the R package [igraph](https://cran.r-project.org/web/packages/igraph/) contains the function `cluster_leiden()` implemented by Vincent Traag ([@vtraag](https://github.com/vtraag)). The usage of this function is detailed in the igraph documentation [here](https://igraph.org/r/html/1.2.7/cluster_leiden.html). We recommend users use this function. 
+#### Note: cluster_leiden() now in igraph
+
+Since [October 2020](https://github.com/igraph/rigraph/pull/399), the R package [igraph](https://cran.r-project.org/package=igraph) contains the function `cluster_leiden()` implemented by Vincent Traag ([@vtraag](https://github.com/vtraag)). The usage of this function is detailed in the igraph documentation [here](https://igraph.org/r/html/1.2.7/cluster_leiden.html). We recommend users use this function. 
+
+There is still no R package which entirely encompasses all of the functionality of the original Python/C++ implementation here from https://github.com/vtraag/leidenalg. We hope interested developers could use this package as a starting point for creating an R package which mirrors the full available functionality of the Python package. See [here](https://github.com/vtraag/leidenalg#usage) for details. 
 
 ## Summary
 
