@@ -1,10 +1,11 @@
 # Changelog
 
-## [1.0.3] - 2022 April 4
-* Updated igraph headers using igraph version [v0.9.7](https://github.com/igraph/igraph/releases/tag/0.9.7). Related discussion for bug found [here](https://github.com/kharchenkolab/leidenAlg/issues/9). 
 
-## [1.0.2] - 2022 March 3
-* Modified the Makevars file to correctly add an rpath (Runpath Search Path) for Mac OS users with `install_name_tool`. From the manual, the command used is `-change old new` whereby this "Changes  the dependent shared library install name old to new in the specified Mach-O binary.  More than one of these options can be specified.  If the Mach-O binary does not contain the old install name in a specified -change option the option is ignored."
+## [1.0.3] - 2022 April 08
+* Install rigraph directly in `/src`. Remove previous linking to `igraph` R package in Makevars.
+
+## [1.0.2] - 2022 March 03
+* Fixed Makevars to use `install_name_tool -change`.
 
 ## [1.0.1] - 2021 Dec 03
 * Modified the Makevars to use SHLIB_EXT to account for both shared library extensions on Mac OS (either *.so or *dylib)
@@ -12,13 +13,9 @@
 ## [1.0.0] - 2021-11-19
 * `leidenAlg` has gone through no major revisions in over a year. In order to avoid any confusion, this should be released with a major version.
 
-
 ## [0.1.1] - 2021-03-02
-
 * Fixed issue with unweighted graph. In this case, we set all edge weights to 1. 
 
-
 ## [0.1.0] - 2020-11-11
-
 * Version published on CRAN: https://cran.r-project.org/web/packages/leidenAlg/index.html
 * Tagged version on github released on 2 Jan 2021: https://github.com/kharchenkolab/leidenAlg/releases/tag/0.1.0

@@ -3,6 +3,9 @@
 
 #include <MutableVertexPartition.h>
 
+#include "igraph.h"
+
+
 class ResolutionParameterVertexPartition : public MutableVertexPartition
 {
   public:

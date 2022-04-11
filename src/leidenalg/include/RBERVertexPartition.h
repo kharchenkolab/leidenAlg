@@ -3,6 +3,8 @@
 
 #include <LinearResolutionParameterVertexPartition.h>
 
+#include "igraph.h"
+
 
 class RBERVertexPartition : public LinearResolutionParameterVertexPartition
 {
