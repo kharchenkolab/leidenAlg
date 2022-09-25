@@ -13,7 +13,6 @@
 #' @importFrom graphics par
 #' @importFrom grDevices adjustcolor
 #' @importFrom stats as.dendrogram is.leaf dendrapply as.hclust
-#' @import Matrix.utils
 #' @import Matrix
 NULL
 

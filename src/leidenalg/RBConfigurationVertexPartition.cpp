@@ -1,6 +1,11 @@
 #include "RBConfigurationVertexPartition.h"
 #include "igraph.h"
 
+// Debug Mode implies checking assertions.
+#if defined(_GLIBCXX_ASSERTIONS)
+# define _GLIBCXX_ASSERTIONS 0
+#endif
+
 
 RBConfigurationVertexPartition::RBConfigurationVertexPartition(Graph* graph,
       vector<size_t> const& membership, double resolution_parameter) :

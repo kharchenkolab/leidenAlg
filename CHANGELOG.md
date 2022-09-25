@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.0.4] - 2022 September 25
+* Remove 'Matrix.utils' as dependency
 
 ## [1.0.3] - 2022 April 08
 * Install rigraph directly in `/src`. Remove previous linking to `igraph` R package in Makevars.
