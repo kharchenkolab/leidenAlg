@@ -12,6 +12,11 @@ using namespace std;
 using namespace Rcpp;
 
 
+// Debug Mode implies checking assertions.
+#if defined(_GLIBCXX_ASSERTIONS)
+# define _GLIBCXX_ASSERTIONS 0
+#endif
+
 // a wrapper for the Leidgen algorithm implementation (https://github.com/vtraag/leidenalg)
 
 int R_SEXP_to_vector(SEXP sv, igraph_vector_t *v) {
