@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.0.5] - 2022 September 29
+* Fixed `/src/leidenalg/include/MutableVertexPartition.h`, Fedora-related 'GLIBCXX_ASSERTIONS' error
+
 ## [1.0.4] - 2022 September 25
 * Remove 'Matrix.utils' as dependency
 
