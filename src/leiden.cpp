@@ -71,10 +71,15 @@ void Stl_To_Igraph_vector_t(std::vector<int>& vectR, igraph_vector_t* v) {
 // Refer to find_partition()
 // 
 // [[Rcpp::export]]
-std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int num_vertices, bool direction, std::vector<double>& edge_weights, double resolution=1.0, int niter=2) {
+std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist_length, int num_vertices, bool direction, std::vector<double>& edge_weights, double resolution=1.0, int niter=2) {
   
   igraph_t g;
   igraph_vector_t edges;
+
+  // initialize igraph_vector_t
+  igraph_vector_init(&edges, edgelist_length);
+
+  // questionable attempt to convert 'std::vector<int>' to 'igraph_vector_t' (not 'igraph_vector_int_t' as documented by 'igraph_create()')
   Stl_To_Igraph_vector_t(edgelist, &edges);
 
   igraph_create(&g, &edges, num_vertices, direction);
@@ -91,6 +96,13 @@ std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int num_vert
     val=o.optimise_partition(&p);
     iter++;
   }
+
+  // destroy the igraph_t 'g' and the igraph_vector_t 'edges'
+  // https://igraph.org/c/html/latest/igraph-Data-structures.html#igraph_vector_destroy
+  // https://igraph.org/c/html/latest/igraph-Generators.html#igraph_create
+  igraph_destroy(&g);
+  igraph_vector_destroy(&edges);
+
   return(p.membership());
   //return(igraph_ecount(&g));
 

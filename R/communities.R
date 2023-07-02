@@ -68,9 +68,10 @@ find_partition <- function(graph, edge_weights, resolution=1.0, niter = 2.0) {
        stop("Input 'graph' must be a valid 'igraph' object")
     }
     edgelist <- as.vector(t(igraph::as_edgelist(g, names=FALSE))) - 1
+    edgelist_length <- length(edgelist)
     num_vertices <- length(igraph::V(graph)) - 1
     direction <- igraph::is_weighted(graph)
-    find_partition_rcpp(edgelist, num_vertices, direction, edge_weights, resolution, niter)
+    find_partition_rcpp(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter)
 }
 
 
