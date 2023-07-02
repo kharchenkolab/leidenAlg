@@ -36,10 +36,6 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
     igraph::E(graph)$weight <- 1
   }
 
-  ## Reminder: https://igraph.org/c/doc/igraph-Basic.html
-  ## Original idea: take graph_edgelist, graph_edgeweights, graph_direction
-  ## Current idea: There's no reason to pass the edge weights
-
   x <- find_partition(graph, igraph::E(graph)$weight, resolution, n.iterations)
 
   # enclose in a masquerading class
@@ -71,9 +67,10 @@ find_partition <- function(graph, edge_weights, resolution=1.0, niter = 2.0) {
     if (!is(graph, "igraph")) {
        stop("Input 'graph' must be a valid 'igraph' object")
     }
-    num_vertices <- length(V(graph)) - 1
+    edgelist <- igraph::as_edgelist(graph, names=FALSE)
+    num_vertices <- length(igraph::V(graph)) - 1
     direction <- igraph::is_weighted(graph)
-    find_partition_rcpp(edge_weights, num_vertices, direction, resolution, niter)
+    find_partition_rcpp(edgelist, num_vertices, direction, edge_weights, resolution, niter)
 }
 
 
