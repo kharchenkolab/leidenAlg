@@ -16,8 +16,8 @@
 #' E(g)$weight <- seq(ecount(g))
 #' find_partition(g, E(g)$weight)
 #' 
-#' @export
-find_partition <- function(graph, edge_weights, resolution = 1.0, niter = 2L) {
-    .Call('_leidenAlg_find_partition', PACKAGE = 'leidenAlg', graph, edge_weights, resolution, niter)
+#' @keywords internal
+find_partition_rcpp <- function(graph, edge_weights, resolution = 1.0, niter = 2L) {
+    .Call('_leidenAlg_find_partition_rcpp', PACKAGE = 'leidenAlg', graph, edge_weights, resolution, niter)
 }
 
