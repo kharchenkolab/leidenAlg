@@ -3,10 +3,13 @@
 #include <Rdefines.h>
 #include <vector>
 #include "igraph.h"
+#include "rigraph/include/igraph.h"
+#include "rigraph/include/igraph_constructors.h"
 #include "leidenalg/include/GraphHelper.h"
 #include "leidenalg/include/Optimiser.h"
 #include "leidenalg/include/RBERVertexPartition.h"
 #include "leidenalg/include/RBConfigurationVertexPartition.h"
+#include "rigraph/include/igraph_constructors.h"
 
 using namespace std;
 using namespace Rcpp;
@@ -50,8 +53,19 @@ using namespace Rcpp;
 //   
 
 
-// FIRST TRY; Take 
+// https://stackoverflow.com/questions/10250438/using-stdvector-with-igraph
 
+void Stl_To_Igraph_vector_t(std::vector<double>& vectR, igraph_vector_t* v) {
+    size_t n = vectR.size();
+
+    /* Make sure that there is enough space for the items in v */
+    igraph_vector_resize(v, n);
+
+    /* Copy all the items */
+    for (size_t i = 0; i < n; i++) {
+        VECTOR(*v)[i] = vectR[i];
+    }
+}
 
 
 // Refer to find_partition()
@@ -59,10 +73,13 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 std::vector<size_t> find_partition_rcpp(std::vector<double>& edge_weights, int num_vertices, bool direction, double resolution=1.0, int niter=2) {
   
-  igraph_t og;
-  //R_SEXP_to_igraph(graph, &g);
-  //Graph og(&graph, edge_weights);
-  igraph_create(&og, &edge_weights, num_vertices, direction);
+  igraph_t g;
+  igraph_vector_t edges;
+
+  Stl_To_Igraph_vector_t(edge_weights, &edges);
+  igraph_create(&g, &edges, num_vertices, direction);
+
+  Graph og(&g, edge_weights);
 
   Optimiser o( (int) (R::runif(0,1)*(double)RAND_MAX) );
   RBConfigurationVertexPartition p(&og,resolution);

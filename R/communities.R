@@ -71,9 +71,9 @@ find_partition <- function(graph, edge_weights, resolution=1.0, niter = 2.0) {
     if (!is(graph, "igraph")) {
        stop("Input 'graph' must be a valid 'igraph' object")
     }
-    num_vertices <- length(V(graph))
+    num_vertices <- length(V(graph)) - 1
     direction <- igraph::is_weighted(graph)
-    find_parition_rcpp(edge_weights, num_vertices, direction, resolution, niter)
+    find_partition_rcpp(edge_weights, num_vertices, direction, resolution, niter)
 }
 
 

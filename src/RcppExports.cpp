@@ -13,22 +13,23 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // find_partition_rcpp
-std::vector<size_t> find_partition_rcpp(igraph_t graph, std::vector<double>& edge_weights, double resolution, int niter);
-RcppExport SEXP _leidenAlg_find_partition_rcpp(SEXP graphSEXP, SEXP edge_weightsSEXP, SEXP resolutionSEXP, SEXP niterSEXP) {
+std::vector<size_t> find_partition_rcpp(std::vector<double>& edge_weights, int num_vertices, bool direction, double resolution, int niter);
+RcppExport SEXP _leidenAlg_find_partition_rcpp(SEXP edge_weightsSEXP, SEXP num_verticesSEXP, SEXP directionSEXP, SEXP resolutionSEXP, SEXP niterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< igraph_t >::type graph(graphSEXP);
     Rcpp::traits::input_parameter< std::vector<double>& >::type edge_weights(edge_weightsSEXP);
+    Rcpp::traits::input_parameter< int >::type num_vertices(num_verticesSEXP);
+    Rcpp::traits::input_parameter< bool >::type direction(directionSEXP);
     Rcpp::traits::input_parameter< double >::type resolution(resolutionSEXP);
     Rcpp::traits::input_parameter< int >::type niter(niterSEXP);
-    rcpp_result_gen = Rcpp::wrap(find_partition_rcpp(graph, edge_weights, resolution, niter));
+    rcpp_result_gen = Rcpp::wrap(find_partition_rcpp(edge_weights, num_vertices, direction, resolution, niter));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_leidenAlg_find_partition_rcpp", (DL_FUNC) &_leidenAlg_find_partition_rcpp, 4},
+    {"_leidenAlg_find_partition_rcpp", (DL_FUNC) &_leidenAlg_find_partition_rcpp, 5},
     {NULL, NULL, 0}
 };
 
