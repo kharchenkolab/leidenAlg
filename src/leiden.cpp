@@ -22,37 +22,6 @@ using namespace Rcpp;
 
 // a wrapper for the Leidgen algorithm implementation (https://github.com/vtraag/leidenalg)
 
-// REMOVED v1.1.0 with igraph (R package) v1.5.0
-//
-// int R_SEXP_to_vector(SEXP sv, igraph_vector_t *v) {
-//   v->stor_begin=REAL(sv);
-//   v->stor_end=v->stor_begin+GET_LENGTH(sv);
-//   v->end=v->stor_end;
-//   return 0;
-// }
-
-
-// int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
-// 
-//   res->n=(igraph_integer_t) REAL(VECTOR_ELT(graph, 0))[0];
-//   res->directed=LOGICAL(VECTOR_ELT(graph, 1))[0];
-//   R_SEXP_to_vector(VECTOR_ELT(graph, 2), &res->from);
-//   R_SEXP_to_vector(VECTOR_ELT(graph, 3), &res->to);
-//   R_SEXP_to_vector(VECTOR_ELT(graph, 4), &res->oi);
-//   R_SEXP_to_vector(VECTOR_ELT(graph, 5), &res->ii);
-//   R_SEXP_to_vector(VECTOR_ELT(graph, 6), &res->os);
-//   R_SEXP_to_vector(VECTOR_ELT(graph, 7), &res->is);
-//   
-//   /* attributes */
-//   REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[0] = 1; /* R objects refcount */
-//   REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[1] = 0; /* igraph_t objects */
-//   res->attr=VECTOR_ELT(graph, 8);
-//   
-//   return 0;
-// }
-//   
-
-
 // https://stackoverflow.com/questions/10250438/using-stdvector-with-igraph
 
 void Stl_To_Igraph_vector_t(std::vector<int>& vectR, igraph_vector_t* v) {
@@ -68,8 +37,25 @@ void Stl_To_Igraph_vector_t(std::vector<int>& vectR, igraph_vector_t* v) {
 }
 
 
-// Refer to find_partition()
-// 
+//' Refer to the R function find_partition()
+//' For notes of the graph object, refer to https://igraph.org/c/doc/igraph-Basic.html
+//'
+//' @param edgelist The graph edge list
+//' @param edgelist_length integer The length of the graph edge list
+//' @param num_vertices integer The number of vertices in the graph
+//' @param direction boolean Whether the graph is directed or undirected
+//' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
+//' @param resolution Integer resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
+//' @param niter Number of iterations that the algorithm should be run for (default=2)
+//' @return A vector of membership values
+//' @examples 
+//' library(igraph)
+//' library(leidenAlg)
+//' 
+//' g <- make_star(10)
+//' E(g)$weight <- seq(ecount(g))
+//' find_partition(g, E(g)$weight)
+//' 
 // [[Rcpp::export]]
 std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist_length, int num_vertices, bool direction, std::vector<double>& edge_weights, double resolution=1.0, int niter=2) {
   

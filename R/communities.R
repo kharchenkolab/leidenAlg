@@ -9,6 +9,7 @@
 #' @importFrom igraph membership
 #' @importFrom igraph walktrap.community
 #' @importFrom igraph induced.subgraph
+#' @importFrom methods is
 #' @import sccore
 #' @importFrom graphics par
 #' @importFrom grDevices adjustcolor
@@ -228,7 +229,7 @@ as.dendrogram.fakeCommunities <- function(object, ...) {
 
 #' Returns pre-calculated membership factor
 #'
-#' @param object fakeCommunities object
+#' @param communities fakeCommunities object
 #' @param ... further parameters for generic
 #' @return membership factor
 #' @examples 
@@ -237,8 +238,8 @@ as.dendrogram.fakeCommunities <- function(object, ...) {
 #' 
 #' @method membership fakeCommunities
 #' @export
-membership.fakeCommunities <- function(object, ...) {
-  return(object$membership)
+membership.fakeCommunities <- function(communities, ...) {
+  return(communities$membership)
 }
 
 
