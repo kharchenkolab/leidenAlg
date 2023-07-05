@@ -9,6 +9,7 @@
 #' @importFrom igraph membership
 #' @importFrom igraph walktrap.community
 #' @importFrom igraph induced.subgraph
+#' @importFrom methods is
 #' @import sccore
 #' @importFrom graphics par
 #' @importFrom grDevices adjustcolor
@@ -17,7 +18,7 @@
 NULL
 
 
-#' Leiden algorithm community detectiond
+#' Leiden algorithm community detection
 #' Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
 #'
 #' @param graph graph on which communities should be detected
@@ -43,6 +44,35 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
   res <- list(membership=fv, dendrogram=NULL, algorithm='leiden', resolution=resolution, n.iter=n.iterations, names=names(fv))
   class(res) <- rev("fakeCommunities")
   return(res)
+}
+
+## Here for backwards compatibility
+
+#' Finds the optimal partition using the Leiden algorithm
+#'
+#' @param graph The igraph graph to define the partition on
+#' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
+#' @param resolution Integer resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
+#' @param niter Number of iterations that the algorithm should be run for (default=2)
+#' @return A vector of membership values
+#' @examples 
+#' library(igraph)
+#' library(leidenAlg)
+#' 
+#' g <- make_star(10)
+#' E(g)$weight <- seq(ecount(g))
+#' find_partition(g, E(g)$weight)
+#' 
+#' @export
+find_partition <- function(graph, edge_weights, resolution=1.0, niter = 2.0) {
+    if (!is(graph, "igraph")) {
+       stop("Input 'graph' must be a valid 'igraph' object")
+    }
+    edgelist <- as.vector(t(igraph::as_edgelist(graph, names=FALSE))) - 1
+    edgelist_length <- length(edgelist)
+    num_vertices <- length(igraph::V(graph)) - 1
+    direction <- igraph::is_weighted(graph)
+    find_partition_rcpp(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter)
 }
 
 
@@ -199,7 +229,7 @@ as.dendrogram.fakeCommunities <- function(object, ...) {
 
 #' Returns pre-calculated membership factor
 #'
-#' @param object fakeCommunities object
+#' @param communities fakeCommunities object
 #' @param ... further parameters for generic
 #' @return membership factor
 #' @examples 
@@ -208,8 +238,8 @@ as.dendrogram.fakeCommunities <- function(object, ...) {
 #' 
 #' @method membership fakeCommunities
 #' @export
-membership.fakeCommunities <- function(object, ...) {
-  return(object$membership)
+membership.fakeCommunities <- function(communities, ...) {
+  return(communities$membership)
 }
 
 

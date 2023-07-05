@@ -1,12 +1,12 @@
 C ?= gcc 
-CFLAGS = -O3 -std=c11 -std=gnu11
-PKG_CFLAGS = -O3 -std=c11 -std=gnu11 -pthread -fPIC 
+CFLAGS = -O3 
+PKG_CFLAGS = -O3 -pthread -fPIC 
 PKG_CFLAGS += -I"./include"  -I"../rigraph/include"
 LDFLAGS += -lpthread
 
 
 CXX ?= g++
-PKG_CXXFLAGS = -O3 -std=c++11 -pthread -fPIC $(SHLIB_OPENMP_CXXFLAGS)
+PKG_CXXFLAGS = -O3 -pthread -fPIC $(SHLIB_OPENMP_CXXFLAGS)
 PKG_CXXFLAGS += -I"./include" -I"../rigraph/include"
 LDFLAGS += -lpthread
 

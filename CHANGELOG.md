@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.1.0] - 2023 July 1
+* Fixed bugs due to release of igraph verison 1.5.0. Refer to https://github.com/kharchenkolab/leidenAlg/issues/13
+
 ## [1.0.5] - 2022 September 29
 * Fixed `/src/leidenalg/include/MutableVertexPartition.h`, Fedora-related 'GLIBCXX_ASSERTIONS' error
 

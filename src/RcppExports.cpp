@@ -2,7 +2,6 @@
 // Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #include <RcppArmadillo.h>
-#define NDEBUG 1
 #include <RcppEigen.h>
 #include <Rcpp.h>
 
@@ -13,23 +12,26 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// find_partition
-std::vector<size_t> find_partition(SEXP graph, std::vector<double>& edge_weights, double resolution, int niter);
-RcppExport SEXP _leidenAlg_find_partition(SEXP graphSEXP, SEXP edge_weightsSEXP, SEXP resolutionSEXP, SEXP niterSEXP) {
+// find_partition_rcpp
+std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist_length, int num_vertices, bool direction, std::vector<double>& edge_weights, double resolution, int niter);
+RcppExport SEXP _leidenAlg_find_partition_rcpp(SEXP edgelistSEXP, SEXP edgelist_lengthSEXP, SEXP num_verticesSEXP, SEXP directionSEXP, SEXP edge_weightsSEXP, SEXP resolutionSEXP, SEXP niterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type graph(graphSEXP);
+    Rcpp::traits::input_parameter< std::vector<int>& >::type edgelist(edgelistSEXP);
+    Rcpp::traits::input_parameter< int >::type edgelist_length(edgelist_lengthSEXP);
+    Rcpp::traits::input_parameter< int >::type num_vertices(num_verticesSEXP);
+    Rcpp::traits::input_parameter< bool >::type direction(directionSEXP);
     Rcpp::traits::input_parameter< std::vector<double>& >::type edge_weights(edge_weightsSEXP);
     Rcpp::traits::input_parameter< double >::type resolution(resolutionSEXP);
     Rcpp::traits::input_parameter< int >::type niter(niterSEXP);
-    rcpp_result_gen = Rcpp::wrap(find_partition(graph, edge_weights, resolution, niter));
+    rcpp_result_gen = Rcpp::wrap(find_partition_rcpp(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_leidenAlg_find_partition", (DL_FUNC) &_leidenAlg_find_partition, 4},
+    {"_leidenAlg_find_partition_rcpp", (DL_FUNC) &_leidenAlg_find_partition_rcpp, 7},
     {NULL, NULL, 0}
 };
 
