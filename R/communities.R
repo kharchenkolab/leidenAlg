@@ -54,8 +54,6 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 #' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
 #' @param resolution Integer resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
 #' @param niter Number of iterations that the algorithm should be run for (default=2)
-#' @param nrep Number of random replicate starts with random number being updated. (default=10) The result with the best modularity will be returned.
-#' @param seed Initial random seed for reproducible result. (default=1) When running multiple replicates, the seed increments by 1 every new start.
 #' @return A vector of membership values
 #' @rdname find_partition
 #' @examples
@@ -67,7 +65,21 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 #' find_partition(g, E(g)$weight)
 #'
 #' @export
-find_partition <- function(graph, edge_weights, resolution=1.0, niter = 2.0, nrep = 1, seed = 1) {
+find_partition <- function(graph, edge_weights, resolution=1.0, niter = 2.0) {
+  if (!is(graph, "igraph")) {
+    stop("Input 'graph' must be a valid 'igraph' object")
+  }
+  edgelist <- as.vector(t(igraph::as_edgelist(graph, names=FALSE))) - 1
+  edgelist_length <- length(edgelist)
+  num_vertices <- length(igraph::V(graph)) - 1
+  direction <- igraph::is_weighted(graph)
+  find_partition_rcpp(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter)
+}
+
+#' @param nrep Number of replicate starts with random number being updated. (default=10) The result with the best quality will be returned.
+#' @rdname find_partition
+#' @export
+find_partition_with_rep <- function(graph, edge_weights, resolution=1.0, niter = 2.0, nrep = 10) {
     if (!is(graph, "igraph")) {
        stop("Input 'graph' must be a valid 'igraph' object")
     }
@@ -75,7 +87,7 @@ find_partition <- function(graph, edge_weights, resolution=1.0, niter = 2.0, nre
     edgelist_length <- length(edgelist)
     num_vertices <- length(igraph::V(graph)) - 1
     direction <- igraph::is_weighted(graph)
-    find_partition_rcpp(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter, nrep, seed)
+    find_partition_with_rep_rcpp(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter, nrep)
 }
 
 
