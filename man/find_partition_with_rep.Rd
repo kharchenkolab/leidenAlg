@@ -17,7 +17,7 @@ find_partition_with_rep(
 
 \item{edge_weights}{Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.}
 
-\item{resolution}{Integer resolution parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.}
+\item{resolution}{Numeric scalar, resolution parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.}
 
 \item{niter}{Number of iterations that the algorithm should be run for (default=2)}
 
@@ -27,12 +27,21 @@ find_partition_with_rep(
 A vector of membership values
 }
 \description{
-Performs Leiden algorithm for partitioning by \code{nrep} times. The random
-seed for the optimiser will be updated each time without pre-seeding. The
-final output comes from the run that generates the membership with the
-highest quality value. \code{\link{find_partition}} only performs one run.
-Users can run \code{set.seed()} before calling these function for
-reproducible result.
+This function performs Leiden algorithm \code{nrep} times and returns the
+result from the run with the maximum quality.
+
+Since Leiden algorithm has stochastic process, repeating stochastically may
+improve the result. However, users should be aware of whether there is indeed
+a community structure with exploration, rather than blindly trusting the
+returned result that comes with the highest quality value.
+
+The random number generator (RNG) is not re-seeded at each new start of
+community detection, in order to keep the independence of each replicate. To
+get reproducible result, users can run \code{set.seed()} before calling these
+functions.
+
+\code{\link{find_partition}} only performs the community detection once and
+the reproducibility can also be ensured with \code{set.seed()}.
 }
 \examples{
 library(igraph)

@@ -45,7 +45,7 @@ void Stl_To_Igraph_vector_t(std::vector<int>& vectR, igraph_vector_t* v) {
 //' @param num_vertices integer The number of vertices in the graph
 //' @param direction boolean Whether the graph is directed or undirected
 //' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
-//' @param resolution Integer resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
+//' @param resolution Numeric scalar, resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
 //' @param niter Number of iterations that the algorithm should be run for (default=2)
 //' @return A vector of membership values
 //' @export
@@ -101,7 +101,7 @@ std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist
 //' @param num_vertices integer The number of vertices in the graph
 //' @param direction boolean Whether the graph is directed or undirected
 //' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
-//' @param resolution Integer resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
+//' @param resolution Numeric scalar, resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
 //' @param niter Number of iterations that the algorithm should be run for (default=2)
 //' @param nrep Number of replicate starts with random number being updated. (default=10) The result with the best quality will be returned.
 //' @export

@@ -11,7 +11,7 @@ find_partition(graph, edge_weights, resolution = 1, niter = 2)
 
 \item{edge_weights}{Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.}
 
-\item{resolution}{Integer resolution parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.}
+\item{resolution}{Numeric scalar, resolution parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.}
 
 \item{niter}{Number of iterations that the algorithm should be run for (default=2)}
 }
