@@ -25,10 +25,10 @@ NULL
 #' @param resolution resolution parameter (default=1.0) - higher numbers lead to more communities
 #' @param n.iterations number of iterations that the algorithm should be run for (default=2)
 #' @return a fakeCommunities object that returns membership and dendrogram
-#' @examples 
+#' @examples
 #' leiden.community(exampleGraph)
-#' 
-#' @export 
+#'
+#' @export
 leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 
   ## add check for unweighted graph, i.e. graph$weight is NULL
@@ -54,17 +54,20 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 #' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
 #' @param resolution Integer resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
 #' @param niter Number of iterations that the algorithm should be run for (default=2)
+#' @param nrep Number of random replicate starts with random number being updated. (default=10) The result with the best modularity will be returned.
+#' @param seed Initial random seed for reproducible result. (default=1) When running multiple replicates, the seed increments by 1 every new start.
 #' @return A vector of membership values
-#' @examples 
+#' @rdname find_partition
+#' @examples
 #' library(igraph)
 #' library(leidenAlg)
-#' 
+#'
 #' g <- make_star(10)
 #' E(g)$weight <- seq(ecount(g))
 #' find_partition(g, E(g)$weight)
-#' 
+#'
 #' @export
-find_partition <- function(graph, edge_weights, resolution=1.0, niter = 2.0) {
+find_partition <- function(graph, edge_weights, resolution=1.0, niter = 2.0, nrep = 1, seed = 1) {
     if (!is(graph, "igraph")) {
        stop("Input 'graph' must be a valid 'igraph' object")
     }
@@ -72,26 +75,26 @@ find_partition <- function(graph, edge_weights, resolution=1.0, niter = 2.0) {
     edgelist_length <- length(edgelist)
     num_vertices <- length(igraph::V(graph)) - 1
     direction <- igraph::is_weighted(graph)
-    find_partition_rcpp(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter)
+    find_partition_rcpp(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter, nrep, seed)
 }
 
 
 #' Recursive leiden communities
 #' Constructs an n-step recursive clustering, using leiden.community
-#' 
+#'
 #' @param graph graph
 #' @param max.depth Recursive depth (default=2)
 #' @param n.cores integer Number of cores to use (default = parallel::detectCores(logical=FALSE)). If logical=FALSE, uses the number of physical CPUs/cores. If logical=TRUE, uses the logical number of CPUS/cores. See parallel::detectCores()
-#' @param min.community.size integer Minimal community size parameter for the walktrap communities---Communities smaller than that will be merged (default=10) 
+#' @param min.community.size integer Minimal community size parameter for the walktrap communities---Communities smaller than that will be merged (default=10)
 #' @param verbose boolean Whether to output progress messages (default=FALSE)
-#' @param resolution resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth) (default=1) 
+#' @param resolution resolution parameter passed to leiden.community (either a single value, or a value equivalent to max.depth) (default=1)
 #' @param cur.depth integer Current depth of clustering (default=1)
 #' @param hierarchical boolean If TRUE, calculate hierarchy on the multilevel clusters (default=TRUE)
 #' @param ... passed to leiden.community
 #' @return a fakeCommunities object that returns membership and dendrogram
-#' @examples 
+#' @examples
 #' rleiden.community(exampleGraph, n.cores=1)
-#' 
+#'
 #' @export
 rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(logical=FALSE), min.community.size=10, verbose=FALSE, resolution=1, cur.depth=1, hierarchical=TRUE, ...) {
 
@@ -217,10 +220,10 @@ rleiden.community <- function(graph, max.depth=2, n.cores=parallel::detectCores(
 #' @param object fakeCommunities object
 #' @param ... further parameters for generic
 #' @return dendrogram
-#' @examples 
+#' @examples
 #' rLeidenComm = suppressWarnings(rleiden.community(exampleGraph, n.cores=1))
 #' as.dendrogram.fakeCommunities(rLeidenComm)
-#' 
+#'
 #' @method as.dendrogram fakeCommunities
 #' @export
 as.dendrogram.fakeCommunities <- function(object, ...) {
@@ -232,10 +235,10 @@ as.dendrogram.fakeCommunities <- function(object, ...) {
 #' @param communities fakeCommunities object
 #' @param ... further parameters for generic
 #' @return membership factor
-#' @examples 
+#' @examples
 #' leidenComm = leiden.community(exampleGraph)
 #' membership.fakeCommunities(leidenComm)
-#' 
+#'
 #' @method membership fakeCommunities
 #' @export
 membership.fakeCommunities <- function(communities, ...) {

@@ -3,6 +3,7 @@
 S3method(as.dendrogram,fakeCommunities)
 S3method(membership,fakeCommunities)
 export(find_partition)
+export(find_partition_rcpp)
 export(leiden.community)
 export(rleiden.community)
 exportPattern("^[[:alpha:]]+")

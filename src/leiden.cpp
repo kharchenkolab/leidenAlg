@@ -36,29 +36,17 @@ void Stl_To_Igraph_vector_t(std::vector<int>& vectR, igraph_vector_t* v) {
     }
 }
 
-
-//' Refer to the R function find_partition()
-//' For notes of the graph object, refer to https://igraph.org/c/doc/igraph-Basic.html
+//' @details For notes of the graph object, refer to https://igraph.org/c/doc/igraph-Basic.html
 //'
 //' @param edgelist The graph edge list
 //' @param edgelist_length integer The length of the graph edge list
 //' @param num_vertices integer The number of vertices in the graph
 //' @param direction boolean Whether the graph is directed or undirected
-//' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
-//' @param resolution Integer resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
-//' @param niter Number of iterations that the algorithm should be run for (default=2)
-//' @return A vector of membership values
-//' @examples 
-//' library(igraph)
-//' library(leidenAlg)
-//' 
-//' g <- make_star(10)
-//' E(g)$weight <- seq(ecount(g))
-//' find_partition(g, E(g)$weight)
-//' 
+//' @rdname find_partition
+//' @export
 // [[Rcpp::export]]
-std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist_length, int num_vertices, bool direction, std::vector<double>& edge_weights, double resolution=1.0, int niter=2) {
-  
+std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist_length, int num_vertices, bool direction, std::vector<double>& edge_weights, double resolution=1.0, int niter=2, int nrep=1, int seed=1) {
+
   igraph_t g;
   igraph_vector_t edges;
 
@@ -72,15 +60,27 @@ std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist
 
   Graph og(&g, edge_weights);
 
-  Optimiser o( (int) (R::runif(0,1)*(double)RAND_MAX) );
-  RBConfigurationVertexPartition p(&og,resolution);
+  // RBConfigurationVertexPartition p(&og,resolution);
     //RBERVertexPartition p(&og,resolution);
   //o.find_partition(og,resolution);
-  double val=1;
-  int iter=0;
-  while(val>0 && (iter<niter || niter<0)) {
-    val=o.optimise_partition(&p);
-    iter++;
+  double best_quality = -1;
+  std::vector<size_t> best_cluster;
+  seed--;
+  for(int i=0; i<nrep; i++) {
+    Rcpp::checkUserInterrupt();
+    seed++;
+    Optimiser o(seed);
+    RBConfigurationVertexPartition p(&og,resolution);
+    double val=1;
+    int iter=0;
+    while(val>0 && (iter<niter || niter<0)) {
+      val=o.optimise_partition(&p);
+      iter++;
+    }
+    if (p.quality(resolution) > best_quality) {
+      best_cluster = p.membership();
+      best_quality = p.quality(resolution);
+    }
   }
 
   // destroy the igraph_t 'g' and the igraph_vector_t 'edges'
@@ -89,8 +89,7 @@ std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist
   igraph_destroy(&g);
   igraph_vector_destroy(&edges);
 
-  return(p.membership());
+  return(best_cluster);
   //return(igraph_ecount(&g));
 
 }
-  
