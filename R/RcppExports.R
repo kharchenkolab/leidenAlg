@@ -15,12 +15,11 @@
 #' @export
 #' @examples
 #' library(igraph)
-#' library(leidenAlg)
-#'
-#' g <- make_star(10)
-#' E(g)$weight <- seq(ecount(g))
-#' find_partition(g, E(g)$weight)
-#'
+#' edgelist <- as.vector(t(igraph::as_edgelist(exampleGraph, names=FALSE))) - 1
+#' edgelist_length <- length(edgelist)
+#' num_vertices <- length(igraph::V(exampleGraph)) - 1
+#' direction <- igraph::is_weighted(exampleGraph)
+#' find_partition_rcpp(edgelist, edgelist_length, num_vertices, direction, E(exampleGraph)$weight)
 find_partition_rcpp <- function(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution = 1.0, niter = 2L) {
     .Call('_leidenAlg_find_partition_rcpp', PACKAGE = 'leidenAlg', edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter)
 }
@@ -36,6 +35,13 @@ find_partition_rcpp <- function(edgelist, edgelist_length, num_vertices, directi
 #' @param niter Number of iterations that the algorithm should be run for (default=2)
 #' @param nrep Number of replicate starts with random number being updated. (default=10) The result with the best quality will be returned.
 #' @export
+#' @examples
+#' library(igraph)
+#' edgelist <- as.vector(t(igraph::as_edgelist(exampleGraph, names=FALSE))) - 1
+#' edgelist_length <- length(edgelist)
+#' num_vertices <- length(igraph::V(exampleGraph)) - 1
+#' direction <- igraph::is_weighted(exampleGraph)
+#' find_partition_with_rep_rcpp(edgelist, edgelist_length, num_vertices, direction, E(exampleGraph)$weight, nrep = 10)
 find_partition_with_rep_rcpp <- function(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution = 1.0, niter = 2L, nrep = 1L) {
     .Call('_leidenAlg_find_partition_with_rep_rcpp', PACKAGE = 'leidenAlg', edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter, nrep)
 }

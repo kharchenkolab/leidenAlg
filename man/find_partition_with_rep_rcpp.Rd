@@ -38,3 +38,11 @@ Finds the optimal partition using the Leiden algorithm
 \details{
 For notes of the graph object, refer to https://igraph.org/c/doc/igraph-Basic.html
 }
+\examples{
+library(igraph)
+edgelist <- as.vector(t(igraph::as_edgelist(exampleGraph, names=FALSE))) - 1
+edgelist_length <- length(edgelist)
+num_vertices <- length(igraph::V(exampleGraph)) - 1
+direction <- igraph::is_weighted(exampleGraph)
+find_partition_with_rep_rcpp(edgelist, edgelist_length, num_vertices, direction, E(exampleGraph)$weight, nrep = 10)
+}

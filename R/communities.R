@@ -52,10 +52,9 @@ leiden.community <- function(graph, resolution=1.0, n.iterations=2) {
 #'
 #' @param graph The igraph graph to define the partition on
 #' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
-#' @param resolution Integer resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
+#' @param resolution Integer resolution parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
 #' @param niter Number of iterations that the algorithm should be run for (default=2)
 #' @return A vector of membership values
-#' @rdname find_partition
 #' @examples
 #' library(igraph)
 #' library(leidenAlg)
@@ -76,9 +75,33 @@ find_partition <- function(graph, edge_weights, resolution=1.0, niter = 2.0) {
   find_partition_rcpp(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter)
 }
 
+#' Finds the optimal partition using the Leiden algorithm with replicate starts
+#' @description
+#' Performs Leiden algorithm for partitioning by \code{nrep} times. The random
+#' seed for the optimiser will be updated each time without pre-seeding. The
+#' final output comes from the run that generates the membership with the
+#' highest quality value. \code{\link{find_partition}} only performs one run.
+#' Users can run \code{set.seed()} before calling these function for
+#' reproducible result.
+#' @param graph The igraph graph to define the partition on
+#' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
+#' @param resolution Integer resolution parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
+#' @param niter Number of iterations that the algorithm should be run for (default=2)
 #' @param nrep Number of replicate starts with random number being updated. (default=10) The result with the best quality will be returned.
-#' @rdname find_partition
+#' @return A vector of membership values
 #' @export
+#' @examples
+#' library(igraph)
+#' # To run 10 replicates and get the partitioning with the highest quality
+#' membership <- find_partition_with_rep(exampleGraph, E(exampleGraph)$weight, nrep = 10)
+#' # To get reprodicible result for every function call, do `set.seed()` right before calling
+#' set.seed(233)
+#' res1 <- find_partition_with_rep(exampleGraph, E(exampleGraph)$weight, resolution = 2)
+#' res2 <- find_partition_with_rep(exampleGraph, E(exampleGraph)$weight, resolution = 2)
+#' set.seed(233)
+#' res3 <- find_partition_with_rep(exampleGraph, E(exampleGraph)$weight, resolution = 2)
+#' identical(res1, res2) # FALSE
+#' identical(res1, res3) # TRUE
 find_partition_with_rep <- function(graph, edge_weights, resolution=1.0, niter = 2.0, nrep = 10) {
     if (!is(graph, "igraph")) {
        stop("Input 'graph' must be a valid 'igraph' object")

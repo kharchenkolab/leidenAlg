@@ -39,10 +39,9 @@ For notes of the graph object, refer to https://igraph.org/c/doc/igraph-Basic.ht
 }
 \examples{
 library(igraph)
-library(leidenAlg)
-
-g <- make_star(10)
-E(g)$weight <- seq(ecount(g))
-find_partition(g, E(g)$weight)
-
+edgelist <- as.vector(t(igraph::as_edgelist(exampleGraph, names=FALSE))) - 1
+edgelist_length <- length(edgelist)
+num_vertices <- length(igraph::V(exampleGraph)) - 1
+direction <- igraph::is_weighted(exampleGraph)
+find_partition_rcpp(edgelist, edgelist_length, num_vertices, direction, E(exampleGraph)$weight)
 }
