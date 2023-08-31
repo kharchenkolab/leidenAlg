@@ -58,4 +58,5 @@ set.seed(233)
 res3 <- find_partition_with_rep(exampleGraph, E(exampleGraph)$weight, resolution = 2)
 identical(res1, res2) # FALSE (usually), as no seed as set
 identical(res1, res3) # TRUE (always), as set.seed() was used directly before the function call
+
 }
