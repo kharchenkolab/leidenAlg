@@ -30,3 +30,14 @@ test_that("find_partition() functionality", {
     membership = find_partition_with_rep(exampleGraph, igraph::E(exampleGraph)$weight, nrep = 5)
     expect_equal(length(membership), 100)
 })
+
+
+test_that("find_partition_with_rep() functionality", {
+	set.seed(42)
+    membership1 = find_partition_with_rep(exampleGraph, igraph::E(exampleGraph)$weight, nrep = 5)
+	set.seed(42)
+    membership2 = find_partition_with_rep(exampleGraph, igraph::E(exampleGraph)$weight, nrep = 5)
+    expect_true(identical(membership1, membership2))
+    expect_equal(length(membership1), 100)
+})
+

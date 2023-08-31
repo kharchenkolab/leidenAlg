@@ -106,12 +106,15 @@ std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist
 //' @param nrep Number of replicate starts with random number being updated. (default=10) The result with the best quality will be returned.
 //' @export
 //' @examples
+//'
 //' library(igraph)
+//'
 //' edgelist <- as.vector(t(igraph::as_edgelist(exampleGraph, names=FALSE))) - 1
 //' edgelist_length <- length(edgelist)
 //' num_vertices <- length(igraph::V(exampleGraph)) - 1
 //' direction <- igraph::is_weighted(exampleGraph)
 //' find_partition_with_rep_rcpp(edgelist, edgelist_length, num_vertices, direction, E(exampleGraph)$weight, nrep = 10)
+//'
 // [[Rcpp::export]]
 std::vector<size_t> find_partition_with_rep_rcpp(std::vector<int>& edgelist, int edgelist_length, int num_vertices, bool direction, std::vector<double>& edge_weights, double resolution=1.0, int niter=2, int nrep=1) {
 
