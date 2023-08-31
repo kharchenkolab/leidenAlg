@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.1.1] - 2023 August 31
+* Yichen Wang (U. Michigan) added function `find_partition_with_rep_rcpp()`
+
 ## [1.1.0] - 2023 July 1
 * Fixed bugs due to release of igraph verison 1.5.0. Refer to https://github.com/kharchenkolab/leidenAlg/issues/13
 
