@@ -9,18 +9,40 @@
 #' @param num_vertices integer The number of vertices in the graph
 #' @param direction boolean Whether the graph is directed or undirected
 #' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
-#' @param resolution Integer resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
+#' @param resolution Numeric scalar, resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
 #' @param niter Number of iterations that the algorithm should be run for (default=2)
 #' @return A vector of membership values
-#' @examples 
+#' @export
+#' @examples
 #' library(igraph)
-#' library(leidenAlg)
-#' 
-#' g <- make_star(10)
-#' E(g)$weight <- seq(ecount(g))
-#' find_partition(g, E(g)$weight)
-#' 
+#' edgelist <- as.vector(t(igraph::as_edgelist(exampleGraph, names=FALSE))) - 1
+#' edgelist_length <- length(edgelist)
+#' num_vertices <- length(igraph::V(exampleGraph)) - 1
+#' direction <- igraph::is_weighted(exampleGraph)
+#' find_partition_rcpp(edgelist, edgelist_length, num_vertices, direction, E(exampleGraph)$weight)
 find_partition_rcpp <- function(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution = 1.0, niter = 2L) {
     .Call('_leidenAlg_find_partition_rcpp', PACKAGE = 'leidenAlg', edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter)
+}
+
+#' Finds the optimal partition using the Leiden algorithm
+#' @details For notes of the graph object, refer to https://igraph.org/c/doc/igraph-Basic.html
+#' @param edgelist The graph edge list
+#' @param edgelist_length integer The length of the graph edge list
+#' @param num_vertices integer The number of vertices in the graph
+#' @param direction boolean Whether the graph is directed or undirected
+#' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
+#' @param resolution Numeric scalar, resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
+#' @param niter Number of iterations that the algorithm should be run for (default=2)
+#' @param nrep Number of replicate starts with random number being updated. (default=10) The result with the best quality will be returned.
+#' @export
+#' @examples
+#' library(igraph)
+#' edgelist <- as.vector(t(igraph::as_edgelist(exampleGraph, names=FALSE))) - 1
+#' edgelist_length <- length(edgelist)
+#' num_vertices <- length(igraph::V(exampleGraph)) - 1
+#' direction <- igraph::is_weighted(exampleGraph)
+#' find_partition_with_rep_rcpp(edgelist, edgelist_length, num_vertices, direction, E(exampleGraph)$weight, nrep = 10)
+find_partition_with_rep_rcpp <- function(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution = 1.0, niter = 2L, nrep = 1L) {
+    .Call('_leidenAlg_find_partition_with_rep_rcpp', PACKAGE = 'leidenAlg', edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter, nrep)
 }
 

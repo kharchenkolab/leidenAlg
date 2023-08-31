@@ -25,15 +25,15 @@ using namespace Rcpp;
 // https://stackoverflow.com/questions/10250438/using-stdvector-with-igraph
 
 void Stl_To_Igraph_vector_t(std::vector<int>& vectR, igraph_vector_t* v) {
-    size_t n = vectR.size();
+  size_t n = vectR.size();
 
-    /* Make sure that there is enough space for the items in v */
-    igraph_vector_resize(v, n);
+  /* Make sure that there is enough space for the items in v */
+  igraph_vector_resize(v, n);
 
-    /* Copy all the items */
-    for (size_t i = 0; i < n; i++) {
-        VECTOR(*v)[i] = vectR[i];
-    }
+  /* Copy all the items */
+  for (size_t i = 0; i < n; i++) {
+    VECTOR(*v)[i] = vectR[i];
+  }
 }
 
 
@@ -45,20 +45,20 @@ void Stl_To_Igraph_vector_t(std::vector<int>& vectR, igraph_vector_t* v) {
 //' @param num_vertices integer The number of vertices in the graph
 //' @param direction boolean Whether the graph is directed or undirected
 //' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
-//' @param resolution Integer resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
+//' @param resolution Numeric scalar, resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
 //' @param niter Number of iterations that the algorithm should be run for (default=2)
 //' @return A vector of membership values
-//' @examples 
+//' @export
+//' @examples
 //' library(igraph)
-//' library(leidenAlg)
-//' 
-//' g <- make_star(10)
-//' E(g)$weight <- seq(ecount(g))
-//' find_partition(g, E(g)$weight)
-//' 
+//' edgelist <- as.vector(t(igraph::as_edgelist(exampleGraph, names=FALSE))) - 1
+//' edgelist_length <- length(edgelist)
+//' num_vertices <- length(igraph::V(exampleGraph)) - 1
+//' direction <- igraph::is_weighted(exampleGraph)
+//' find_partition_rcpp(edgelist, edgelist_length, num_vertices, direction, E(exampleGraph)$weight)
 // [[Rcpp::export]]
 std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist_length, int num_vertices, bool direction, std::vector<double>& edge_weights, double resolution=1.0, int niter=2) {
-  
+
   igraph_t g;
   igraph_vector_t edges;
 
@@ -74,7 +74,7 @@ std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist
 
   Optimiser o( (int) (R::runif(0,1)*(double)RAND_MAX) );
   RBConfigurationVertexPartition p(&og,resolution);
-    //RBERVertexPartition p(&og,resolution);
+  //RBERVertexPartition p(&og,resolution);
   //o.find_partition(og,resolution);
   double val=1;
   int iter=0;
@@ -93,4 +93,58 @@ std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist
   //return(igraph_ecount(&g));
 
 }
-  
+
+//' Finds the optimal partition using the Leiden algorithm
+//' @details For notes of the graph object, refer to https://igraph.org/c/doc/igraph-Basic.html
+//' @param edgelist The graph edge list
+//' @param edgelist_length integer The length of the graph edge list
+//' @param num_vertices integer The number of vertices in the graph
+//' @param direction boolean Whether the graph is directed or undirected
+//' @param edge_weights Vector of edge weights. In weighted graphs, a real number is assigned to each (directed or undirected) edge. For an unweighted graph, this is set to 1. Refer to igraph, weighted graphs.
+//' @param resolution Numeric scalar, resoluiton parameter controlling communities detected (default=1.0) Higher resolutions lead to more communities, while lower resolutions lead to fewer communities.
+//' @param niter Number of iterations that the algorithm should be run for (default=2)
+//' @param nrep Number of replicate starts with random number being updated. (default=10) The result with the best quality will be returned.
+//' @export
+//' @examples
+//' library(igraph)
+//' edgelist <- as.vector(t(igraph::as_edgelist(exampleGraph, names=FALSE))) - 1
+//' edgelist_length <- length(edgelist)
+//' num_vertices <- length(igraph::V(exampleGraph)) - 1
+//' direction <- igraph::is_weighted(exampleGraph)
+//' find_partition_with_rep_rcpp(edgelist, edgelist_length, num_vertices, direction, E(exampleGraph)$weight, nrep = 10)
+// [[Rcpp::export]]
+std::vector<size_t> find_partition_with_rep_rcpp(std::vector<int>& edgelist, int edgelist_length, int num_vertices, bool direction, std::vector<double>& edge_weights, double resolution=1.0, int niter=2, int nrep=1) {
+
+  igraph_t g;
+  igraph_vector_t edges;
+  igraph_vector_init(&edges, edgelist_length);
+  Stl_To_Igraph_vector_t(edgelist, &edges);
+  igraph_create(&g, &edges, num_vertices, direction);
+
+  Graph og(&g, edge_weights);
+
+  double best_quality = -1;
+  std::vector<size_t> best_cluster;
+  for(int i=0; i<nrep; i++) {
+    Rcpp::checkUserInterrupt();
+    int seed = R::runif(0,1)*(double)RAND_MAX;
+    Optimiser o( (int) (R::runif(0,1)*(double)RAND_MAX) );
+    RBConfigurationVertexPartition p(&og,resolution);
+    double val=1;
+    int iter=0;
+    while(val>0 && (iter<niter || niter<0)) {
+      val=o.optimise_partition(&p);
+      iter++;
+    }
+    double q = p.quality(resolution);
+    if (q > best_quality) {
+      best_cluster = p.membership();
+      best_quality = q;
+    }
+  }
+
+  igraph_destroy(&g);
+  igraph_vector_destroy(&edges);
+
+  return(best_cluster);
+}

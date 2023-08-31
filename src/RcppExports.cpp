@@ -29,9 +29,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// find_partition_with_rep_rcpp
+std::vector<size_t> find_partition_with_rep_rcpp(std::vector<int>& edgelist, int edgelist_length, int num_vertices, bool direction, std::vector<double>& edge_weights, double resolution, int niter, int nrep);
+RcppExport SEXP _leidenAlg_find_partition_with_rep_rcpp(SEXP edgelistSEXP, SEXP edgelist_lengthSEXP, SEXP num_verticesSEXP, SEXP directionSEXP, SEXP edge_weightsSEXP, SEXP resolutionSEXP, SEXP niterSEXP, SEXP nrepSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<int>& >::type edgelist(edgelistSEXP);
+    Rcpp::traits::input_parameter< int >::type edgelist_length(edgelist_lengthSEXP);
+    Rcpp::traits::input_parameter< int >::type num_vertices(num_verticesSEXP);
+    Rcpp::traits::input_parameter< bool >::type direction(directionSEXP);
+    Rcpp::traits::input_parameter< std::vector<double>& >::type edge_weights(edge_weightsSEXP);
+    Rcpp::traits::input_parameter< double >::type resolution(resolutionSEXP);
+    Rcpp::traits::input_parameter< int >::type niter(niterSEXP);
+    Rcpp::traits::input_parameter< int >::type nrep(nrepSEXP);
+    rcpp_result_gen = Rcpp::wrap(find_partition_with_rep_rcpp(edgelist, edgelist_length, num_vertices, direction, edge_weights, resolution, niter, nrep));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_leidenAlg_find_partition_rcpp", (DL_FUNC) &_leidenAlg_find_partition_rcpp, 7},
+    {"_leidenAlg_find_partition_with_rep_rcpp", (DL_FUNC) &_leidenAlg_find_partition_with_rep_rcpp, 8},
     {NULL, NULL, 0}
 };
 
