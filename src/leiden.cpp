@@ -110,10 +110,11 @@ std::vector<size_t> find_partition_rcpp(std::vector<int>& edgelist, int edgelist
 //' library(igraph)
 //'
 //' edgelist <- as.vector(t(igraph::as_edgelist(exampleGraph, names=FALSE))) - 1
-//' edgelist_length <- length(edgelist)
-//' num_vertices <- length(igraph::V(exampleGraph)) - 1
-//' direction <- igraph::is_weighted(exampleGraph)
-//' find_partition_with_rep_rcpp(edgelist, edgelist_length, num_vertices, direction, E(exampleGraph)$weight, nrep = 10)
+//' edgelist_len <- length(edgelist)  ## The length of the graph edge list
+//' n_vertices <- length(igraph::V(exampleGraph)) - 1  ## The number of vertices in the graph
+//' direct <- igraph::is_weighted(exampleGraph)  ## Whether the graph is directed or undirected
+//' edge_weights <- E(exampleGraph)$weight
+//' find_partition_with_rep_rcpp(edgelist, edgelist_len, n_vertices, direct, edge_weights, nrep = 10)
 //'
 // [[Rcpp::export]]
 std::vector<size_t> find_partition_with_rep_rcpp(std::vector<int>& edgelist, int edgelist_length, int num_vertices, bool direction, std::vector<double>& edge_weights, double resolution=1.0, int niter=2, int nrep=1) {
