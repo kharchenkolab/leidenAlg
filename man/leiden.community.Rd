@@ -3,7 +3,7 @@
 \name{leiden.community}
 \alias{leiden.community}
 \title{Leiden algorithm community detection
-Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)}
+Detects communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)}
 \usage{
 leiden.community(graph, resolution = 1, n.iterations = 2)
 }
@@ -19,7 +19,7 @@ a fakeCommunities object that returns membership and dendrogram
 }
 \description{
 Leiden algorithm community detection
-Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
+Detects communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
 }
 \examples{
 leiden.community(exampleGraph)

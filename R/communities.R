@@ -19,7 +19,7 @@ NULL
 
 
 #' Leiden algorithm community detection
-#' Detect communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
+#' Detects communities using Leiden algorithm (implementation copied from https://github.com/vtraag/leidenalg)
 #'
 #' @param graph graph on which communities should be detected
 #' @param resolution resolution parameter (default=1.0) - higher numbers lead to more communities

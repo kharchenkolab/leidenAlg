@@ -70,7 +70,11 @@ brew install libxml2 glpk gmp
 
 ## Functions
 
-* `leiden.community()`: Detect communities using Leiden algorithm, output as `fakeCommunities` class for downstream use.
+* `find_partition()`: Finds the optimal partition using the Leiden algorithm.
+
+* `find_partition_with_rep()`: Finds the optimal partition using the Leiden algorithm with replicate starts
+
+* `leiden.community()`: Detects communities using Leiden algorithm, output as `fakeCommunities` class for downstream use.
 
 * `rleiden.community()`: Recursive leiden communities, constructs an n-step recursive clustering, using leiden.community.detection. Returns a `fakeCommunities` object that has methods membership(), without dendrogram.
 
@@ -78,11 +82,12 @@ brew install libxml2 glpk gmp
 
 * `membership()`: Returns pre-calculated membership factor from `"fakeCommunities"` object
 
+
 ## Citation
 If you find `leidenAlg` useful for your publication, please cite:
 
 ```
 Peter Kharchenko, Viktor Petukhov, Yichen Wang, and Evan Biederstedt (2023).
 leidenAlg: Implements the Leiden Algorithm via an R Interface. R
-package version 1.1.1. https://github.com/kharchenkolab/leidenAlg
+package version 1.1.2. https://github.com/kharchenkolab/leidenAlg
 ```
