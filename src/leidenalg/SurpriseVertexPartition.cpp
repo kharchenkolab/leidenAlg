@@ -1,6 +1,5 @@
 #include "SurpriseVertexPartition.h"
 
-#include "igraph.h"
 
 SurpriseVertexPartition::SurpriseVertexPartition(Graph* graph,
       vector<size_t> const& membership) :

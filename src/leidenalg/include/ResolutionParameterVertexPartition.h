@@ -2,9 +2,9 @@
 #define RESOLUTIONPARAMETERVERTEXPARTITION_H
 
 #include <MutableVertexPartition.h>
-
+extern "C" {
 #include "igraph.h"
-
+}
 
 class ResolutionParameterVertexPartition : public MutableVertexPartition
 {

@@ -1,5 +1,4 @@
 #include "RBConfigurationVertexPartition.h"
-#include "igraph.h"
 
 // Debug Mode implies checking assertions.
 #if defined(_GLIBCXX_ASSERTIONS)

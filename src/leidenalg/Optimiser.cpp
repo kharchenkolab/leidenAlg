@@ -1,5 +1,4 @@
 #include "Optimiser.h"
-#include "igraph.h"
 
 
 /****************************************************************************
@@ -43,7 +42,7 @@ Optimiser::Optimiser(int seed)
   this->refine_routine = Optimiser::MERGE_NODES;
   this->refine_partition = true;
   this->consider_empty_community = true;
-  
+
   igraph_rng_init(&rng, &igraph_rngtype_mt19937);
   igraph_rng_seed(&rng, seed);
 }

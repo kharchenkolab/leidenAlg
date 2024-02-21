@@ -2,8 +2,9 @@
 #define MODULARITYVERTEXPARTITION_H
 
 #include <MutableVertexPartition.h>
+extern "C" {
 #include "igraph.h"
-
+}
 
 class ModularityVertexPartition : public MutableVertexPartition
 {

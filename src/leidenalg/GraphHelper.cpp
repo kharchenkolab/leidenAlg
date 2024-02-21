@@ -1,8 +1,5 @@
 #include "GraphHelper.h"
 
-#include "igraph.h"
-
-
 #ifdef DEBUG
   using std::cerr;
   using std::endl;

@@ -2,8 +2,9 @@
 #define LINEARRESOLUTIONPARAMETERVERTEXPARTITION_H
 
 #include <ResolutionParameterVertexPartition.h>
+extern "C" {
 #include "igraph.h"
-
+}
 class LinearResolutionParameterVertexPartition : public ResolutionParameterVertexPartition
 {
   public:

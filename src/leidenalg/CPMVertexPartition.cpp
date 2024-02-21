@@ -1,6 +1,4 @@
 #include "CPMVertexPartition.h"
-#include "igraph.h"
-
 CPMVertexPartition::CPMVertexPartition(Graph* graph,
       vector<size_t> membership, double resolution_parameter) :
         LinearResolutionParameterVertexPartition(graph,

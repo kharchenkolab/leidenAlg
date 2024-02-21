@@ -1,5 +1,4 @@
 #include "LinearResolutionParameterVertexPartition.h"
-#include "igraph.h"
 
 
 LinearResolutionParameterVertexPartition::LinearResolutionParameterVertexPartition(Graph* graph,

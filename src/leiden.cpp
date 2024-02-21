@@ -2,14 +2,13 @@
 #include <R.h>
 #include <Rdefines.h>
 #include <vector>
+extern "C"{
 #include "igraph.h"
-#include "rigraph/include/igraph.h"
-#include "rigraph/include/igraph_constructors.h"
+}
 #include "leidenalg/include/GraphHelper.h"
 #include "leidenalg/include/Optimiser.h"
 #include "leidenalg/include/RBERVertexPartition.h"
 #include "leidenalg/include/RBConfigurationVertexPartition.h"
-#include "rigraph/include/igraph_constructors.h"
 
 using namespace std;
 using namespace Rcpp;

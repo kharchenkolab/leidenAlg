@@ -7,8 +7,9 @@
 #include <set>
 #include <utility>
 #include <algorithm>
+extern "C" {
 #include "igraph.h"
-
+}
 
 using std::string;
 using std::map;

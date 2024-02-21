@@ -2,9 +2,9 @@
 #define RBERVERTEXPARTITION_H
 
 #include <LinearResolutionParameterVertexPartition.h>
-
+extern "C" {
 #include "igraph.h"
-
+}
 
 class RBERVertexPartition : public LinearResolutionParameterVertexPartition
 {

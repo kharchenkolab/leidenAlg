@@ -2,9 +2,9 @@
 #define SURPRISEVERTEXPARTITION_H
 
 #include "MutableVertexPartition.h"
-
+extern "C" {
 #include "igraph.h"
-
+}
 
 #include <iostream>
   using std::cerr;

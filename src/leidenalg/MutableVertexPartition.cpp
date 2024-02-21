@@ -1,6 +1,5 @@
 #include "MutableVertexPartition.h"
 
-#include "igraph.h"
 
 #ifdef DEBUG
   using std::cerr;

@@ -1,7 +1,8 @@
 #ifndef GRAPHHELPER_INCLUDED
 #define GRAPHHELPER_INCLUDED
-
+extern "C" {
 #include "igraph.h"
+}
 #include <vector>
 #include <set>
 #include <exception>

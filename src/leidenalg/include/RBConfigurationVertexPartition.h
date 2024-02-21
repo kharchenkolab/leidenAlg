@@ -2,9 +2,9 @@
 #define RBCONFIGURATIONVERTEXPARTITION_H
 
 #include "LinearResolutionParameterVertexPartition.h"
-
+extern "C" {
 #include "igraph.h"
-
+}
 
 class RBConfigurationVertexPartition : public LinearResolutionParameterVertexPartition
 {
