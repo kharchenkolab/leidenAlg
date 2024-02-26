@@ -131,7 +131,7 @@ std::vector<size_t> find_partition_with_rep_rcpp(std::vector<int>& edgelist, int
   std::vector<size_t> best_cluster;
   for(int i=0; i<nrep; i++) {
     Rcpp::checkUserInterrupt();
-    int seed = R::runif(0,1)*(double)RAND_MAX;
+    // unused variable, int seed = R::runif(0,1)*(double)RAND_MAX;
     Optimiser o( (int) (R::runif(0,1)*(double)RAND_MAX) );
     RBConfigurationVertexPartition p(&og,resolution);
     double val=1;
