@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.3] - 2024 February 27
+* Fixed Makevars file
+* Fix "format string is not a string literal" error, '-Wformat-security' warning
+
 ## [1.1.2] - 2023 September 3
 * README changes, documentation changes
 
