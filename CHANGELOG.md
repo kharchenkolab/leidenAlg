@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.4] - 2024 October 17
+* Update rigraph/src/vendor/arpack Fortran files
+* Fix 'Obsolescent feature' warning associated with Fortan, CRAN warning, cf https://fortranwiki.org/fortran/show/Modernizing+Old+Fortran
+
 ## [1.1.3] - 2024 February 27
 * Fixed Makevars file
 * Fix "format string is not a string literal" error, '-Wformat-security' warning
