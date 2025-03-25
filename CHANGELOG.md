@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.1.5] - 2025 March 25
+* Removed any `std::cerr` from leidenalg C++ source
+
 ## [1.1.4] - 2024 October 17
 * Update rigraph/src/vendor/arpack Fortran files
 * Fix 'Obsolescent feature' warning associated with Fortan, CRAN warning, cf https://fortranwiki.org/fortran/show/Modernizing+Old+Fortran
