@@ -1,6 +1,7 @@
 #include "MutableVertexPartition.h"
 
 #include "igraph.h"
+#include <Rcpp.h>
 
 //#ifdef DEBUG
 //  using std::cerr;
@@ -37,7 +38,7 @@ MutableVertexPartition::MutableVertexPartition(Graph* graph,
   this->graph = graph;
   if (membership.size() != graph->vcount())
   {
-    throw Exception("Membership vector has incorrect size.");
+    Rcpp::Rcerr << "Membership vector has incorrect size." << "\n";
   }
   this->_membership = membership;
   this->init_admin();
@@ -350,7 +351,7 @@ size_t MutableVertexPartition::add_empty_community()
   this->_n_communities = this->_n_communities + 1;
 
   if (this->_n_communities > this->graph->vcount())
-    throw Exception("There cannot be more communities than nodes, so there must already be an empty community.");
+    Rcpp::Rcerr << "There cannot be more communities than nodes, so there must already be an empty community." << "\n";
 
   size_t new_comm = this->_n_communities - 1;
 
@@ -390,7 +391,7 @@ void MutableVertexPartition::move_node(size_t v,size_t new_comm)
     }
     else
     {
-      throw Exception("Cannot add new communities beyond the number of nodes.");
+      Rcpp::Rcerr << "Cannot add new communities beyond the number of nodes." << "\n";
     }
   }
 
@@ -526,7 +527,7 @@ void MutableVertexPartition::move_node(size_t v,size_t new_comm)
         //#endif
       }
       else
-        throw Exception("Incorrect mode for updating the admin.");
+        Rcpp::Rcerr << "Incorrect mode for updating the admin." << "\n";
       // Get internal weight (if it is an internal edge)
       double int_weight = w/(this->graph->is_directed() ? 1.0 : 2.0)/( u == v ? 2.0 : 1.0);
       // If it is an internal edge in the old community
@@ -773,7 +774,7 @@ vector<size_t> const& MutableVertexPartition::get_neigh_comms(size_t v, igraph_n
       }
       return this->_cached_neigh_comms_all;
   }
-  throw Exception("Problem obtaining neighbour communities, invalid mode.");
+  Rcpp::Rcerr << "Cannot add new communities beyond the number of nodes." << "\n";
 }
 
 set<size_t> MutableVertexPartition::get_neigh_comms(size_t v, igraph_neimode_t mode, vector<size_t> const& constrained_membership)

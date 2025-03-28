@@ -4,8 +4,9 @@
 #include "igraph.h"
 #include <vector>
 #include <set>
-#include <exception>
+//#include <exception>
 #include <queue>
+#include <Rcpp.h>
 
 // #ifdef DEBUG
 // #include <iostream>
@@ -41,6 +42,7 @@ template <class T> T sum(vector<T> vec)
   return sum_of_elems;
 };
 
+/*
 class Exception : public std::exception
 {
   public:
@@ -58,6 +60,7 @@ class Exception : public std::exception
     const char* str;
 
 };
+*/
 
 inline size_t get_random_int(size_t from, size_t to, igraph_rng_t* rng)
 {
@@ -123,10 +126,10 @@ class Graph
     // Get weight of edge based on attribute (or 1.0 if there is none).
     inline double edge_weight(size_t e)
     {
-      #ifdef DEBUG
-      if (e > this->_edge_weights.size())
-        throw Exception("Edges outside of range of edge weights.");
-      #endif
+      //#ifdef DEBUG
+      //if (e > this->_edge_weights.size())
+      //  throw Exception("Edges outside of range of edge weights.");
+      //#endif
       return this->_edge_weights[e];
     };
 
@@ -156,7 +159,8 @@ class Graph
       else if (mode == IGRAPH_ALL)
         return this->_degree_all[v];
       else
-        throw Exception("Incorrect mode specified.");
+        Rcpp::Rcerr << "Incorrect mode specified." << "\n";
+       // throw Exception("Incorrect mode specified.");
     };
 
     inline double strength(size_t v, igraph_neimode_t mode)
@@ -166,7 +170,8 @@ class Graph
       else if (mode == IGRAPH_OUT)
         return this->_strength_out[v];
       else
-        throw Exception("Incorrect mode specified.");
+        Rcpp::Rcerr << "Incorrect mode specified." << "\n";
+        //throw Exception("Incorrect mode specified.");
     };
 
   protected:

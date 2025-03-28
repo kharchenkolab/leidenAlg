@@ -1,6 +1,7 @@
 #include "Optimiser.h"
 #include "igraph.h"
 
+#include <Rcpp.h>
 
 /****************************************************************************
   Create a new Optimiser object
@@ -89,7 +90,7 @@ double Optimiser::optimise_partition(vector<MutableVertexPartition*> partitions,
   // Number of multiplex layers
   size_t nb_layers = partitions.size();
   if (nb_layers == 0)
-    throw Exception("No partitions provided.");
+    Rcpp::Rcerr << "No partitions provided." << "\n";
 
   // Get graphs for all layers
   vector<Graph*> graphs(nb_layers);
@@ -105,7 +106,7 @@ double Optimiser::optimise_partition(vector<MutableVertexPartition*> partitions,
   // same node (but then in a different layer).
   for (size_t layer = 0; layer < nb_layers; layer++)
     if (graphs[layer]->vcount() != n)
-      throw Exception("Number of nodes are not equal for all graphs.");
+      Rcpp::Rcerr << "Number of nodes are not equal for all graphs." << "\n";
 
   // Initialize the vector of the collapsed graphs for all layers
   vector<Graph*> collapsed_graphs(nb_layers);
@@ -434,7 +435,7 @@ double Optimiser::move_nodes(vector<MutableVertexPartition*> partitions, vector<
 
   for (size_t layer = 0; layer < nb_layers; layer++)
     if (graphs[layer]->vcount() != n)
-      throw Exception("Number of nodes are not equal for all graphs.");
+      Rcpp::Rcerr << "Number of nodes are not equal for all graphs." << "\n";
   // Number of moved nodes during one loop
   size_t nb_moves = 0;
 
@@ -682,7 +683,7 @@ double Optimiser::merge_nodes(vector<MutableVertexPartition*> partitions, vector
 
   for (size_t layer = 0; layer < nb_layers; layer++)
     if (graphs[layer]->vcount() != n)
-      throw Exception("Number of nodes are not equal for all graphs.");
+      Rcpp::Rcerr << "Number of nodes are not equal for all graphs.." << "\n";
 
   // Establish vertex order
   // We normally initialize the normal vertex order
@@ -867,7 +868,7 @@ double Optimiser::move_nodes_constrained(vector<MutableVertexPartition*> partiti
 
   for (size_t layer = 0; layer < nb_layers; layer++)
     if (graphs[layer]->vcount() != n)
-      throw Exception("Number of nodes are not equal for all graphs.");
+      Rcpp::Rcerr << "Number of nodes are not equal for all graphs." << "\n";
   // Number of moved nodes during one loop
   size_t nb_moves = 0;
 
@@ -1093,7 +1094,7 @@ double Optimiser::merge_nodes_constrained(vector<MutableVertexPartition*> partit
 
   for (size_t layer = 0; layer < nb_layers; layer++)
     if (graphs[layer]->vcount() != n)
-      throw Exception("Number of nodes are not equal for all graphs.");
+      Rcpp::Rcerr << "Number of nodes are not equal for all graphs." << "\n";
 
   // Establish vertex order
   // We normally initialize the normal vertex order

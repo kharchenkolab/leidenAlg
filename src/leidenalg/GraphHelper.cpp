@@ -1,6 +1,7 @@
 #include "GraphHelper.h"
 
 #include "igraph.h"
+#include <Rcpp.h>
 
 
 //#ifdef DEBUG
@@ -84,16 +85,16 @@ Graph::Graph(igraph_t* graph,
   this->_remove_graph = false;
 
   if (edge_weights.size() != this->ecount())
-    throw Exception("Edge weights vector inconsistent length with the edge count of the graph.");
+    Rcpp::Rcerr << "Edge weights vector inconsistent length with the edge count of the graph." << "\n";
   this->_edge_weights = edge_weights;
   this->_is_weighted = true;
 
   if (node_sizes.size() != this->vcount())
-    throw Exception("Node size vector inconsistent length with the vertex count of the graph.");
+    Rcpp::Rcerr << "Node size vector inconsistent length with the vertex count of the graph." << "\n";
   this->_node_sizes = node_sizes;
 
   if (node_self_weights.size() != this->vcount())
-    throw Exception("Node self weights vector inconsistent length with the vertex count of the graph.");
+    Rcpp::Rcerr << "Node self weights vector inconsistent length with the vertex count of the graph." << "\n";    
   this->_node_self_weights = node_self_weights;
 
   this->_correct_self_loops = correct_self_loops;
@@ -109,12 +110,12 @@ Graph::Graph(igraph_t* graph,
   this->_remove_graph = false;
 
   if (edge_weights.size() != this->ecount())
-    throw Exception("Edge weights vector inconsistent length with the edge count of the graph.");
+    Rcpp::Rcerr << "Edge weights vector inconsistent length with the edge count of the graph." << "\n";
   this->_edge_weights = edge_weights;
   this->_is_weighted = true;
 
   if (node_sizes.size() != this->vcount())
-    throw Exception("Node size vector inconsistent length with the vertex count of the graph.");
+    Rcpp::Rcerr << "Edge weights vector inconsistent length with the edge count of the graph." << "\n";
   this->_node_sizes = node_sizes;
 
   this->_correct_self_loops = this->has_self_loops();
@@ -131,12 +132,12 @@ Graph::Graph(igraph_t* graph,
   this->_remove_graph = false;
 
   if (edge_weights.size() != this->ecount())
-    throw Exception("Edge weights vector inconsistent length with the edge count of the graph.");
+    Rcpp::Rcerr << "Edge weights vector inconsistent length with the edge count of the graph." << "\n";
   this->_edge_weights = edge_weights;
   this->_is_weighted = true;
 
   if (node_sizes.size() != this->vcount())
-    throw Exception("Node size vector inconsistent length with the vertex count of the graph.");
+    Rcpp::Rcerr << "Edge weights vector inconsistent length with the edge count of the graph." << "\n";
   this->_node_sizes = node_sizes;
 
   this->_correct_self_loops = correct_self_loops;
@@ -151,12 +152,12 @@ Graph::Graph(igraph_t* graph,
   this->_graph = graph;
   this->_remove_graph = false;
   if (edge_weights.size() != this->ecount())
-    throw Exception("Edge weights vector inconsistent length with the edge count of the graph.");
+    Rcpp::Rcerr << "Edge weights vector inconsistent length with the edge count of the graph." << "\n";
   this->_edge_weights = edge_weights;
   this->_is_weighted = true;
 
   if (node_sizes.size() != this->vcount())
-    throw Exception("Node size vector inconsistent length with the vertex count of the graph.");
+    Rcpp::Rcerr << "Edge weights vector inconsistent length with the edge count of the graph." << "\n";
   this->_node_sizes = node_sizes;
 
   this->_correct_self_loops = this->has_self_loops();
@@ -171,7 +172,7 @@ Graph::Graph(igraph_t* graph, vector<double> const& edge_weights, int correct_se
   this->_remove_graph = false;
   this->_correct_self_loops = correct_self_loops;
   if (edge_weights.size() != this->ecount())
-    throw Exception("Edge weights vector inconsistent length with the edge count of the graph.");
+    Rcpp::Rcerr << "Edge weights vector inconsistent length with the edge count of the graph." << "\n";
   this->_edge_weights = edge_weights;
   this->_is_weighted = true;
   this->set_default_node_size();
@@ -184,7 +185,7 @@ Graph::Graph(igraph_t* graph, vector<double> const& edge_weights)
   this->_graph = graph;
   this->_remove_graph = false;
   if (edge_weights.size() != this->ecount())
-    throw Exception("Edge weights vector inconsistent length with the edge count of the graph.");
+    Rcpp::Rcerr << "Edge weights vector inconsistent length with the edge count of the graph." << "\n";
   this->_edge_weights = edge_weights;
   this->_is_weighted = true;
 
@@ -202,7 +203,7 @@ Graph::Graph(igraph_t* graph, vector<size_t> const& node_sizes, int correct_self
   this->_correct_self_loops = correct_self_loops;
 
   if (node_sizes.size() != this->vcount())
-    throw Exception("Node size vector inconsistent length with the vertex count of the graph.");
+    Rcpp::Rcerr << "Node size vector inconsistent length with the vertex count of the graph." << "\n";
   this->_node_sizes = node_sizes;
 
   this->set_default_edge_weight();
@@ -219,7 +220,7 @@ Graph::Graph(igraph_t* graph, vector<size_t> const& node_sizes)
   this->_is_weighted = false;
 
   if (node_sizes.size() != this->vcount())
-    throw Exception("Node size vector inconsistent length with the vertex count of the graph.");
+    Rcpp::Rcerr << "Node size vector inconsistent length with the vertex count of the graph." << "\n";
 
   this->_node_sizes = node_sizes;
 
@@ -536,7 +537,7 @@ vector<size_t> const& Graph::get_neighbour_edges(size_t v, igraph_neimode_t mode
       }
       return this->_cached_neigh_edges_all;
   }
-  throw Exception("Incorrect model for getting neighbour edges.");
+  Rcpp::Rcerr << "Incorrect model for getting neighbour edges." << "\n";
 }
 
 pair<size_t, size_t> Graph::get_endpoints(size_t e)
@@ -623,7 +624,7 @@ vector< size_t > const& Graph::get_neighbours(size_t v, igraph_neimode_t mode)
       //#endif
       return this->_cached_neighs_all;
   }
-  throw Exception("Invalid mode for getting neighbours.");
+  Rcpp::Rcerr << "Invalid mode for getting neighbours." << "\n";
 }
 
 /********************************************************************************
@@ -635,7 +636,7 @@ size_t Graph::get_random_neighbour(size_t v, igraph_neimode_t mode, igraph_rng_t
   size_t rand_neigh = -1;
 
   if (this->degree(v, mode) <= 0)
-    throw Exception("Cannot select a random neighbour for an isolated node.");
+    Rcpp::Rcerr << "Cannot select a random neighbour for an isolated node." << "\n";
 
   if (igraph_is_directed(this->_graph) && mode != IGRAPH_ALL)
   {
@@ -765,7 +766,7 @@ Graph* Graph::collapse_graph(MutableVertexPartition* partition)
       collapsed_weights[e_idx] = w;
       total_collapsed_weight += w;
       if (e_idx >= m_collapsed)
-        throw Exception("Maximum number of possible edges exceeded.");
+        Rcpp::Rcerr << "Maximum number of possible edges exceeded." << "\n";
       // next edge
       e_idx += 1;
     }
@@ -777,7 +778,7 @@ Graph* Graph::collapse_graph(MutableVertexPartition* partition)
   igraph_vector_destroy(&edges);
 
   if ((size_t) igraph_vcount(graph) != partition->n_communities())
-    throw Exception("Something went wrong with collapsing the graph.");
+    Rcpp::Rcerr << "Something went wrong with collapsing the graph." << "\n";
 
   // Calculate new node sizes
   vector<size_t> csizes(n_collapsed, 0);
