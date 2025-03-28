@@ -1,3 +1,5 @@
+#include <Rcpp.h>
+
 #ifndef GRAPHHELPER_INCLUDED
 #define GRAPHHELPER_INCLUDED
 
@@ -6,7 +8,6 @@
 #include <set>
 //#include <exception>
 #include <queue>
-#include <Rcpp.h>
 
 // #ifdef DEBUG
 // #include <iostream>
@@ -158,8 +159,9 @@ class Graph
         return this->_degree_out[v];
       else if (mode == IGRAPH_ALL)
         return this->_degree_all[v];
-      else
-        Rcpp::Rcerr << "Incorrect mode specified." << "\n";
+     // else
+     //   Rcpp::Rcerr << "Incorrect mode specified." << "\n";
+     //   exit(0);
        // throw Exception("Incorrect mode specified.");
     };
 
@@ -169,8 +171,9 @@ class Graph
         return this->_strength_in[v];
       else if (mode == IGRAPH_OUT)
         return this->_strength_out[v];
-      else
-        Rcpp::Rcerr << "Incorrect mode specified." << "\n";
+      //else
+      //  Rcpp::Rcerr << "Incorrect mode specified." << "\n";
+      //  exit(0);
         //throw Exception("Incorrect mode specified.");
     };
 

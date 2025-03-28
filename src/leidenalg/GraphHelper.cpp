@@ -1,7 +1,6 @@
 #include "GraphHelper.h"
 
 #include "igraph.h"
-#include <Rcpp.h>
 
 
 //#ifdef DEBUG

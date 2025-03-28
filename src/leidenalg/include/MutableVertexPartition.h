@@ -65,14 +65,14 @@ class MutableVertexPartition
     size_t n_communities();
 
     void move_node(size_t v,size_t new_comm);
-    //virtual double diff_move(size_t v, size_t new_comm)
-    //{
-    //  throw Exception("Function not implemented. This should be implented in a derived class, since the base class does not implement a specific method.");
-    //};
-    //virtual double quality()
-    //{
-    //  throw Exception("Function not implemented. This should be implented in a derived class, since the base class does not implement a specific method.");
-    //};
+    virtual double diff_move(size_t v, size_t new_comm)
+    {
+      //throw Exception("Function not implemented. This should be implented in a derived class, since the base class does not implement a specific method.");
+    };
+    virtual double quality()
+    {
+      //throw Exception("Function not implemented. This should be implented in a derived class, since the base class does not implement a specific method.");
+    };
 
     inline Graph* get_graph() { return this->graph; };
 

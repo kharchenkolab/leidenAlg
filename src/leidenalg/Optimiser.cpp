@@ -1,7 +1,6 @@
 #include "Optimiser.h"
 #include "igraph.h"
 
-#include <Rcpp.h>
 
 /****************************************************************************
   Create a new Optimiser object

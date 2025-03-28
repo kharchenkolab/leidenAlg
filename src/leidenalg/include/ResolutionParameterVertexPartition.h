@@ -24,10 +24,10 @@ class ResolutionParameterVertexPartition : public MutableVertexPartition
       return this->quality(this->resolution_parameter);
     };
 
-    //virtual double quality(double resolution_parameter)
-    //{
-    //  throw Exception("Function not implemented. This should be implented in a derived class, since the base class does not implement a specific method.");
-    //};
+    virtual double quality(double resolution_parameter)
+    {
+      Rcpp::Rcerr << "Function not implemented. This should be implented in a derived class, since the base class does not implement a specific method." << "\n";
+    };
 
   private:
 
