@@ -1,7 +1,7 @@
 # Changelog
 
-## [1.1.5] - 2025 March 25
-* Removed any `std::cerr` from leidenalg C++ source
+## [1.1.5] - 2025 March 28
+* Removed any used of the `std::cerr` and `std::exception` libraries from leidenalg C++ source
 
 ## [1.1.4] - 2024 October 17
 * Update rigraph/src/vendor/arpack Fortran files
