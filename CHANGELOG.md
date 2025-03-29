@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.1.5] - 2025 March 25
+## [1.1.5] - 2025 March 28
 * Removed any `std::cerr` from leidenalg C++ source
 
 ## [1.1.4] - 2024 October 17
