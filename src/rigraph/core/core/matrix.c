@@ -63,6 +63,7 @@
 #ifndef USING_R
 int igraph_matrix_complex_print(const igraph_matrix_complex_t *m) {
 
+    char spacechar = ' ';
     long int nr = igraph_matrix_complex_nrow(m);
     long int nc = igraph_matrix_complex_ncol(m);
     long int i, j;
@@ -70,7 +71,7 @@ int igraph_matrix_complex_print(const igraph_matrix_complex_t *m) {
         for (j = 0; j < nc; j++) {
             igraph_complex_t z = MATRIX(*m, i, j);
             if (j != 0) {
-                putchar(' ');
+                printf("%c", spacechar);
             }
             printf("%g%+gi", IGRAPH_REAL(z), IGRAPH_IMAG(z));
         }

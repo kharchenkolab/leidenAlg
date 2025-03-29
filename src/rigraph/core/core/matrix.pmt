@@ -1583,13 +1583,14 @@ int FUNCTION(igraph_matrix, select_cols)(const TYPE(igraph_matrix) *m,
 #ifndef USING_R
 int FUNCTION(igraph_matrix, print)(const TYPE(igraph_matrix) *m) {
 
+    char spacechar = ' ';
     long int nr = FUNCTION(igraph_matrix, nrow)(m);
     long int nc = FUNCTION(igraph_matrix, ncol)(m);
     long int i, j;
     for (i = 0; i < nr; i++) {
         for (j = 0; j < nc; j++) {
             if (j != 0) {
-                putchar(' ');
+                printf("%c", spacechar);
             }
             printf(OUT_FORMAT, MATRIX(*m, i, j));
         }

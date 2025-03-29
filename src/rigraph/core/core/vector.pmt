@@ -2863,7 +2863,8 @@ int FUNCTION(igraph_vector, print)(const TYPE(igraph_vector) *v) {
     }
     for (i = 1; i < n; i++) {
 #ifdef PRINTFUNC
-        putchar(' '); PRINTFUNC(VECTOR(*v)[i]);
+        char spacechar = ' ';
+        printf("%c", spacechar); PRINTFUNC(VECTOR(*v)[i]);
 #else
         printf(" " OUT_FORMAT, VECTOR(*v)[i]);
 #endif
@@ -2879,7 +2880,9 @@ int FUNCTION(igraph_vector, printf)(const TYPE(igraph_vector) *v,
         printf(format, VECTOR(*v)[0]);
     }
     for (i = 1; i < n; i++) {
-        putchar(' '); printf(format, VECTOR(*v)[i]);
+        char spacechar = ' ';
+        printf("%c", spacechar); 
+        printf(format, VECTOR(*v)[i]);
     }
     printf("\n");
     return 0;
