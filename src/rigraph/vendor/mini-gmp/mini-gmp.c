@@ -282,7 +282,7 @@ gmp_die (const char *msg)
 {
   /*
   fprintf (stderr, "%s\n", msg);
-  abort();
+  ///abort();
   */
   IGRAPH_FATAL(msg);
 }
