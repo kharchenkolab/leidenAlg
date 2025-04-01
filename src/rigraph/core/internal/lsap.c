@@ -411,7 +411,7 @@ int ap_datamatrix(AP *p, double **m) {
 void ap_error(char *message)
 {
     fprintf(stderr,"%s\n",message);
-    exit(1);
+    // exit(1);
 }
 */
 

@@ -137,7 +137,7 @@ graph_molloy_opt::graph_molloy_opt(degree_sequence &degs) {
 //       while(skip_int(b)) {
 //         if(sscanf(b,"%d",&j)!=1) {
 //           fprintf(stderr,"\nParse error at line %d, col %d : integer expected\n",line,int(b-buff));
-//           exit(6);
+//           ///exit(6);
 //         }
 //         *(neigh[i]++) = j;
 //       }

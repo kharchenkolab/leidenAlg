@@ -1,5 +1,6 @@
 #include "Optimiser.h"
 #include "igraph.h"
+#include <R_ext/Random.h>
 
 
 /****************************************************************************
@@ -32,7 +33,10 @@ Optimiser::Optimiser()
   this->consider_empty_community = true;
 
   igraph_rng_init(&rng, &igraph_rngtype_mt19937);
-  igraph_rng_seed(&rng, rand());
+  GetRNGstate();
+  igraph_rng_seed(&rng, (int) (RAND_MAX * unif_rand()));
+  PutRNGstate();
+  //igraph_rng_seed(&rng, rand());
 }
 
 Optimiser::Optimiser(int seed)

@@ -2,6 +2,8 @@
 
 ## [1.1.5] - 2025 March 28
 * Removed any `std::cerr` from leidenalg C++ source
+* Removed other symbols like putchar(), exit(), etc. in the igraph source
+* Used R internal random number generator for the leiden algorithm C++ code
 
 ## [1.1.4] - 2024 October 17
 * Update rigraph/src/vendor/arpack Fortran files

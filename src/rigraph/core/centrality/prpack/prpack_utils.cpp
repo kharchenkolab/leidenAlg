@@ -44,7 +44,7 @@ void prpack_utils::validate(const bool condition, const string& msg) {
         igraph_error("Internal error in PRPACK", IGRAPH_FILE_BASENAME, __LINE__,
 	             IGRAPH_EINTERNAL);
 #else
-        exit(-1);
+        // edited 2025 for CRAN exit(-1);
 #endif
     }
 }

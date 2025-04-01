@@ -817,7 +817,7 @@ graph_molloy_hash::graph_molloy_hash(FILE *f) {
       while(skip_int(b)) {
         if(sscanf(b,"%d",&j)!=1) {
           fprintf(stderr,"\nParse error at line %d, col %d : integer expected\n",line,int(b-buff));
-          exit(6);
+          ///exit(6);
         }
         if(i<j) add_edge(i,j,dd.seq());
       }
