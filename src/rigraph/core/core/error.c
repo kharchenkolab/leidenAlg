@@ -65,8 +65,8 @@
 static IGRAPH_NORETURN void igraph_abort() {
 #ifndef USING_R
 #ifdef IGRAPH_SANITIZER_AVAILABLE
-    fprintf(stderr, "\nStack trace:\n");
-    __sanitizer_print_stack_trace();
+//    fprintf(stderr, "\nStack trace:\n");
+//    __sanitizer_print_stack_trace();
 #endif
     //abort();
 #else
@@ -193,8 +193,8 @@ int igraph_errorvf(const char *reason, const char *file, int line,
 #ifndef USING_R
 void igraph_error_handler_abort(const char *reason, const char *file,
                                 int line, int igraph_errno) {
-    fprintf(stderr, "Error at %s:%i : %s - %s.\n",
-            file, line, reason, igraph_strerror(igraph_errno));
+//    fprintf(stderr, "Error at %s:%i : %s - %s.\n",
+//            file, line, reason, igraph_strerror(igraph_errno));
     igraph_abort();
 }
 #endif
@@ -212,8 +212,8 @@ void igraph_error_handler_ignore(const char *reason, const char *file,
 #ifndef USING_R
 void igraph_error_handler_printignore(const char *reason, const char *file,
                                       int line, int igraph_errno) {
-    fprintf(stderr, "Error at %s:%i : %s - %s.\n",
-            file, line, reason, igraph_strerror(igraph_errno));
+//    fprintf(stderr, "Error at %s:%i : %s - %s.\n",
+//            file, line, reason, igraph_strerror(igraph_errno));
     IGRAPH_FINALLY_FREE();
 }
 #endif
@@ -312,7 +312,7 @@ void igraph_warning_handler_ignore(const char *reason, const char *file,
 void igraph_warning_handler_print(const char *reason, const char *file,
                                   int line, int igraph_errno) {
     IGRAPH_UNUSED(igraph_errno);
-    fprintf(stderr, "Warning at %s:%i : %s\n", file, line, reason);
+//    fprintf(stderr, "Warning at %s:%i : %s\n", file, line, reason);
 }
 #endif
 
@@ -358,7 +358,7 @@ igraph_fatal_handler_t *igraph_set_fatal_handler(igraph_fatal_handler_t *new_han
 
 #ifndef USING_R
 void igraph_fatal_handler_abort(const char *reason, const char *file, int line) {
-    fprintf(stderr, "Fatal error at %s:%i : %s\n", file, line, reason);
+//    fprintf(stderr, "Fatal error at %s:%i : %s\n", file, line, reason);
     igraph_abort();
 }
 #endif

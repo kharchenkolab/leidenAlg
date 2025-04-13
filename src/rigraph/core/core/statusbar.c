@@ -105,7 +105,7 @@ int igraph_statusf(const char *message, void *data, ...) {
 
 int igraph_status_handler_stderr(const char *message, void *data) {
     IGRAPH_UNUSED(data);
-    fputs(message, stderr);
+    //fputs(message, stderr);
     return 0;
 }
 #endif
