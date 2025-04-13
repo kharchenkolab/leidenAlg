@@ -71,11 +71,11 @@ int igraph_matrix_complex_print(const igraph_matrix_complex_t *m) {
         for (j = 0; j < nc; j++) {
             igraph_complex_t z = MATRIX(*m, i, j);
             if (j != 0) {
-                printf("%c", spacechar);
+                //printf("%c", spacechar);
             }
-            printf("%g%+gi", IGRAPH_REAL(z), IGRAPH_IMAG(z));
+            //printf("%g%+gi", IGRAPH_REAL(z), IGRAPH_IMAG(z));
         }
-        printf("\n");
+        //printf("\n");
     }
 
     return 0;
@@ -92,11 +92,11 @@ int igraph_matrix_complex_fprint(const igraph_matrix_complex_t *m,
         for (j = 0; j < nc; j++) {
             igraph_complex_t z = MATRIX(*m, i, j);
             if (j != 0) {
-                fputc(' ', file);
+                //fputc(' ', file);
             }
-            fprintf(file, "%g%+gi", IGRAPH_REAL(z), IGRAPH_IMAG(z));
+            //fprintf(file, "%g%+gi", IGRAPH_REAL(z), IGRAPH_IMAG(z));
         }
-        fprintf(file, "\n");
+        //fprintf(file, "\n");
     }
 
     return 0;
