@@ -267,11 +267,11 @@ boolean graph_write_dimacs_binary(graph_t *g, char *comment,FILE *fp) {
 		strcat(buf,"\n");
 		STR_APPEND(buf);
 	}
-	sprintf(buf,"p edge %d %d\n",g->n,graph_edge_count(g));
+	//sprintf(buf,"p edge %d %d\n",g->n,graph_edge_count(g));
 	STR_APPEND(buf);
 	for (i=0; i < g->n; i++) {
 		if (g->weights[i]!=1) {
-			sprintf(buf,"n %d %d\n",i+1,g->weights[i]);
+			//sprintf(buf,"n %d %d\n",i+1,g->weights[i]);
 			STR_APPEND(buf);
 		}
 	}

@@ -95,7 +95,7 @@ namespace drl {
 //   coord_file = coord_file + ".icoord";
 
 //   char error_string[200];
-//   sprintf ( error_string, "%s %d %s", "root file name cannot be longer than", MAX_FILE_NAME-7,
+//   //sprintf ( error_string, "%s %d %s", "root file name cannot be longer than", MAX_FILE_NAME-7,
 //                 "characters.");
 //   if ( coord_file.length() > MAX_FILE_NAME )
 //  print_syntax ( error_string );
