@@ -226,7 +226,8 @@ int igraph_i_snprintf(char *buffer, size_t count, const char *format, ...) {
     va_list args;
     if (count > 0) {
         va_start(args, format);
-        n = _vsnprintf(buffer, count, format, args);
+        // CRAN n = _vsnprintf(buffer, count, format, args);
+        n = 0;
         buffer[count - 1] = 0;
         va_end(args);
     } else {

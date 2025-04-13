@@ -2901,7 +2901,7 @@ int FUNCTION(igraph_vector, fprint)(const TYPE(igraph_vector) *v, FILE *file) {
     }
     for (i = 1; i < n; i++) {
 #ifdef FPRINTFUNC
-        fputc(' ', file); FPRINTFUNC(file, VECTOR(*v)[i]);
+        // fputc(' ', file); FPRINTFUNC(file, VECTOR(*v)[i]);
 #else
         fprintf(file, " " OUT_FORMAT, VECTOR(*v)[i]);
 #endif

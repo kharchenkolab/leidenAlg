@@ -94,8 +94,8 @@ int igraph_progressf(const char *message, igraph_real_t percent, void *data,
                      ...) {
     va_list ap;
     va_start(ap, data);
-    vsnprintf(igraph_i_progressmsg_buffer,
-              sizeof(igraph_i_progressmsg_buffer) / sizeof(char), message, ap);
+    //vsnprintf(igraph_i_progressmsg_buffer,
+    //          sizeof(igraph_i_progressmsg_buffer) / sizeof(char), message, ap);
     return igraph_progress(igraph_i_progressmsg_buffer, percent, data);
 }
 

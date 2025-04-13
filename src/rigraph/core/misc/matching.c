@@ -41,13 +41,13 @@ static void debug(const char* fmt, ...) {
     va_list args;
     va_start(args, fmt);
 #ifdef MATCHING_DEBUG
-    vfprintf(stderr, fmt, args);
+    //vfprintf(stderr, fmt, args);
 #endif
     va_end(args);
 }
 #else
 #ifdef MATCHING_DEBUG
-    #define debug(...) fprintf(stderr, __VA_ARGS__)
+    // #define debug(...) fprintf(stderr, __VA_ARGS__)
 #else
     #define debug(...)
 #endif

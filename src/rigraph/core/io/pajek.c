@@ -595,9 +595,9 @@ int igraph_write_graph_pajek(const igraph_t *graph, FILE *outstream) {
             if (vtypes[V_ID] == IGRAPH_ATTRIBUTE_NUMERIC) {
                 igraph_i_attribute_get_numeric_vertex_attr(graph, vnames[V_ID],
                         igraph_vss_1((igraph_integer_t) id), &numv);
-                fputs(" \"", outstream);
+                //fputs(" \"", outstream);
                 igraph_real_fprintf_precise(outstream, VECTOR(numv)[0]);
-                fputc('"', outstream);
+                //fputc('"', outstream);
             } else if (vtypes[V_ID] == IGRAPH_ATTRIBUTE_STRING) {
                 igraph_i_attribute_get_string_vertex_attr(graph, vnames[V_ID],
                         igraph_vss_1((igraph_integer_t) id), &strv);
@@ -614,16 +614,16 @@ int igraph_write_graph_pajek(const igraph_t *graph, FILE *outstream) {
                 vtypes[V_Y] == IGRAPH_ATTRIBUTE_NUMERIC) {
                 igraph_i_attribute_get_numeric_vertex_attr(graph, vnames[V_X],
                         igraph_vss_1((igraph_integer_t) id), &numv);
-                fputc(' ', outstream);
+                //fputc(' ', outstream);
                 igraph_real_fprintf_precise(outstream, VECTOR(numv)[0]);
                 igraph_i_attribute_get_numeric_vertex_attr(graph, vnames[V_Y],
                         igraph_vss_1((igraph_integer_t) id), &numv);
-                fputc(' ', outstream);
+                //fputc(' ', outstream);
                 igraph_real_fprintf_precise(outstream, VECTOR(numv)[0]);
                 if (vtypes[V_Z] == IGRAPH_ATTRIBUTE_NUMERIC) {
                     igraph_i_attribute_get_numeric_vertex_attr(graph, vnames[V_Z],
                             igraph_vss_1((igraph_integer_t) id), &numv);
-                    fputc(' ', outstream);
+                    //fputc(' ', outstream);
                     igraph_real_fprintf_precise(outstream, VECTOR(numv)[0]);
                 }
             }
@@ -722,7 +722,7 @@ int igraph_write_graph_pajek(const igraph_t *graph, FILE *outstream) {
         if (etypes[E_WEIGHT] == IGRAPH_ATTRIBUTE_NUMERIC) {
             igraph_i_attribute_get_numeric_edge_attr(graph, enames[E_WEIGHT],
                     igraph_ess_1((igraph_integer_t) edge), &numv);
-            fputc(' ', outstream);
+            //fputc(' ', outstream);
             igraph_real_fprintf_precise(outstream, VECTOR(numv)[0]);
         }
 

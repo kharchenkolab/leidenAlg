@@ -305,10 +305,10 @@ int igraph_write_graph_dimacs(const igraph_t *graph, FILE *outstream,
         ret1 = fprintf(outstream, "a %li %li ",
                        (long int) from + 1, (long int) to + 1);
         ret2 = igraph_real_fprintf_precise(outstream, cap);
-        ret3 = fputc('\n', outstream);
-        if (ret1 < 0 || ret2 < 0 || ret3 == EOF) {
-            IGRAPH_ERROR("Write error", IGRAPH_EFILE);
-        }
+        //ret3 = fputc('\n', outstream);
+        //if (ret1 < 0 || ret2 < 0 || ret3 == EOF) {
+        //    IGRAPH_ERROR("Write error", IGRAPH_EFILE);
+        //}
         IGRAPH_EIT_NEXT(it);
     }
 

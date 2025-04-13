@@ -663,7 +663,7 @@ int igraph_write_graph_gml(const igraph_t *graph, FILE *outstream,
             IGRAPH_CHECK(igraph_i_attribute_get_numeric_graph_attr(graph, name, &numv));
             CHECK(fprintf(outstream, "  %s ", newname));
             CHECK(igraph_real_fprintf_precise(outstream, VECTOR(numv)[0]));
-            CHECK(fputc('\n', outstream));
+            //CHECK(fputc('\n', outstream));
         } else if (VECTOR(gtypes)[i] == IGRAPH_ATTRIBUTE_STRING) {
             char *s;
             IGRAPH_CHECK(igraph_i_attribute_get_string_graph_attr(graph, name, &strv));
@@ -701,7 +701,7 @@ int igraph_write_graph_gml(const igraph_t *graph, FILE *outstream,
                              igraph_vss_1((igraph_integer_t) i), &numv));
                 CHECK(fprintf(outstream, "    %s ", newname));
                 CHECK(igraph_real_fprintf_precise(outstream, VECTOR(numv)[0]));
-                CHECK(fputc('\n', outstream));
+                //CHECK(fputc('\n', outstream));
             } else if (type == IGRAPH_ATTRIBUTE_STRING) {
                 char *s;
                 IGRAPH_CHECK(igraph_i_attribute_get_string_vertex_attr(graph, name,
@@ -749,7 +749,7 @@ int igraph_write_graph_gml(const igraph_t *graph, FILE *outstream,
                              igraph_ess_1((igraph_integer_t) i), &numv));
                 CHECK(fprintf(outstream, "    %s ", newname));
                 CHECK(igraph_real_fprintf_precise(outstream, VECTOR(numv)[0]));
-                CHECK(fputc('\n', outstream));
+                //CHECK(fputc('\n', outstream));
             } else if (type == IGRAPH_ATTRIBUTE_STRING) {
                 char *s;
                 IGRAPH_CHECK(igraph_i_attribute_get_string_edge_attr(graph, name,

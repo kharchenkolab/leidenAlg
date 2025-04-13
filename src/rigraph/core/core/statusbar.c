@@ -83,7 +83,7 @@ int igraph_statusf(const char *message, void *data, ...) {
     char buffer[300];
     va_list ap;
     va_start(ap, data);
-    vsnprintf(buffer, sizeof(buffer) - 1, message, ap);
+    //vsnprintf(buffer, sizeof(buffer) - 1, message, ap);
     return igraph_status(buffer, data);
 }
 

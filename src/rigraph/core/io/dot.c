@@ -184,7 +184,7 @@ int igraph_write_graph_dot(const igraph_t *graph, FILE* outstream) {
                 } else {
                     CHECK(fprintf(outstream, "    %s=", newname));
                     CHECK(igraph_real_fprintf_precise(outstream, VECTOR(numv)[0]));
-                    CHECK(fputc('\n', outstream));
+                    // CHECK(fputc('\n', outstream));
                 }
             } else if (VECTOR(gtypes)[i] == IGRAPH_ATTRIBUTE_STRING) {
                 char *s, *news;
@@ -223,7 +223,7 @@ int igraph_write_graph_dot(const igraph_t *graph, FILE* outstream) {
                         CHECK(fprintf(outstream, "    %s=", newname));
                         CHECK(igraph_real_fprintf_precise(outstream,
                                                           VECTOR(numv)[0]));
-                        CHECK(fputc('\n', outstream));
+                        //CHECK(fputc('\n', outstream));
                     }
                 } else if (VECTOR(vtypes)[j] == IGRAPH_ATTRIBUTE_STRING) {
                     char *s, *news;
@@ -270,7 +270,7 @@ int igraph_write_graph_dot(const igraph_t *graph, FILE* outstream) {
                     } else {
                         CHECK(fprintf(outstream, "    %s=", newname));
                         CHECK(igraph_real_fprintf_precise(outstream, VECTOR(numv)[0]));
-                        CHECK(fputc('\n', outstream));
+                        //CHECK(fputc('\n', outstream));
                     }
                 } else if (VECTOR(etypes)[j] == IGRAPH_ATTRIBUTE_STRING) {
                     char *s, *news;

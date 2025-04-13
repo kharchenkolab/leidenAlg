@@ -297,7 +297,7 @@ static void igraph_i_graphml_sax_handler_error(void *state0, const char* msg, ..
 
     state->successful = 0;
     state->st = ERROR;
-    vsnprintf(state->error_message, max_error_message_length, msg, ap);
+    //vsnprintf(state->error_message, max_error_message_length, msg, ap);
 
     va_end(ap);
 }

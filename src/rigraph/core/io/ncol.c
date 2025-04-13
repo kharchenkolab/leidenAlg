@@ -332,10 +332,10 @@ int igraph_write_graph_ncol(const igraph_t *graph, FILE *outstream,
             ret1 = fprintf(outstream, "%li %li ",
                            (long int)from, (long int)to);
             ret2 = igraph_real_fprintf_precise(outstream, VECTOR(wvec)[(long int)edge]);
-            ret3 = fputc('\n', outstream);
-            if (ret1 < 0 || ret2 < 0 || ret3 == EOF) {
-                IGRAPH_ERROR("Write failed", IGRAPH_EFILE);
-            }
+            //ret3 = fputc('\n', outstream);
+            //if (ret1 < 0 || ret2 < 0 || ret3 == EOF) {
+            //    IGRAPH_ERROR("Write failed", IGRAPH_EFILE);
+            //}
             IGRAPH_EIT_NEXT(it);
         }
         igraph_vector_destroy(&wvec);
@@ -366,10 +366,10 @@ int igraph_write_graph_ncol(const igraph_t *graph, FILE *outstream,
                 IGRAPH_ERROR("Write failed", IGRAPH_EFILE);
             }
             ret = igraph_real_fprintf_precise(outstream, VECTOR(wvec)[(long int)edge]);
-            ret2 = fputc('\n', outstream);
-            if (ret < 0 || ret2 == EOF) {
-                IGRAPH_ERROR("Write failed", IGRAPH_EFILE);
-            }
+            //ret2 = fputc('\n', outstream);
+            //if (ret < 0 || ret2 == EOF) {
+            //    IGRAPH_ERROR("Write failed", IGRAPH_EFILE);
+            //}
             IGRAPH_EIT_NEXT(it);
         }
         igraph_strvector_destroy(&nvec);
