@@ -56,8 +56,8 @@ void plfit_error(const char *reason, const char *file, int line,
 #ifndef USING_R
 void plfit_error_handler_printignore(const char *reason, const char *file, int line,
         int plfit_errno) {
-    fprintf(stderr, "Error at %s:%i : %s, %s\n", file, line, reason,
-            plfit_strerror(plfit_errno));
+    //fprintf(stderr, "Error at %s:%i : %s, %s\n", file, line, reason,
+    //        plfit_strerror(plfit_errno));
 }
 #endif
 

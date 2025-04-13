@@ -301,7 +301,7 @@ boolean graph_write_dimacs_binary(graph_t *g, char *comment,FILE *fp) {
  * Reads a dimacs-format (ASCII or binary) file from the given file.
  *
  * Returns a newly allocated graph, or NULL if an error occurred, and an
- * error message is printed to stderr.
+ * error message is printed to //stderr.
  */
 graph_t *graph_read_dimacs_file(char *file) {
 	FILE *fp;
@@ -326,7 +326,7 @@ graph_t *graph_read_dimacs_file(char *file) {
  * Reads a dimacs-format (ASCII or binary) file from the file stream fp.
  *
  * Returns a newly allocated graph, or NULL if an error occurred, and an
- * error message is printed to stderr.
+ * error message is printed to //stderr.
  */
 graph_t *graph_read_dimacs(FILE *fp) {
 	char buffer[1024];
@@ -338,7 +338,7 @@ graph_t *graph_read_dimacs(FILE *fp) {
 	ASSERT(fp!=NULL);
 
 	if (fgets(buffer,1023,fp)==NULL) {
-		fprintf(stderr,"Input does not contain any data.\n");
+		 //fprintf(stderr,"Input does not contain any data.\n");
 		return NULL;
 	}
 	if (sscanf(buffer," %d %2s",&n,tmp)!=1) {
@@ -419,7 +419,7 @@ static boolean parse_input(char *str,graph_t *g) {
 	case 'x':
 		return TRUE;
 	default:
-		fprintf(stderr,"Warning: ignoring field '%c' in "
+		//fprintf(stderr,"Warning: ignoring field '%c' in "
 			"input.\n",str[i]);
 		return TRUE;
 	}
@@ -449,12 +449,12 @@ static graph_t *graph_read_dimacs_binary(FILE *fp,char *firstline) {
 	if (sscanf(firstline," %d %2s",&length,tmp)!=1)
 		return NULL;
 	if (length<=0) {
-		fprintf(stderr,"Malformed preamble: preamble size < 0.\n");
+		//fprintf(stderr,"Malformed preamble: preamble size < 0.\n");
 		return NULL;
 	}
 	buffer=malloc(length+2);
 	if (fread(buffer,1,length,fp)<length) {
-		fprintf(stderr,"Malformed preamble: unexpected "
+		//fprintf(stderr,"Malformed preamble: unexpected "
 			"end of file.\n");
 		free(buffer);
 		return NULL;
@@ -468,7 +468,7 @@ static graph_t *graph_read_dimacs_binary(FILE *fp,char *firstline) {
 			end=buffer+length;
 		end[0]=0;
 		if (!parse_input(start,g)) {
-			fprintf(stderr,"Malformed preamble: %s\n",start);
+			//fprintf(stderr,"Malformed preamble: %s\n",start);
 			free (buffer);
 			return NULL;
 		}
@@ -477,8 +477,8 @@ static graph_t *graph_read_dimacs_binary(FILE *fp,char *firstline) {
 
 	free(buffer);
 	if (g->n <= 0) {
-		fprintf(stderr,"Malformed preamble: number of "
-			"vertices <= 0\n");
+		//fprintf(stderr,"Malformed preamble: number of "
+		//	"vertices <= 0\n");
 		free(g);
 		return NULL;
 	}
@@ -488,8 +488,8 @@ static graph_t *graph_read_dimacs_binary(FILE *fp,char *firstline) {
 	for (i=0; i < g->n; i++) {
 		buf[i]=calloc(g->n,1);
 		if (fread(buf[i],1,i/8+1,fp) < (i/8+1)) {
-			fprintf(stderr,"Unexpected end of file when "
-				"reading graph.\n");
+			//fprintf(stderr,"Unexpected end of file when "
+			//	"reading graph.\n");
 			return NULL;
 		}
 	}
@@ -525,19 +525,19 @@ static graph_t *graph_read_dimacs_ascii(FILE *fp, char *firstline) {
 	g=calloc(1,sizeof(graph_t));
 
 	if (!parse_input(firstline,g)) {
-		fprintf(stderr,"Malformed input: %s",firstline);
+		//fprintf(stderr,"Malformed input: %s",firstline);
 		free(g);
 		return NULL;
 	}
 	while (fgets(buffer,1023,fp)) {
 		if (!parse_input(buffer,g)) {
-			fprintf(stderr,"Malformed input: %s",buffer);
+			//fprintf(stderr,"Malformed input: %s",buffer);
 			return NULL;
 		}
 	}
 	if (g->n <= 0) {
 		free(g);
-		fprintf(stderr,"Unexpected end of file when reading graph.\n");
+		//fprintf(stderr,"Unexpected end of file when reading graph.\n");
 		return NULL;
 	}
 

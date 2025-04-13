@@ -206,7 +206,7 @@ int igraph_transitivity_local_undirected2(const igraph_t *graph,
         long int nodeindex = (long int) VECTOR(indexv)[node];
         long int noderank = (long int) VECTOR(rank) [nodeindex - 1];
 
-        /*     fprintf(stderr, "node %li (indexv %li, rank %li)\n", node, */
+        /*     ////fprintf(stderr, "node %li (indexv %li, rank %li)\n", node, */
         /*      (long int)VECTOR(indexv)[node]-1, noderank); */
 
         IGRAPH_ALLOW_INTERRUPTION();
@@ -222,7 +222,7 @@ int igraph_transitivity_local_undirected2(const igraph_t *graph,
             long int neiindex = (long int) VECTOR(indexv)[nei];
             long int neirank = (long int) VECTOR(rank)[neiindex - 1];
 
-            /*       fprintf(stderr, "  nei %li (indexv %li, rank %li)\n", nei, */
+            /*       //fprintf(stderr, "  nei %li (indexv %li, rank %li)\n", nei, */
             /*        neiindex, neirank); */
             if (neirank > noderank) {
                 neis2 = igraph_lazy_adjlist_get(&adjlist, (igraph_integer_t) nei);
@@ -231,12 +231,12 @@ int igraph_transitivity_local_undirected2(const igraph_t *graph,
                     long int nei2 = (long int) VECTOR(*neis2)[j];
                     long int nei2index = (long int) VECTOR(indexv)[nei2];
                     long int nei2rank = (long int) VECTOR(rank)[nei2index - 1];
-                    /*    fprintf(stderr, "    triple %li %li %li\n", node, nei, nei2); */
+                    /*    //fprintf(stderr, "    triple %li %li %li\n", node, nei, nei2); */
                     if (nei2rank < neirank) {
                         continue;
                     }
                     if (neis[nei2] == node + 1) {
-                        /*      fprintf(stderr, "    triangle\n"); */
+                        /*      //fprintf(stderr, "    triangle\n"); */
                         VECTOR(triangles) [ nei2index - 1 ] += 1;
                         VECTOR(triangles) [ neiindex - 1 ] += 1;
                         VECTOR(triangles) [ nodeindex - 1 ] += 1;
@@ -261,7 +261,7 @@ int igraph_transitivity_local_undirected2(const igraph_t *graph,
         } else {
             VECTOR(*res)[i] = VECTOR(triangles)[idx] / deg / (deg - 1) * 2.0;
         }
-        /*     fprintf(stderr, "%f %f\n", VECTOR(triangles)[idx], triples); */
+        /*     //fprintf(stderr, "%f %f\n", VECTOR(triangles)[idx], triples); */
     }
 
     igraph_vector_destroy(&triangles);

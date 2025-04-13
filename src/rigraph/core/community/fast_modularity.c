@@ -47,7 +47,7 @@ void debug(const char* fmt, ...) {
 }
 #else
 #ifdef IGRAPH_FASTCOMM_DEBUG
-    #define debug(...) fprintf(stderr, __VA_ARGS__)
+    //#define debug(...) fprintf(stderr, __VA_ARGS__)
 #else
     #define debug(...)
 #endif

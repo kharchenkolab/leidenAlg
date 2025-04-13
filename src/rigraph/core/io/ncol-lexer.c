@@ -1884,7 +1884,7 @@ static void __attribute__((unused)) yy_fatal_error (const char* msg , yyscan_t y
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
-	fprintf( stderr, "%s\n", msg );
+	//fprintf( stderr, "%s\n", msg );
 }
 
 /* Redefine yyless() so it works in section 3 code. */

@@ -65,7 +65,7 @@
 static IGRAPH_NORETURN void igraph_abort() {
 #ifndef USING_R
 #ifdef IGRAPH_SANITIZER_AVAILABLE
-   fprintf(stderr, "\nStack trace:\n");
+   //fprintf(stderr, "\nStack trace:\n");
     __sanitizer_print_stack_trace();
 #endif
     //abort();
@@ -193,8 +193,8 @@ int igraph_errorvf(const char *reason, const char *file, int line,
 #ifndef USING_R
 void igraph_error_handler_abort(const char *reason, const char *file,
                                 int line, int igraph_errno) {
-    fprintf(stderr, "Error at %s:%i : %s - %s.\n",
-            file, line, reason, igraph_strerror(igraph_errno));
+    // fprintf(stderr, "Error at %s:%i : %s - %s.\n",
+    //        file, line, reason, igraph_strerror(igraph_errno));
     igraph_abort();
 }
 #endif
@@ -212,8 +212,8 @@ void igraph_error_handler_ignore(const char *reason, const char *file,
 #ifndef USING_R
 void igraph_error_handler_printignore(const char *reason, const char *file,
                                       int line, int igraph_errno) {
-    fprintf(stderr, "Error at %s:%i : %s - %s.\n",
-            file, line, reason, igraph_strerror(igraph_errno));
+    //fprintf(stderr, "Error at %s:%i : %s - %s.\n",
+    //        file, line, reason, igraph_strerror(igraph_errno));
     IGRAPH_FINALLY_FREE();
 }
 #endif

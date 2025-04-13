@@ -1294,9 +1294,9 @@ AbstractGraph::search(const bool canonical,
 
           /*
           for(unsigned int j = 0; j < search_stack.size(); j++)
-            fprintf(stderr, "%u ", search_stack[j].split_element);
-          fprintf(stderr, "\n");
-          p.print(stderr); fprintf(stderr, "\n");
+          //  fprintf(stderr, "%u ", search_stack[j].split_element);
+          // fprintf(stderr, "\n");
+          // p.print(stderr); fprintf(stderr, "\n");
           */
 
           /*

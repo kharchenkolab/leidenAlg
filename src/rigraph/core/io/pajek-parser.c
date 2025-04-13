@@ -1062,10 +1062,10 @@ yy_location_print_ (FILE *yyo, YYLTYPE const * const yylocp)
 do {                                                                      \
   if (yydebug)                                                            \
     {                                                                     \
-      YYFPRINTF (stderr, "%s ", Title);                                   \
-      yy_symbol_print (stderr,                                            \
-                  Type, Value, Location, context); \
-      YYFPRINTF (stderr, "\n");                                           \
+      //YYFPRINTF (stderr, "%s ", Title);                                   \
+      //yy_symbol_print (stderr,                                            \
+      //            Type, Value, Location, context); \
+      //YYFPRINTF (stderr, "\n");                                           \
     }                                                                     \
 } while (0)
 
@@ -1117,13 +1117,13 @@ yy_symbol_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE 
 static void
 yy_stack_print (yy_state_t *yybottom, yy_state_t *yytop)
 {
-  YYFPRINTF (stderr, "Stack now");
+  // YYFPRINTF (stderr, "Stack now");
   for (; yybottom <= yytop; yybottom++)
     {
       int yybot = *yybottom;
-      YYFPRINTF (stderr, " %d", yybot);
+      //YYFPRINTF (stderr, " %d", yybot);
     }
-  YYFPRINTF (stderr, "\n");
+  //YYFPRINTF (stderr, "\n");
 }
 
 # define YY_STACK_PRINT(Bottom, Top)                            \
@@ -1143,24 +1143,24 @@ yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp, int yyrule, 
   int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
   int yyi;
-  YYFPRINTF (stderr, "Reducing stack by rule %d (line %d):\n",
-             yyrule - 1, yylno);
+  //YYFPRINTF (stderr, "Reducing stack by rule %d (line %d):\n",
+  //           yyrule - 1, yylno);
   /* The symbols being reduced.  */
-  for (yyi = 0; yyi < yynrhs; yyi++)
-    {
-      YYFPRINTF (stderr, "   $%d = ", yyi + 1);
-      yy_symbol_print (stderr,
-                       yystos[+yyssp[yyi + 1 - yynrhs]],
-                       &yyvsp[(yyi + 1) - (yynrhs)]
-                       , &(yylsp[(yyi + 1) - (yynrhs)])                       , context);
-      YYFPRINTF (stderr, "\n");
-    }
+  //for (yyi = 0; yyi < yynrhs; yyi++)
+  //  {
+  //    //YYFPRINTF (stderr, "   $%d = ", yyi + 1);
+  //    //yy_symbol_print (stderr,
+  //                     yystos[+yyssp[yyi + 1 - yynrhs]],
+  //                     &yyvsp[(yyi + 1) - (yynrhs)]
+  //                     , &(yylsp[(yyi + 1) - (yynrhs)])                       , context);
+  //    YYFPRINTF (stderr, "\n");
+  //  }
 }
 
 # define YY_REDUCE_PRINT(Rule)          \
 do {                                    \
   if (yydebug)                          \
-    yy_reduce_print (yyssp, yyvsp, yylsp, Rule, context); \
+    yy_reduce_print(yyssp, yyvsp, yylsp, Rule, context); \
 } while (0)
 
 /* Nonzero means print parse trace.  It is left uninitialized so that
@@ -1532,7 +1532,7 @@ YYLTYPE yylloc = yyloc_default;
   yylsp = yyls = yylsa;
   yystacksize = YYINITDEPTH;
 
-  YYDPRINTF ((stderr, "Starting parse\n"));
+  //YYDPRINTF ((stderr, "Starting parse\n"));
 
   yystate = 0;
   yyerrstatus = 0;
@@ -1555,7 +1555,7 @@ yynewstate:
 | yysetstate -- set current state (the top of the stack) to yystate.  |
 `--------------------------------------------------------------------*/
 yysetstate:
-  YYDPRINTF ((stderr, "Entering state %d\n", yystate));
+  //YYDPRINTF ((stderr, "Entering state %d\n", yystate));
   YY_ASSERT (0 <= yystate && yystate < YYNSTATES);
   YY_IGNORE_USELESS_CAST_BEGIN
   *yyssp = YY_CAST (yy_state_t, yystate);
@@ -1620,8 +1620,8 @@ yysetstate:
       yylsp = yyls + yysize - 1;
 
       YY_IGNORE_USELESS_CAST_BEGIN
-      YYDPRINTF ((stderr, "Stack size increased to %ld\n",
-                  YY_CAST (long, yystacksize)));
+      //YYDPRINTF ((stderr, "Stack size increased to %ld\n",
+      //            YY_CAST (long, yystacksize)));
       YY_IGNORE_USELESS_CAST_END
 
       if (yyss + yystacksize - 1 <= yyssp)
@@ -1652,14 +1652,14 @@ yybackup:
   /* YYCHAR is either YYEMPTY or YYEOF or a valid lookahead symbol.  */
   if (yychar == YYEMPTY)
     {
-      YYDPRINTF ((stderr, "Reading a token: "));
+      //YYDPRINTF ((stderr, "Reading a token: "));
       yychar = yylex (&yylval, &yylloc, scanner);
     }
 
   if (yychar <= YYEOF)
     {
       yychar = yytoken = YYEOF;
-      YYDPRINTF ((stderr, "Now at end of input.\n"));
+      //YYDPRINTF ((stderr, "Now at end of input.\n"));
     }
   else
     {
