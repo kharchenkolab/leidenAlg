@@ -1609,7 +1609,6 @@ int FUNCTION(igraph_matrix, printf)(const TYPE(igraph_matrix) *m,
     for (i = 0; i < nr; i++) {
         for (j = 0; j < nc; j++) {
             if (j != 0) {
-                /// putchar(' ');
                 printf("%c", spacechar);
             }
             printf(format, MATRIX(*m, i, j));
