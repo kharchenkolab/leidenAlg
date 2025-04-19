@@ -1,11 +1,13 @@
 C ?= gcc 
 CFLAGS = -O3 
 PKG_CFLAGS = -O3 -pthread -fPIC -I"./include" -I"../rigraph/include"
+PKG_CPPFLAGS=-DUSING_R
 LDFLAGS = -lpthread
 
 
 CXX ?= g++
 PKG_CXXFLAGS = -O3 -pthread -fPIC $(SHLIB_OPENMP_CXXFLAGS) -I"./include" -I"../rigraph/include" 
+PKG_CPPFLAGS=-DUSING_R
 LDFLAGS = -lpthread
 
 

@@ -1,6 +1,7 @@
 CXX ?= g++
 PKG_CXXFLAGS = -O3 -pthread -fPIC $(SHLIB_OPENMP_CXXFLAGS) -I"./include" -I"../rigraph/include"
 LDFLAGS += -lpthread
+PKG_CPPFLAGS=-DUSING_R
 
 
 LIB = ../libleidenalg.a
