@@ -38,7 +38,6 @@
 
 #include <stdio.h>
 
-#include <Rcpp.h>
 
 void igraph_free(void *p);
 
@@ -162,7 +161,8 @@ SEXP R_igraph_safe_eval(SEXP expr_call, R_igraph_safe_eval_result_t* result) {
   SEXP identity_func = PROTECT(Rf_findFun(identity, R_BaseNamespace));
   if (identity_func == R_UnboundValue) {
     // Rf_error("Failed to find 'base::identity()'");
-    Rcpp::stop("Failed to find 'base::identity()'");
+    // See GitHub issue #20 --- seems to be a callback passed on to R
+    (Rf_error)("Failed to find 'base::identity()'");
   }
 
   /* define the call -- enclose with `tryCatch` so we can record errors */

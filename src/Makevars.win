@@ -8,7 +8,7 @@ PKG_CFLAGS = -pthread -I"./include"  -I"../rigraph/include"
 LDFLAGS = -lpthread
 
 
-PKG_LIBS = -L"." -lpthread -lleidenalg -lrigraph -lm `$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) $(SHLIB_OPENMP_CXXFLAGS) 
+PKG_LIBS = -L"." -lpthread -lleidenalg -lrigraph -lm $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) $(SHLIB_OPENMP_CXXFLAGS) 
 MkInclude = $(R_HOME)/etc${R_ARCH}/Makeconf
 
 #.PHONY: all sublibs
