@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.1.6] - 2026 March 6
+* Replaced calls to `Rf_error` with `Rcpp::stop()` based on details in GitHub issue #20
+
 ## [1.1.5] - 2025 April 12
 * Removed any `std::cerr` from leidenalg C++ source
 * Removed other symbols like putchar(), exit(), etc. in the igraph source
