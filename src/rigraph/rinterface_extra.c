@@ -23,9 +23,12 @@
 
 #include "igraph.h"
 
+
 #include <R.h>
+#include <Rversion.h>
 #include <Rinternals.h>
 #include <Rdefines.h>
+
 
 #include "rinterface.h"
 
@@ -335,10 +338,10 @@ SEXP R_igraph_add_version_to_env(SEXP graph) {
   return graph;
 }
 
-/*
-April 15 2026, v1.1.7
-Cannot use ATTRIB(), SET_ATTRIB(), or allocSExp() for R version 4.6.0
-Also, Remove lazyeval.c entirely, cf https://github.com/igraph/rigraph/commit/58f8a39e12585a3b5bd32cb7b994b5100e4d2135
+
+//April 15 2026, v1.1.7
+//Cannot use ATTRIB(), SET_ATTRIB(), or allocSExp() for R version 4.6.0
+//Also, Remove lazyeval.c entirely, cf https://github.com/igraph/rigraph/commit/58f8a39e12585a3b5bd32cb7b994b5100e4d2135
 
 
 SEXP R_igraph_add_env(SEXP graph) {
@@ -353,11 +356,24 @@ SEXP R_igraph_add_env(SEXP graph) {
     for (i = 0; i < 9; i++) {
       SET_VECTOR_ELT(result, i, duplicate(VECTOR_ELT(graph, i)));
     }
-    SET_ATTRIB(result, duplicate(ATTRIB(graph)));
+    // v1.1.7 changes, SET_ATTRIB(result, duplicate(ATTRIB(graph)));
+    Rf_setAttrib(result, duplicate(Rf_getAttrib(graph)), R_NilValue);
     SET_CLASS(result, duplicate(GET_CLASS(graph)));
   }
 
-  SET_VECTOR_ELT(result, 9, allocSExp(ENVSXP));
+  // v1.1.7 changes, SET_VECTOR_ELT(result, 9, allocSExp(ENVSXP));
+  // https://github.com/igraph/rigraph/commit/d64ef7a7204ee0a9a192f8d8c000eabc46ac12fd
+
+  // Get the base namespace
+  SEXP base_ns = PROTECT(R_FindNamespace(Rf_mkString("base"))); px++;
+  // Get the emptyenv function
+  SEXP empty_env_fun = PROTECT(Rf_findVarInFrame(base_ns, Rf_install("emptyenv"))); px++;
+  // Call emptyenv()
+  SEXP empty_env = PROTECT(Rf_eval(Rf_lang1(empty_env_fun), R_GlobalEnv)); px++;
+  // Evaluate the call
+  SEXP env = PROTECT(R_NewEnv(empty_env, 0, 0)); px++;
+
+  SET_VECTOR_ELT(result, 9, env);
 
   uuid_generate(my_id);
   uuid_unparse_lower(my_id, my_id_chr);
@@ -374,7 +390,7 @@ SEXP R_igraph_add_env(SEXP graph) {
 
   return result;
 }
-*/
+
 
 
 SEXP R_igraph_get_graph_id(SEXP graph) {

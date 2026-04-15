@@ -1,12 +1,12 @@
 # Changelog
 
-## [1.1.7] - 2026 April 14
-* Remove ATTRIB() and SET_ATTRIB() for CRAN, 
-including calls of findVar(), allocSExp(), PRENV(), and PREXPR(). 
+## [1.1.7] - 2026 April 15
+* Replaced ATTRIB() and SET_ATTRIB() for CRAN, and replaced/removed
+calls to findVar(), allocSExp(), PRENV(), and PREXPR(). 
 NOTE: R version 4.6.0 (release April 17 2026) removes the declaration 
 for the non-API function ATTRIB from the public R header files.
-* Replace with functions used in version 2.2.3.9002; 
-Do not use 'R_igraph_add_env()', and use instead R_getVar() as a substitute for findVar() for R >=4.6.0. Remove lazyeval.c entirely
+Used '#ifdef' preprocessor directives for code >= R version 4.6.0
+
 
 ## [1.1.6] - 2026 March 6
 * Replaced calls to `Rf_error` with `(Rf_error)` based on details in GitHub issue #20
