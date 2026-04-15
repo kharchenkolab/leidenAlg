@@ -263,16 +263,56 @@ SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2, SEXP attrs) {
 
 SEXP R_igraph_graph_version(SEXP graph) {
   if (GET_LENGTH(graph) == 10 && isEnvironment(VECTOR_ELT(graph, 9))) {
+
+#if R_VERSION >= R_Version(4, 6, 0)
+    SEXP ver = R_getVarEx(install(R_IGRAPH_VERSION_VAR), VECTOR_ELT(graph, 9), TRUE, R_NilValue);
+    if (ver != R_UnboundValue) {
+      return ver;
+    } else {
+      return mkString("0.7.999");
+    }
+#else
     SEXP ver = findVar(install(R_IGRAPH_VERSION_VAR), VECTOR_ELT(graph, 9));
     if (ver != R_UnboundValue) {
       return ver;
     } else {
       return mkString("0.7.999");
     }
+#endif
   } else {
     return mkString("0.4.0");
   }
 }
+
+
+SEXP R_igraph_graph_version(SEXP graph) {
+  if (Rf_xlength(graph) == 11) {
+    return Rf_ScalarInteger(ver_0_1_1);
+  }
+
+  if (Rf_xlength(graph) != igraph_t_idx_max || !Rf_isEnvironment(Rx_igraph_graph_env(graph))) {
+    return Rf_ScalarInteger(ver_0_4);
+  }
+
+#if R_VERSION >= R_Version(4, 6, 0)
+  SEXP ver = R_getVarEx(Rf_install(R_IGRAPH_VERSION_VAR), Rx_igraph_graph_env(graph), TRUE, R_NilValue);
+  if (ver == R_NilValue) {
+    return Rf_ScalarInteger(ver_0_7_999);
+  }
+#else
+  SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), Rx_igraph_graph_env(graph));
+  if (ver == R_UnboundValue) {
+    return Rf_ScalarInteger(ver_0_7_999);
+  }
+#endif
+
+  if (TYPEOF(ver) == STRSXP) {
+    return Rf_ScalarInteger(ver_0_8);
+  }
+
+  return ver;
+}
+
 
 SEXP R_igraph_add_version_to_env(SEXP graph) {
   uuid_t my_id;
@@ -294,6 +334,12 @@ SEXP R_igraph_add_version_to_env(SEXP graph) {
   UNPROTECT(1);
   return graph;
 }
+
+/*
+April 15 2026, v1.1.7
+Cannot use ATTRIB(), SET_ATTRIB(), or allocSExp() for R version 4.6.0
+Also, Remove lazyeval.c entirely, cf https://github.com/igraph/rigraph/commit/58f8a39e12585a3b5bd32cb7b994b5100e4d2135
+
 
 SEXP R_igraph_add_env(SEXP graph) {
   SEXP result = graph;
@@ -328,7 +374,13 @@ SEXP R_igraph_add_env(SEXP graph) {
 
   return result;
 }
+*/
+
 
 SEXP R_igraph_get_graph_id(SEXP graph) {
+#if R_VERSION >= R_Version(4, 6, 0)
+  return R_getVar(install("myid"), VECTOR_ELT(graph, 9), TRUE);
+#else
   return findVar(install("myid"), VECTOR_ELT(graph, 9));
+#endif
 }

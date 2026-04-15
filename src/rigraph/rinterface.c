@@ -39,6 +39,30 @@
 #include <stdio.h>
 
 
+enum igraph_t_idx {
+  igraph_t_idx_n = 0,
+  igraph_t_idx_directed = 1,
+  igraph_t_idx_from = 2,
+  igraph_t_idx_to = 3,
+  igraph_t_idx_oi = 4,
+  igraph_t_idx_ii = 5,
+  igraph_t_idx_os = 6,
+  igraph_t_idx_is = 7,
+  igraph_t_idx_attr = 8,
+  igraph_t_idx_env = 9,
+  igraph_t_idx_max = 10,
+};
+
+// format versions
+enum igraph_versions {
+  ver_0_1_1,   // 0.1.1
+  ver_0_4,     // 0.4
+  ver_0_7_999, // 0.7.999
+  ver_0_8,     // 0.8
+  ver_1_5_0,   // 1.5.0
+  ver_current = ver_1_5_0
+};
+
 void igraph_free(void *p);
 
 SEXP R_igraph_vector_to_SEXP(const igraph_vector_t *v);
@@ -2773,6 +2797,137 @@ SEXP R_igraph_strvector_to_SEXP(const igraph_strvector_t *m) {
   UNPROTECT(1);
   return result;
 }
+
+
+// added v1.1.7
+
+void Rx_igraph_set_n(SEXP rgraph, const igraph_t *graph) {
+  SET_VECTOR_ELT(rgraph, igraph_t_idx_n, NEW_NUMERIC(1));
+  REAL(VECTOR_ELT(rgraph, igraph_t_idx_n))[0]=igraph_vcount(graph);
+}
+
+void Rx_igraph_set_directed(SEXP rgraph, const igraph_t *graph) {
+  SET_VECTOR_ELT(rgraph, igraph_t_idx_directed, NEW_LOGICAL(1));
+  LOGICAL(VECTOR_ELT(rgraph, igraph_t_idx_directed))[0]=graph->directed;
+}
+
+SEXP Rx_igraph_graph_env(SEXP graph) {
+  return VECTOR_ELT(graph, igraph_t_idx_env);
+}
+
+void Rx_igraph_set_from(SEXP rgraph, const igraph_t *graph) {
+  SET_VECTOR_ELT(rgraph, igraph_t_idx_from, R_new_altrep(Rx_igraph_altrep_from_class, Rx_igraph_graph_env(rgraph), R_NilValue));
+}
+
+void Rx_igraph_set_to(SEXP rgraph, const igraph_t *graph) {
+  SET_VECTOR_ELT(rgraph, igraph_t_idx_to, R_new_altrep(Rx_igraph_altrep_to_class, Rx_igraph_graph_env(rgraph), R_NilValue));
+}
+
+static R_xlen_t Rx_igraph_altrep_length(SEXP vec) {
+#if R_VERSION >= R_Version(4, 6, 0)
+  SEXP xp=R_getVar(Rf_install("igraph"), R_altrep_data1(vec), TRUE);
+#else
+  SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
+#endif
+  igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
+  return igraph_ecount(g);
+}
+
+static R_altrep_class_t Rx_igraph_altrep_from_class;
+static R_altrep_class_t Rx_igraph_altrep_to_class;
+
+void Rx_igraph_init_vector_class(DllInfo *dll) {
+  Rx_igraph_altrep_from_class=R_make_altreal_class("igraph_from", "base", dll);
+  Rx_igraph_altrep_to_class=R_make_altreal_class("igraph_to", "base", dll);
+
+  R_set_altrep_Length_method(Rx_igraph_altrep_from_class, Rx_igraph_altrep_length);
+  R_set_altvec_Dataptr_method(Rx_igraph_altrep_from_class, Rx_igraph_altrep_from);
+
+  R_set_altrep_Length_method(Rx_igraph_altrep_to_class, Rx_igraph_altrep_length);
+  R_set_altvec_Dataptr_method(Rx_igraph_altrep_to_class, Rx_igraph_altrep_to);
+}
+
+SEXP Rx_igraph_add_env(SEXP graph) {
+  SEXP result = graph;
+  uuid_t my_id;
+  char my_id_chr[40];
+  int px = 0;
+
+  if (Rf_xlength(graph) <= igraph_t_idx_env) {
+    PROTECT(result = Rf_duplicate(graph)); px++;
+    PROTECT(result = Rf_lengthgets(result, igraph_t_idx_env + 1)); px++;
+    Rf_copyMostAttrib(graph, result);
+  }
+
+  SEXP env = PROTECT(R_NewEnv(R_EmptyEnv, 0, 0)); px++;
+
+  SET_VECTOR_ELT(result, igraph_t_idx_env, env);
+
+  uuid_generate(my_id);
+  uuid_unparse_lower(my_id, my_id_chr);
+
+  SEXP l1 = PROTECT(Rf_install("myid")); px++;
+  SEXP l2 = PROTECT(Rf_mkString(my_id_chr)); px++;
+  Rf_defineVar(l1, l2, Rx_igraph_graph_env(result));
+
+  l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR)); px++;
+  l2 = PROTECT(Rf_ScalarInteger(ver_current)); px++;
+  Rf_defineVar(l1, l2, Rx_igraph_graph_env(result));
+
+  l1 = PROTECT(Rf_install("igraph")); px++;
+  Rf_defineVar(l1, R_NilValue, Rx_igraph_graph_env(result));
+
+  UNPROTECT(px);
+
+  return result;
+}
+
+void Rx_igraph_set_pointer(SEXP result, const igraph_t* graph) {
+  int px = 0;
+
+  igraph_t *pgraph = IGRAPH_CALLOC(1, igraph_t);
+  *pgraph = *graph;
+
+  //Rx_igraph_status_handler("Make graph external pointer.\n", NULL);
+
+  SEXP l1 = PROTECT(Rf_install("igraph")); px++;
+  SEXP l2 = PROTECT(R_MakeExternalPtr(pgraph, R_NilValue, R_NilValue)); px++;
+  Rf_defineVar(l1, l2, Rx_igraph_graph_env(result));
+  R_RegisterCFinalizerEx(l2, free_graph, TRUE);
+
+  UNPROTECT(px);
+}
+
+
+
+
+SEXP Ry_igraph_to_SEXP(const igraph_t *graph) {
+
+  SEXP result;
+
+  PROTECT(result=NEW_LIST(igraph_t_idx_max));
+  Rx_igraph_set_n(result, graph);
+  Rx_igraph_set_directed(result, graph);
+
+  SET_CLASS(result, Rf_ScalarString(Rf_mkChar("igraph")));
+
+  /* Attributes */
+  SET_VECTOR_ELT(result, igraph_t_idx_attr, graph->attr);
+
+  /* Environment for vertex/edge seqs */
+  SET_VECTOR_ELT(result, igraph_t_idx_env, R_NilValue);
+  Rx_igraph_add_env(result);
+  Rx_igraph_set_pointer(result, graph);
+  /* Set from and to requires environment */
+  Rx_igraph_set_from(result, graph);
+  Rx_igraph_set_to(result, graph);
+
+  UNPROTECT(1);
+  return result;
+}
+
+
+
 
 SEXP R_igraph_to_SEXP(const igraph_t *graph) {
 
