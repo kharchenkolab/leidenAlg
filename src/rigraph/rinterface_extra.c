@@ -288,34 +288,6 @@ SEXP R_igraph_graph_version(SEXP graph) {
 }
 
 
-SEXP R_igraph_graph_version(SEXP graph) {
-  if (Rf_xlength(graph) == 11) {
-    return Rf_ScalarInteger(ver_0_1_1);
-  }
-
-  if (Rf_xlength(graph) != igraph_t_idx_max || !Rf_isEnvironment(Rx_igraph_graph_env(graph))) {
-    return Rf_ScalarInteger(ver_0_4);
-  }
-
-#if R_VERSION >= R_Version(4, 6, 0)
-  SEXP ver = R_getVarEx(Rf_install(R_IGRAPH_VERSION_VAR), Rx_igraph_graph_env(graph), TRUE, R_NilValue);
-  if (ver == R_NilValue) {
-    return Rf_ScalarInteger(ver_0_7_999);
-  }
-#else
-  SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), Rx_igraph_graph_env(graph));
-  if (ver == R_UnboundValue) {
-    return Rf_ScalarInteger(ver_0_7_999);
-  }
-#endif
-
-  if (TYPEOF(ver) == STRSXP) {
-    return Rf_ScalarInteger(ver_0_8);
-  }
-
-  return ver;
-}
-
 
 SEXP R_igraph_add_version_to_env(SEXP graph) {
   uuid_t my_id;
