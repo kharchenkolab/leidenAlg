@@ -26,13 +26,16 @@
 
 #include <R.h>
 #include <Rversion.h>
-#include <Rinternals.h>
 #include <Rdefines.h>
 
+#include <R_ext/Visibility.h>
+#include <R_ext/Altrep.h>
 
 #include "rinterface.h"
 
 #include <stdlib.h>
+
+#include <Rinternals.h>
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++C */
 /*                                                               C */
@@ -166,6 +169,7 @@ int igraphhcass2(int *n, int *ia, int *ib,
 
   return 0;
 } /* hcass2_ */
+
 
 SEXP R_igraph_psumtree_draw(SEXP plength, SEXP howmany, SEXP prob) {
   SEXP result;
@@ -339,7 +343,7 @@ SEXP R_igraph_add_env(SEXP graph) {
   // Get the base namespace
   SEXP base_ns = PROTECT(R_FindNamespace(Rf_mkString("base"))); px++;
   // Get the emptyenv function
-  SEXP empty_env_fun = PROTECT(Rf_findVarInFrame(base_ns, Rf_install("emptyenv"))); px++;
+  SEXP empty_env_fun = PROTECT(findVarInFrame(base_ns, Rf_install("emptyenv"))); px++;
   // Call emptyenv()
   SEXP empty_env = PROTECT(Rf_eval(Rf_lang1(empty_env_fun), R_GlobalEnv)); px++;
   // Evaluate the call
