@@ -6,6 +6,7 @@ calls to findVar(), allocSExp(), PRENV(), and PREXPR().
 NOTE: R version 4.6.0 (release April 17 2026) removes the declaration 
 for the non-API function ATTRIB from the public R header files.
 Used '#ifdef' preprocessor directives for code >= R version 4.6.0
+* Use R_getVarEx (or R_getVar) if R 4.5.0 or later is used
 
 
 ## [1.1.6] - 2026 March 6

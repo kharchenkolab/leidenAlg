@@ -343,7 +343,11 @@ SEXP R_igraph_add_env(SEXP graph) {
   // Get the base namespace
   SEXP base_ns = PROTECT(R_FindNamespace(Rf_mkString("base"))); px++;
   // Get the emptyenv function
-  SEXP empty_env_fun = PROTECT(findVarInFrame(base_ns, Rf_install("emptyenv"))); px++;
+#if R_VERSION < R_Version(4,5,0)
+  SEXP empty_env_fun = PROTECT(Rf_findVarInFrame(base_ns, Rf_install("emptyenv"))); px++;
+#else
+  SEXP empty_env_fun = PROTECT(R_getVarEx(Rf_install("emptyenv"), base_ns, TRUE, R_UnboundValue)); px++;
+#endif
   // Call emptyenv()
   SEXP empty_env = PROTECT(Rf_eval(Rf_lang1(empty_env_fun), R_GlobalEnv)); px++;
   // Evaluate the call
