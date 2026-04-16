@@ -329,7 +329,7 @@ SEXP R_igraph_add_env(SEXP graph) {
       SET_VECTOR_ELT(result, i, duplicate(VECTOR_ELT(graph, i)));
     }
     // v1.1.7 changes, SET_ATTRIB(result, duplicate(ATTRIB(graph)));
-    Rf_setAttrib(result, duplicate(Rf_getAttrib(graph)), R_NilValue);
+    Rf_setAttrib(result, R_NamesSymbol, duplicate(Rf_getAttrib(graph, R_NamesSymbol)));
     SET_CLASS(result, duplicate(GET_CLASS(graph)));
   }
 
