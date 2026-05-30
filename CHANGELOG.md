@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.8] - 2026 May 30
+* Fix Fortran errors for CRAN, 'Obsolescent feature: Old-style character length at (1)'
+Issues with 'arpack/UTIL/' and gfortran-16 + `-pedantic`, files dmout.f and dvout.f. 
+Refer to this: https://github.com/igraph/rigraph/commit/710b35c92a1b2bbd6ada9d865c071f8be3f25202
+
 ## [1.1.7] - 2026 April 15
 * Replaced ATTRIB() and SET_ATTRIB() for CRAN, and replaced/removed
 calls to findVar(), allocSExp(), PRENV(), and PREXPR(). 
@@ -7,7 +12,6 @@ NOTE: R version 4.6.0 (release April 17 2026) removes the declaration
 for the non-API function ATTRIB from the public R header files.
 Used '#ifdef' preprocessor directives for code >= R version 4.6.0
 * Use R_getVarEx (or R_getVar) if R 4.5.0 or later is used
-
 
 ## [1.1.6] - 2026 March 6
 * Replaced calls to `Rf_error` with `(Rf_error)` based on details in GitHub issue #20
