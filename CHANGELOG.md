@@ -1,8 +1,7 @@
 # Changelog
 
 ## [1.1.8] - 2026 May 30
-* Fix Fortran errors for CRAN, 'Obsolescent feature: Old-style character length at (1)'
-Issues with 'arpack/UTIL/' and gfortran-16 + `-pedantic`, files dmout.f and dvout.f. 
+* Fix Fortran errors for CRAN, "'Obsolescent feature: Old-style character length at (1)'", compiled with `gfortran-16 -pedantic`, files `dmout.f` and `dvout.f` in `'arpack/UTIL/'`.
 Refer to this: https://github.com/igraph/rigraph/commit/710b35c92a1b2bbd6ada9d865c071f8be3f25202
 
 ## [1.1.7] - 2026 April 15
